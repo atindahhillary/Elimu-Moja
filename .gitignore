@@ -1,0 +1,3 @@
+# local QA scratch
+assets/_*
+*.tmp
