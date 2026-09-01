@@ -70,6 +70,10 @@
   --serious:  #ec835a;
   --critical: #d03b3b;
 
+  --sev-crit: #e2564f;
+  --sev-high: #ec9a4f;
+  --sev-mod:  #8b9e86;
+
   --focus:    var(--fg-blue);
   --hero-scrim: linear-gradient(to bottom, rgba(9,12,7,.58), rgba(9,12,7,.86));
 
@@ -118,6 +122,9 @@
   --on-accent:   #f6fbf4;
 
   --focus:    #1a76a6;
+  --sev-crit: #cf3b33;
+  --sev-high: #c9791f;
+  --sev-mod:  #5f7a5a;
   --hero-scrim: linear-gradient(to bottom, rgba(248,248,243,.78), rgba(248,248,243,.93));
   --sa-soft: color-mix(in srgb, var(--sa) 12%, var(--bg));
 }
@@ -382,6 +389,65 @@ ul.ticks li::before{
 .mappanel .mp-back:hover{ color:var(--ink); }
 .mappanel .mp-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
 .mappanel .mp-where{ font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-top:12px; }
+
+/* ---------- gap dashboard ---------- */
+.dash{ margin-top:30px; }
+.kpirow{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); }
+.kpi{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:15px 15px 14px; }
+.kpi .kv{ font-family:var(--font-display); font-weight:800; font-size:1.85rem; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:8px; font-variant-numeric:tabular-nums; line-height:1; }
+.kpi .kl{ font-size:12px; color:var(--ink-2); margin-top:6px; font-weight:600; }
+.kpi .ks{ font-family:var(--font-mono); font-size:9.5px; color:var(--muted); margin-top:5px; letter-spacing:.02em; }
+.sev-swatch{ width:11px; height:11px; border-radius:3px; display:inline-block; flex:none; }
+.s-crit{ background:var(--sev-crit); } .s-high{ background:var(--sev-high); } .s-mod{ background:var(--sev-mod); }
+
+.dgrid{ display:grid; gap:14px; margin-top:14px; grid-template-columns:1fr; }
+@media (min-width:820px){ .dgrid{ grid-template-columns:1.4fr 1fr; } .dcard--full{ grid-column:1 / -1; } }
+.dcard{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:16px 16px 14px; }
+.dcard figcaption{ font-family:var(--font-mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin:0 0 15px; display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
+.dc-hint{ text-transform:none; letter-spacing:0; font-size:9.5px; color:var(--muted); opacity:.75; }
+
+.hbars{ display:flex; flex-direction:column; gap:8px; }
+.hrow{ display:grid; grid-template-columns:116px 1fr 24px; gap:10px; align-items:center; background:none; border:0; padding:4px 3px; cursor:pointer; text-align:left; border-radius:7px; font:inherit; font-family:var(--font-body); }
+.hrow:hover{ background:var(--surface-2); }
+.hrow.on{ background:color-mix(in srgb,var(--fg-red) 13%, var(--surface)); }
+.hrow.dim{ opacity:.38; }
+.hrow-l{ font-size:11.5px; color:var(--ink-2); }
+.hrow.on .hrow-l{ color:var(--ink); font-weight:600; }
+.hrow-track{ height:15px; background:var(--surface-2); border-radius:4px; overflow:hidden; display:flex; }
+.hrow-track .seg{ height:100%; display:block; transition:width .4s ease; }
+.hrow-n{ font-family:var(--font-mono); font-size:11.5px; color:var(--ink); text-align:right; font-variant-numeric:tabular-nums; }
+.legend{ display:flex; flex-wrap:wrap; gap:6px; margin-top:13px; }
+.legend .lg{ font:inherit; font-family:var(--font-body); font-size:10.5px; color:var(--ink-2); background:none; border:1px solid var(--hair-strong); border-radius:999px; padding:4px 9px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+.legend .lg:hover{ color:var(--ink); }
+.legend .lg.on{ border-color:var(--ink); color:var(--ink); }
+.legend .lg .sw{ width:9px; height:9px; border-radius:2px; flex:none; }
+.legend .lg b{ font-family:var(--font-mono); }
+
+.donutwrap{ display:flex; flex-direction:column; align-items:center; gap:4px; }
+.donut{ width:148px; height:148px; }
+.donut circle{ transition:opacity .25s, stroke-dashoffset .4s ease, stroke-dasharray .4s ease; }
+.donut-num{ font-family:var(--font-display); font-weight:800; font-size:26px; fill:var(--ink); }
+.donut-lbl{ font-family:var(--font-mono); font-size:7.5px; fill:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
+
+.matrix{ overflow-x:auto; }
+.mgrid{ display:grid; grid-template-columns:140px repeat(3,minmax(72px,150px)) 44px; gap:4px; min-width:480px; max-width:660px; }
+.mhead{ font-family:var(--font-mono); font-size:9px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); text-align:center; align-self:end; padding-bottom:5px; line-height:1.3; }
+.mrowh{ font-size:11px; color:var(--ink-2); align-self:center; }
+.mcell{ font:inherit; font-family:var(--font-mono); font-size:13px; color:var(--ink); border:1px solid var(--hair); border-radius:6px; min-height:34px; cursor:pointer; display:grid; place-items:center; font-variant-numeric:tabular-nums; transition:border-color .15s; }
+.mcell:hover{ border-color:var(--fg-blue); }
+.mcell.on{ border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink); }
+.mcell.zero{ color:var(--muted); cursor:default; }
+.mtot{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted); display:grid; place-items:center; font-variant-numeric:tabular-nums; }
+.mtot--grand{ color:var(--ink); }
+
+.phases3{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(176px,1fr)); }
+.pcol{ border:1px solid var(--hair); border-radius:var(--radius-sm); padding:13px 13px 15px; background:var(--surface-2); }
+.pcol-h{ font-size:12px; color:var(--ink-2); } .pcol-h b{ font-family:var(--font-display); color:var(--ink); }
+.pcol-w{ font-family:var(--font-mono); font-size:9.5px; color:var(--muted); margin-top:2px; }
+.pcol-n{ font-family:var(--font-display); font-weight:800; font-size:1.65rem; color:var(--ink); margin:9px 0 9px; font-variant-numeric:tabular-nums; line-height:1; }
+
+.dash-reset{ font:inherit; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.04em; color:var(--fg-red); background:none; border:0; padding:0 0 0 10px; cursor:pointer; }
+.dash-reset:hover{ color:var(--ink); }
 
 /* ---------- gap map ---------- */
 .filterbar{ display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 4px; align-items:center; }
@@ -739,10 +805,52 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     <p class="eyebrow">What has to be fixed</p>
     <h2>The gap map</h2>
     <p class="standfirst">
-      A register of what a unified system has to close. It combines the gaps raised on the conference floor,
-      the priorities in this brief, and further gaps the advisory review adds. Filter by domain or by source.
+      A live register of what a unified system has to close. It combines the gaps raised on the conference
+      floor, the priorities in this brief, and further gaps the advisory review adds. Every tile, bar and
+      cell below is a filter: the whole board and the cards update together.
     </p>
 
+    <div class="dash" id="gapDash">
+      <div class="kpirow">
+        <div class="kpi"><div class="kv" id="kpiTotal">29</div><div class="kl">gaps in view</div><div class="ks" id="kpiTotalSub">of 29 in the register</div></div>
+        <div class="kpi"><div class="kv"><span id="kpiCrit">8</span><span class="sev-swatch s-crit"></span></div><div class="kl">critical, fix now</div><div class="ks" id="kpiCritSub">8 critical &middot; 15 high &middot; 6 moderate</div></div>
+        <div class="kpi"><div class="kv" id="kpiDomains">6</div><div class="kl">domains affected</div><div class="ks">the gaps reach every part</div></div>
+        <div class="kpi"><div class="kv" id="kpiP1">7</div><div class="kl">year-one actions</div><div class="ks">worked in roadmap Phase 1</div></div>
+        <div class="kpi"><div class="kv" id="kpiCouncil">17</div><div class="kl">from the review</div><div class="ks">beyond the floor and the brief</div></div>
+      </div>
+
+      <div class="dgrid">
+        <figure class="dcard">
+          <figcaption>Gaps by domain <span class="dc-hint">click a bar to filter</span></figcaption>
+          <div id="chartDomain" class="hbars"></div>
+          <div class="legend" id="sevLegend">
+            <button class="lg" type="button" data-sev="crit"><span class="sw s-crit"></span>Critical</button>
+            <button class="lg" type="button" data-sev="high"><span class="sw s-high"></span>High</button>
+            <button class="lg" type="button" data-sev="mod"><span class="sw s-mod"></span>Moderate</button>
+          </div>
+        </figure>
+        <figure class="dcard">
+          <figcaption>By source</figcaption>
+          <div id="chartSource" class="donutwrap"></div>
+        </figure>
+        <figure class="dcard dcard--full">
+          <figcaption>Domain &times; source <span class="dc-hint">click a cell to filter both</span></figcaption>
+          <div id="chartMatrix" class="matrix"></div>
+        </figure>
+        <figure class="dcard dcard--full">
+          <figcaption>When the register gets worked through</figcaption>
+          <div id="chartPhase" class="phases3"></div>
+        </figure>
+      </div>
+    </div>
+
+    <div class="filterbar" role="group" aria-label="Filter gaps by severity">
+      <span class="flabel">Severity</span>
+      <button class="fbtn" data-fkey="sev" data-fval="all" aria-pressed="true">All</button>
+      <button class="fbtn" data-fkey="sev" data-fval="crit" aria-pressed="false">Critical</button>
+      <button class="fbtn" data-fkey="sev" data-fval="high" aria-pressed="false">High</button>
+      <button class="fbtn" data-fkey="sev" data-fval="mod" aria-pressed="false">Moderate</button>
+    </div>
     <div class="filterbar" role="group" aria-label="Filter gaps by source">
       <span class="flabel">Source</span>
       <button class="fbtn" data-fkey="src" data-fval="all" aria-pressed="true">All</button>
@@ -967,7 +1075,7 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
       </article>
 
     </div>
-    <p class="gapmeta" id="gapCount"></p>
+    <p class="gapmeta"><span id="gapCount"></span><button class="dash-reset" id="dashReset" type="button" hidden>clear all filters</button></p>
   </div>
 </section>
 
@@ -1541,32 +1649,218 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     setTimeout(function(){ items.forEach(function(el){ el.classList.add("in"); }); }, 2600);
   }
 
-  /* ---------- gap map filter ---------- */
-  var state = { src: "all", dom: "all" };
+  /* ---------- gap dashboard ---------- */
   var gaps = Array.prototype.slice.call(document.querySelectorAll("#gapGrid .gap"));
-  var fbtns = Array.prototype.slice.call(document.querySelectorAll(".fbtn"));
-  var gapCount = document.getElementById("gapCount");
-  function applyFilter(){
-    var shown = 0;
+  if (gaps.length){
+    var GC = { crit:"var(--sev-crit)", high:"var(--sev-high)", mod:"var(--sev-mod)" };
+    var DOMAINS = [["system","System & finance"],["learning","Learning"],["teachers","Teachers"],
+                   ["data","Data & AI"],["equity","Equity"],["mobility","Mobility"]];
+    var SOURCES = [["conf","Conference floor","var(--fg-blue)"],["brief","This brief","var(--fg-green)"],
+                   ["council","Advisory review adds","var(--fg-gold)"]];
+    var PHASES  = [["1","Foundation","0 to 12 months"],["2","Build","12 to 30 months"],["3","Scale","30 to 60 months"]];
+    /* severity + roadmap phase per gap, keyed by headline */
+    var META = {
+      "No shared definition of foundational proficiency": ["crit","1"],
+      "Foundational learning is not integrated across the region": ["high","1"],
+      "Early childhood is treated as optional": ["high","2"],
+      "Language of instruction policy diverges, and there is a book famine": ["high","2"],
+      "Over-age and out-of-school children are missed": ["high","3"],
+      "Teacher development is episodic and uneven": ["high","2"],
+      "No recognised \"East African teacher\"": ["crit","2"],
+      "No teacher mutual recognition agreement": ["crit","1"],
+      "Teacher registries cannot talk to each other, and fraud is hard to catch": ["high","1"],
+      "Mobility could drain the poorest districts": ["mod","3"],
+      "No single regional data warehouse": ["crit","1"],
+      "Data does not become decisions": ["high","2"],
+      "AI is arriving in classrooms with no safety floor": ["high","2"],
+      "Child-data protection is not harmonised": ["high","2"],
+      "The middle tier has data it cannot use": ["high","2"],
+      "Cross-border teaching is not practical": ["high","3"],
+      "No equivalency table for mobile and displaced learners": ["high","2"],
+      "School years and exam calendars do not line up": ["mod","3"],
+      "Children with disabilities are unseen and unassessed": ["crit","2"],
+      "Crisis and refugee education is treated as an exception": ["high","2"],
+      "Gender parity is measured, gender outcomes are not": ["mod","2"],
+      "Parents, learners and communities are not really engaged": ["high","2"],
+      "Information does not flow after the conference": ["crit","1"],
+      "Learning resources and research are not shared": ["mod","2"],
+      "No funding model for the regional system itself": ["crit","3"],
+      "Non-state schools are outside regional quality assurance": ["mod","3"],
+      "Commitments have no teeth": ["crit","3"],
+      "One timeline for eight very different states will fail": ["high","1"],
+      "Climate shocks close schools with no regional response": ["mod","3"]
+    };
     gaps.forEach(function(g){
-      var okS = state.src === "all" || g.getAttribute("data-src") === state.src;
-      var okD = state.dom === "all" || g.getAttribute("data-dom") === state.dom;
-      if (okS && okD){ g.classList.remove("hide"); shown++; }
-      else { g.classList.add("hide"); }
+      var t = (g.querySelector("h4").textContent || "").trim();
+      var m = META[t] || ["high","2"];
+      g.dataset.sev = m[0]; g.dataset.phase = m[1];
     });
-    if (gapCount) gapCount.textContent = "Showing " + shown + " of " + gaps.length + " gaps";
-  }
-  fbtns.forEach(function(b){
-    b.addEventListener("click", function(){
-      var k = b.getAttribute("data-fkey"), v = b.getAttribute("data-fval");
-      state[k] = v;
-      fbtns.forEach(function(o){
-        if (o.getAttribute("data-fkey") === k) o.setAttribute("aria-pressed", o === b ? "true" : "false");
+
+    var state = { src:"all", dom:"all", sev:"all" };
+    var fbtns = Array.prototype.slice.call(document.querySelectorAll("#gaps .fbtn"));
+    var gapCount = document.getElementById("gapCount");
+    var resetBtn = document.getElementById("dashReset");
+    var byId = function(id){ return document.getElementById(id); };
+    var count = function(arr, key, val){ return arr.filter(function(g){ return g.dataset[key] === val; }).length; };
+    var match = function(g){
+      return (state.src === "all" || g.dataset.src === state.src)
+          && (state.dom === "all" || g.dataset.dom === state.dom)
+          && (state.sev === "all" || g.dataset.sev === state.sev);
+    };
+    var active = function(){ return state.src !== "all" || state.dom !== "all" || state.sev !== "all"; };
+    function setFilter(k, v, toggle){
+      state[k] = (toggle && state[k] === v) ? "all" : v;
+      render();
+    }
+    function reset(){ state = { src:"all", dom:"all", sev:"all" }; render(); }
+
+    function renderDomain(vis){
+      var host = byId("chartDomain"); host.innerHTML = "";
+      var maxAll = Math.max.apply(null, DOMAINS.map(function(d){ return count(gaps,"dom",d[0]); }));
+      DOMAINS.forEach(function(d){
+        var rows = vis.filter(function(g){ return g.dataset.dom === d[0]; });
+        var c = { crit:0, high:0, mod:0 };
+        rows.forEach(function(g){ c[g.dataset.sev]++; });
+        var w = function(v){ return (v / maxAll * 100).toFixed(2) + "%"; };
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "hrow" + (state.dom === d[0] ? " on" : "") + (state.dom !== "all" && state.dom !== d[0] ? " dim" : "");
+        b.innerHTML =
+          '<span class="hrow-l">' + d[1] + '</span>'
+        + '<span class="hrow-track">'
+        +   '<i class="seg" style="width:' + w(c.crit) + ';background:' + GC.crit + '"></i>'
+        +   '<i class="seg" style="width:' + w(c.high) + ';background:' + GC.high + '"></i>'
+        +   '<i class="seg" style="width:' + w(c.mod)  + ';background:' + GC.mod  + '"></i>'
+        + '</span>'
+        + '<span class="hrow-n">' + rows.length + '</span>';
+        b.addEventListener("click", function(){ setFilter("dom", d[0], true); });
+        host.appendChild(b);
       });
-      applyFilter();
+    }
+
+    function renderSource(vis){
+      var host = byId("chartSource");
+      var counts = SOURCES.map(function(s){ return count(vis,"src",s[0]); });
+      var total = counts.reduce(function(a,b){ return a + b; }, 0) || 1;
+      var R = 54, CIRC = 2 * Math.PI * R, off = 0, segs = "";
+      SOURCES.forEach(function(s, i){
+        var len = counts[i] / total * CIRC;
+        segs += '<circle r="' + R + '" cx="70" cy="70" fill="none" stroke="' + s[2] + '" stroke-width="15" '
+             + 'stroke-dasharray="' + len.toFixed(2) + ' ' + (CIRC - len).toFixed(2) + '" '
+             + 'stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 70 70)" '
+             + (state.src !== "all" && state.src !== s[0] ? 'opacity="0.25"' : '') + '></circle>';
+        off += len;
+      });
+      host.innerHTML =
+        '<svg viewBox="0 0 140 140" class="donut" aria-hidden="true">' + segs
+      + '<text x="70" y="67" text-anchor="middle" class="donut-num">' + vis.length + '</text>'
+      + '<text x="70" y="83" text-anchor="middle" class="donut-lbl">in view</text></svg>'
+      + '<div class="legend">' + SOURCES.map(function(s, i){
+          return '<button class="lg' + (state.src === s[0] ? " on" : "") + '" type="button" data-src="' + s[0] + '">'
+               + '<span class="sw" style="background:' + s[2] + '"></span>' + s[1] + ' <b>' + counts[i] + '</b></button>';
+        }).join("") + '</div>';
+      host.querySelectorAll(".lg[data-src]").forEach(function(bx){
+        bx.addEventListener("click", function(){ setFilter("src", bx.dataset.src, true); });
+      });
+    }
+
+    function renderMatrix(){
+      /* the matrix is a stable navigator: full-register counts, always clickable */
+      var host = byId("chartMatrix");
+      var full = function(dom, src){
+        return gaps.filter(function(g){ return g.dataset.dom === dom && g.dataset.src === src; }).length;
+      };
+      var maxCell = 1;
+      DOMAINS.forEach(function(d){ SOURCES.forEach(function(s){ maxCell = Math.max(maxCell, full(d[0], s[0])); }); });
+      var h = '<div class="mgrid"><div></div>';
+      SOURCES.forEach(function(s){ h += '<div class="mhead">' + s[1] + '</div>'; });
+      h += '<div class="mhead">All</div>';
+      DOMAINS.forEach(function(d){
+        h += '<div class="mrowh">' + d[1] + '</div>';
+        SOURCES.forEach(function(s){
+          var n = full(d[0], s[0]);
+          var t = n ? (14 + 58 * n / maxCell) : 0;
+          var sel = state.dom === d[0] && state.src === s[0];
+          h += '<button class="mcell' + (sel ? " on" : "") + (n === 0 ? " zero" : "") + '" type="button" '
+             + 'data-dom="' + d[0] + '" data-src="' + s[0] + '" aria-label="' + d[1] + ', ' + s[1] + ': ' + n + ' gaps" '
+             + 'style="background:color-mix(in srgb, var(--fg-blue) ' + t.toFixed(0) + '%, var(--surface))">' + (n || "") + '</button>';
+        });
+        h += '<div class="mtot">' + count(gaps,"dom",d[0]) + '</div>';
+      });
+      h += '<div class="mrowh">All</div>';
+      SOURCES.forEach(function(s){ h += '<div class="mtot">' + count(gaps,"src",s[0]) + '</div>'; });
+      h += '<div class="mtot mtot--grand">' + gaps.length + '</div></div>';
+      host.innerHTML = h;
+      host.querySelectorAll(".mcell").forEach(function(bx){
+        if (bx.classList.contains("zero")) return;
+        bx.addEventListener("click", function(){
+          if (state.dom === bx.dataset.dom && state.src === bx.dataset.src){ state.dom = "all"; state.src = "all"; }
+          else { state.dom = bx.dataset.dom; state.src = bx.dataset.src; }
+          render();
+        });
+      });
+    }
+
+    function renderPhase(vis){
+      var host = byId("chartPhase"); host.innerHTML = "";
+      var maxAll = Math.max.apply(null, PHASES.map(function(p){ return count(gaps,"phase",p[0]); }));
+      PHASES.forEach(function(p){
+        var rows = vis.filter(function(g){ return g.dataset.phase === p[0]; });
+        var c = { crit:0, high:0, mod:0 };
+        rows.forEach(function(g){ c[g.dataset.sev]++; });
+        var w = function(v){ return (v / maxAll * 100).toFixed(2) + "%"; };
+        var el = document.createElement("div");
+        el.className = "pcol";
+        el.innerHTML =
+          '<div class="pcol-h"><b>Phase ' + p[0] + '</b> ' + p[1] + '</div>'
+        + '<div class="pcol-w">' + p[2] + '</div>'
+        + '<div class="pcol-n">' + rows.length + '</div>'
+        + '<div class="hrow-track">'
+        +   '<i class="seg" style="width:' + w(c.crit) + ';background:' + GC.crit + '"></i>'
+        +   '<i class="seg" style="width:' + w(c.high) + ';background:' + GC.high + '"></i>'
+        +   '<i class="seg" style="width:' + w(c.mod)  + ';background:' + GC.mod  + '"></i>'
+        + '</div>';
+        host.appendChild(el);
+      });
+    }
+
+    function render(){
+      var vis = gaps.filter(match);
+      gaps.forEach(function(g){ g.classList.toggle("hide", !match(g)); });
+
+      byId("kpiTotal").textContent = vis.length;
+      byId("kpiTotalSub").textContent = "of " + gaps.length + " in the register";
+      var cc = count(vis,"sev","crit"), ch = count(vis,"sev","high"), cm = count(vis,"sev","mod");
+      byId("kpiCrit").textContent = cc;
+      byId("kpiCritSub").textContent = cc + " critical · " + ch + " high · " + cm + " moderate";
+      var doms = {}; vis.forEach(function(g){ doms[g.dataset.dom] = 1; });
+      byId("kpiDomains").textContent = Object.keys(doms).length;
+      byId("kpiP1").textContent = count(vis,"phase","1");
+      byId("kpiCouncil").textContent = count(vis,"src","council");
+
+      renderDomain(vis); renderSource(vis); renderMatrix(); renderPhase(vis);
+
+      fbtns.forEach(function(b){
+        if (b.dataset.fkey in state)
+          b.setAttribute("aria-pressed", b.dataset.fval === state[b.dataset.fkey] ? "true" : "false");
+      });
+      Array.prototype.slice.call(document.querySelectorAll("#sevLegend .lg")).forEach(function(b){
+        b.classList.toggle("on", state.sev === b.dataset.sev);
+      });
+      if (gapCount) gapCount.textContent = "Showing " + vis.length + " of " + gaps.length + " gaps"
+        + (active() ? "  ·  filtered" : "");
+      if (resetBtn) resetBtn.hidden = !active();
+    }
+
+    fbtns.forEach(function(b){
+      b.addEventListener("click", function(){ state[b.dataset.fkey] = b.dataset.fval; render(); });
     });
-  });
-  applyFilter();
+    Array.prototype.slice.call(document.querySelectorAll("#sevLegend .lg")).forEach(function(b){
+      b.addEventListener("click", function(){ setFilter("sev", b.dataset.sev, true); });
+    });
+    if (resetBtn) resetBtn.addEventListener("click", reset);
+    render();
+  }
 
   /* ---------- assistant accordions ---------- */
   Array.prototype.slice.call(document.querySelectorAll(".qbtn")).forEach(function(btn){
