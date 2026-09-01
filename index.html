@@ -453,13 +453,21 @@ ul.ticks li::before{
 }
 
 /* ---------- #system: the lamina ---------- */
-.sysfig .figsvg{ max-height:460px; }
-.lam-str .lam-rect{ fill:var(--surface-2); stroke:var(--hair-strong); stroke-width:2; }
-.lam-str[data-l="continental"] .lam-rect{ fill:none; stroke-dasharray:4 3; }
-.lam-str[data-l="regional"] .lam-rect{ fill:var(--surface-3); }
-.lam-str[data-l="subnat"] .lam-rect{ fill:var(--surface-3); }
-.lam-str .lam-comp{ fill:var(--surface); stroke:var(--hair-strong); stroke-width:1.5; }
+.sysfig .figwrap{ padding:20px 18px 6px; }
+.lam-str .lam-band{ fill:var(--surface-2); stroke:var(--hair-strong); stroke-width:1.5; }
+.lam-str[data-l="continental"] .lam-band{ fill:none; stroke-dasharray:5 3; }
+.lam-str[data-l="regional"] .lam-band{ fill:var(--surface-3); }
+.lam-str[data-l="subnat"] .lam-band{ fill:var(--surface-3); }
+.lam-key{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; fill:var(--muted); }
+.lam-chip{ fill:var(--surface); stroke:var(--hair-strong); stroke-width:1; }
+.lam-chip-t{ font-family:var(--font-body); font-size:10.5px; fill:var(--ink-2); }
+.lam-rail{ fill:none; stroke-linecap:round; }
+.lam-rail--dn{ stroke:var(--fg-gold); stroke-width:3.5; }
+.lam-rail--up{ stroke:var(--fg-blue); stroke-width:3.5; stroke-dasharray:6 4; }
+.lam-railcap{ font-family:var(--font-mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
+.lam-railcap--dn{ fill:var(--fg-gold-txt); } .lam-railcap--up{ fill:var(--fg-blue-txt); }
 .lam-em .lam-cell{ stroke:var(--surface); stroke-width:1.25; transition:fill .15s; }
+.lam-em .lam-num{ font-family:var(--font-mono); font-size:11px; font-weight:500; fill:var(--ink); }
 .lam-em .lam-cg:hover .lam-cell,.lam-em .lam-cg.lit .lam-cell{ stroke:var(--ink); stroke-width:2; }
 .lam-em .lam-cg[aria-pressed="true"] .lam-cell{ stroke:var(--ink); stroke-width:2.5; }
 .lam-em .lam-cg:focus-visible{ outline:none; }
@@ -467,13 +475,12 @@ ul.ticks li::before{
 @media (forced-colors: active){ .lam-em .lam-cg:focus-visible .lam-cell{ stroke:Highlight; } }
 .lam-alt{ opacity:0; transition:opacity .22s; pointer-events:none; }
 .fig.alt .lam-alt{ opacity:1; }
-.fig.alt .lam-str,.fig.alt .lam-flows{ opacity:.16; }
-.lam-alt .lam-rect{ fill:var(--surface-3); stroke:var(--muted); stroke-dasharray:none; }
+.lam-alt .alt-scrim{ fill:var(--bg); opacity:.82; }
+.lam-alt .alt-box{ fill:var(--surface-3); stroke:var(--muted); stroke-width:1.5; stroke-dasharray:5 4; }
 .lam-alt .alt-flag{ fill:var(--fg-red); }
-.lam-alt text{ fill:var(--muted); }
-.lam-alt .alt-flag-t{ fill:var(--surface); font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; }
+.lam-alt .alt-flag-t{ fill:#fff; font-family:var(--font-mono); font-size:9px; letter-spacing:.08em; }
+.lam-alt .alt-cap{ font-family:var(--font-body); font-size:12px; fill:var(--muted); }
 .block.lit{ box-shadow:0 0 0 2px var(--fg-blue); }
-@media (max-width:700px){ .sysfig .fig-v{ display:none; } }
 .dash{ margin-top:24px; --dash-dur:.42s; --dash-stagger:38ms; }
 .vh{ position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
 a.vh-focusable:focus{ position:static!important; width:auto; height:auto; margin:0 0 12px; clip-path:none; padding:8px 12px; display:inline-block; background:var(--surface); border:1px solid var(--fg-red); border-radius:8px; font-size:12.5px; color:var(--ink); text-decoration:none; }
@@ -1288,51 +1295,56 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
 
     <figure class="fig sysfig" id="sysFig">
       <div class="figwrap">
-        <svg viewBox="0 0 1000 442" class="figsvg" role="group" aria-label="Diagram of five governance layers drawn to scale. Elimu Moja is a thin layer, about seven percent of the stack, made of eight blocks. Mandate and standards flow down; evidence and reporting flow back up. The layers, top to bottom, are Continental, Regional political, Elimu Moja, National, and Sub-national.">
-          <g class="lam-str" data-l="subnat" data-rise style="--i:0">
-            <rect class="lam-rect" x="160" y="316" width="788" height="96" rx="6"></rect>
-            <rect class="lam-comp" x="164" y="324" width="189" height="80"></rect><rect class="lam-comp" x="361" y="324" width="189" height="80"></rect><rect class="lam-comp" x="558" y="324" width="189" height="80"></rect><rect class="lam-comp" x="755" y="324" width="189" height="80"></rect>
-            <text class="fig-key" x="150" y="360" text-anchor="end">Sub-</text><text class="fig-key" x="150" y="373" text-anchor="end">national</text>
-            <text class="fig-v" x="176" y="367">Districts &middot; the middle tier &middot; schools &middot; teachers &middot; families. Where impact is felt.</text>
-          </g>
-          <g class="lam-str" data-l="national" data-rise style="--i:1">
-            <rect class="lam-rect" x="160" y="196" width="788" height="108" rx="6"></rect>
-            <rect class="lam-comp" x="164" y="204" width="149" height="92"></rect><rect class="lam-comp" x="322" y="204" width="149" height="92"></rect><rect class="lam-comp" x="480" y="204" width="149" height="92"></rect><rect class="lam-comp" x="638" y="204" width="149" height="92"></rect><rect class="lam-comp" x="796" y="204" width="149" height="92"></rect>
-            <text class="fig-key" x="150" y="253" text-anchor="end">National</text>
-            <text class="fig-v" x="176" y="253">Ministries &middot; curriculum institutes &middot; teacher services &middot; exam bodies &middot; national EMIS. Custody and delivery stay here.</text>
-          </g>
-          <text class="fig-cap" x="176" y="150">Elimu Moja layer &mdash; drawn to scale, about 7% of the stack</text>
-          <g class="lam-str lam-em" data-l="em" data-rise style="--i:2">
-            <rect class="lam-rect" x="160" y="156" width="788" height="22" rx="3"></rect>
-            <text class="fig-key" x="150" y="171" text-anchor="end">Elimu Moja</text>
-            <g class="lam-cells"></g>
+        <svg viewBox="0 0 1000 364" class="figsvg" role="group" aria-label="Diagram of five governance layers drawn to scale. From top to bottom: Continental, Regional, Elimu Moja, National, Sub-national. Elimu Moja is a thin layer, about seven percent of the stack, made of eight blocks. Mandate flows down the left; evidence and reporting flow up the right.">
+          <text class="lam-railcap lam-railcap--dn" x="8" y="13">Mandate</text>
+          <text class="lam-railcap lam-railcap--up" x="992" y="13" text-anchor="end">Evidence &middot; reporting</text>
+          <path class="lam-rail lam-rail--dn" data-draw pathLength="1" style="--i:5" d="M18 22 L18 322" marker-end="url(#emArrow)"></path>
+          <path class="lam-rail lam-rail--up" data-draw pathLength="1" style="--i:6" d="M982 322 L982 22" marker-end="url(#emArrow)"></path>
+
+          <g class="lam-str" data-l="continental" data-rise style="--i:4">
+            <rect class="lam-band" x="40" y="18" width="920" height="36" rx="6"></rect>
+            <text class="lam-key" x="128" y="39" text-anchor="end">Continental</text>
+            <g class="lam-chips" data-band="continental"></g>
           </g>
           <g class="lam-str" data-l="regional" data-rise style="--i:3">
-            <rect class="lam-rect" x="160" y="82" width="788" height="54" rx="6"></rect>
-            <text class="fig-key" x="150" y="105" text-anchor="end">Regional</text><text class="fig-key" x="150" y="118" text-anchor="end">political</text>
-            <text class="fig-v" x="176" y="113">EAC Treaty &middot; Common Market Protocol Art. 11 &middot; Sectoral Council &middot; Regional Forum on Education</text>
-          </g>
-          <g class="lam-str" data-l="continental" data-rise style="--i:4">
-            <rect class="lam-rect" x="40" y="24" width="936" height="44" rx="6"></rect>
-            <text class="fig-key" x="150" y="49" text-anchor="end">Continental</text>
-            <text class="fig-v" x="176" y="49">AU Agenda 2063 &middot; CESA 2026&ndash;35 &middot; Continental Teacher Qualification Framework &middot; CAF-Africa &middot; Addis Convention</text>
+            <rect class="lam-band" x="148" y="66" width="804" height="42" rx="6"></rect>
+            <text class="lam-key" x="128" y="90" text-anchor="end">Regional</text>
+            <g class="lam-chips" data-band="regional"></g>
           </g>
 
-          <g class="lam-flows" aria-hidden="true">
-            <path class="edge" data-draw pathLength="1" style="--i:5" d="M122 74 L122 150" marker-end="url(#emArrow)"></path>
-            <text class="fig-cap" x="58" y="96" text-anchor="start">Mandate</text>
-            <path class="edge" data-draw pathLength="1" style="--i:6" d="M600 180 L600 193" marker-end="url(#emArrow)"></path>
-            <text class="fig-cap" x="612" y="190">Standards &middot; data &middot; services</text>
-            <path class="edge edge--up" data-draw pathLength="1" style="--i:7" d="M912 402 L912 62" marker-end="url(#emArrow)"></path>
-            <text class="fig-cap" transform="rotate(-90 932 232)" x="932" y="232" text-anchor="middle">Evidence &middot; reporting</text>
+          <text class="fig-cap" x="148" y="122">Elimu Moja layer, drawn to scale: about 7% of the stack</text>
+          <g class="lam-str lam-em" data-l="em" data-rise style="--i:2">
+            <rect class="lam-band" x="148" y="126" width="804" height="22" rx="4"></rect>
+            <text class="lam-key" x="128" y="141" text-anchor="end">Elimu Moja</text>
+            <g class="lam-cells"></g>
+          </g>
+          <g class="lam-handoff" data-rise style="--i:1" aria-hidden="true">
+            <path class="edge" data-draw pathLength="1" style="--i:7" d="M310 154 L310 164" marker-end="url(#emArrow)"></path>
+            <path class="edge" data-draw pathLength="1" style="--i:7" d="M550 154 L550 164" marker-end="url(#emArrow)"></path>
+            <path class="edge" data-draw pathLength="1" style="--i:7" d="M790 154 L790 164" marker-end="url(#emArrow)"></path>
+            <text class="fig-cap" x="550" y="180" text-anchor="middle">Standards &middot; data &middot; services</text>
+          </g>
+
+          <g class="lam-str" data-l="national" data-rise style="--i:1">
+            <rect class="lam-band" x="148" y="188" width="804" height="78" rx="6"></rect>
+            <text class="lam-key" x="128" y="221" text-anchor="end">National</text>
+            <g class="lam-chips" data-band="national"></g>
+            <text class="fig-cap" x="148" y="259">Custody and delivery stay here</text>
+          </g>
+          <g class="lam-str" data-l="subnat" data-rise style="--i:0">
+            <rect class="lam-band" x="148" y="278" width="804" height="72" rx="6"></rect>
+            <text class="lam-key" x="128" y="310" text-anchor="end">Sub-national</text>
+            <g class="lam-chips" data-band="subnat"></g>
+            <text class="fig-cap" x="148" y="344">Where impact is felt</text>
           </g>
 
           <g class="lam-alt" aria-hidden="true">
-            <rect class="lam-rect" x="160" y="156" width="788" height="182" rx="6"></rect>
-            <rect class="alt-flag" x="160" y="138" width="210" height="16" rx="3"></rect>
-            <text class="alt-flag-t" x="168" y="150">NOT THE PROPOSAL</text>
-            <text class="fig-cap" x="554" y="244" text-anchor="middle">A new regional agency that absorbs national delivery</text>
-            <text class="fig-cap" x="554" y="260" text-anchor="middle">and competes with ministries</text>
+            <rect class="alt-scrim" x="0" y="0" width="1000" height="364"></rect>
+            <rect class="alt-box" x="148" y="126" width="804" height="228" rx="6"></rect>
+            <rect class="alt-flag" x="148" y="110" width="176" height="16" rx="3"></rect>
+            <text class="alt-flag-t" x="156" y="122">NOT THE PROPOSAL</text>
+            <text class="alt-cap" x="550" y="234" text-anchor="middle">A new regional agency that absorbs national delivery</text>
+            <text class="alt-cap" x="550" y="254" text-anchor="middle">and competes with ministries. Rejected.</text>
           </g>
         </svg>
         <p class="fig-hint">Hover or focus a segment of the band to see which block it is.</p>
@@ -2568,10 +2580,34 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     ];
     var gbc = {};
     qsa("#gapGrid .gap").forEach(function(g){ var b = g.dataset.block; if (b) gbc[b] = (gbc[b] || 0) + 1; });
-    var X0 = 160, W = 788, G = 2, cw = (W - G * 7) / 8;
+
+    /* --- static context chips: name the parts of each layer we are NOT --- */
+    var PLOT_X = 148, PLOT_W = 804;
+    var CHIPS = {
+      continental: { y:25, h:22, ty:39.5, cols:["AU Agenda 2063","CESA 2026-35","AU teacher framework","Assessment framework","Addis Convention"] },
+      regional:    { y:73, h:28, ty:90.5, cols:["EAC Treaty","Common Market Protocol","Sectoral Council","Regional Education Forum"] },
+      national:    { y:197, h:44, ty:222.5, cols:["Ministries of education","Curriculum institutes","Teacher services","Examinations councils","National EMIS"] },
+      subnat:      { y:287, h:42, ty:311.5, cols:["Districts and counties","The middle tier","Schools","Teachers","Learners and families"] }
+    };
+    Object.keys(CHIPS).forEach(function(band){
+      var host = fig.querySelector('.lam-chips[data-band="' + band + '"]');
+      if (!host) return;
+      var spec = CHIPS[band], n = spec.cols.length, gap = 7;
+      var cw = (PLOT_W - gap * (n - 1)) / n;
+      spec.cols.forEach(function(label, i){
+        var x = PLOT_X + i * (cw + gap);
+        host.appendChild(svgEl("rect", { "class":"lam-chip", x:x.toFixed(1), y:spec.y, width:cw.toFixed(1), height:spec.h, rx:"4" }));
+        var t = { "class":"lam-chip-t", x:(x + cw / 2).toFixed(1), y:spec.ty, "text-anchor":"middle" };
+        if (label.length * 6.15 > cw - 14){ t.textLength = (cw - 14).toFixed(0); t.lengthAdjust = "spacingAndGlyphs"; }
+        host.appendChild(svgEl("text", t, [label]));
+      });
+    });
+
+    /* --- the eight interactive Elimu Moja segments --- */
+    var X0 = 148, W = 804, G = 4, cw = (W - G * 7) / 8, CY = 126, CH = 22;
     var cards = qsa("#system .blocks .block");
     cards.forEach(function(c, i){ c.dataset.b = BLKS[i][0]; });
-    var defaultRead = "Elimu Moja is a thin regional layer: eight blocks sitting between eight national systems and one regional promise, about seven percent of the institutional stack. Select a segment for detail.";
+    var defaultRead = "Elimu Moja is a thin regional layer: eight blocks sitting between eight national systems and one continental strategy, about seven percent of the institutional stack. Select a segment for detail.";
     var sel = null;
 
     function lit(b, on){
@@ -2605,10 +2641,10 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
         "data-tip": "Block " + b[0] + " · " + b[1] + "\nAnswers " + (gbc[b[0]] || 0) + " of 29 gaps"
       });
       g.appendChild(svgEl("rect", {
-        "class": "lam-cell", x: x.toFixed(1), y: "156", width: cw.toFixed(1), height: "22", rx: "2",
-        fill: "color-mix(in srgb, var(" + b[2] + ") 50%, var(--surface))"
+        "class": "lam-cell", x: x.toFixed(1), y: String(CY), width: cw.toFixed(1), height: String(CH), rx: "2",
+        fill: "color-mix(in srgb, var(" + b[2] + ") 52%, var(--surface))"
       }));
-      g.appendChild(svgEl("text", { "class": "fig-cap", x: (x + cw / 2).toFixed(1), y: "170.5", "text-anchor": "middle" }, [b[0]]));
+      g.appendChild(svgEl("text", { "class": "lam-num", x: (x + cw / 2).toFixed(1), y: String(CY + 15), "text-anchor": "middle" }, [b[0]]));
       lamCells.appendChild(g);
       g.addEventListener("click", function(){ choose(b[0]); });
       g.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); choose(b[0]); } });
@@ -2626,12 +2662,15 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     roving(lamCells, ".lam-cg", 8);
 
     var alt = sec.querySelector("#sysAlt");
-    if (alt) alt.addEventListener("change", function(){
-      fig.classList.toggle("alt", alt.checked);
-      readEl.textContent = alt.checked
-        ? "The alternative Elimu Moja is not: a new regional agency that absorbs national delivery and competes with ministries. Rejected. The proposal keeps custody and delivery national."
-        : (sel ? readEl.textContent : defaultRead);
-    });
+    if (alt){
+      alt.addEventListener("change", function(){
+        fig.classList.toggle("alt", alt.checked);
+        readEl.textContent = alt.checked
+          ? "The alternative Elimu Moja is not: a new regional agency that absorbs national delivery and competes with ministries. Rejected. The proposal keeps custody and delivery national."
+          : (sel ? readEl.textContent : defaultRead);
+      });
+      fig.classList.toggle("alt", alt.checked); /* sync a browser-restored checkbox state */
+    }
 
     sec.addEventListener("keydown", function(e){
       if (e.key === "Escape" && sel){ e.preventDefault(); choose(sel); }
