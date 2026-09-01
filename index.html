@@ -70,9 +70,13 @@
   --serious:  #ec835a;
   --critical: #d03b3b;
 
-  --sev-crit: #e2564f;
-  --sev-high: #ec9a4f;
-  --sev-mod:  #8b9e86;
+  --sev-crit: #f26a5e;
+  --sev-high: #cf7b22;
+  --sev-mod:  #74806b;
+
+  --fg-blue-txt:  var(--fg-blue);
+  --fg-green-txt: var(--fg-green);
+  --fg-gold-txt:  var(--fg-gold);
 
   --focus:    var(--fg-blue);
   --hero-scrim: linear-gradient(to bottom, rgba(9,12,7,.58), rgba(9,12,7,.86));
@@ -112,7 +116,7 @@
   --surface-3:   #e4e6da;
   --ink:         #14160f;
   --ink-2:       #45483b;
-  --muted:       #767965;
+  --muted:       #67695a;
   --hair:        #e0e1d2;
   --hair-strong: #cccdb9;
 
@@ -123,8 +127,11 @@
 
   --focus:    #1a76a6;
   --sev-crit: #cf3b33;
-  --sev-high: #c9791f;
-  --sev-mod:  #5f7a5a;
+  --sev-high: #a85f0d;
+  --sev-mod:  #556f50;
+  --fg-blue-txt:  #15607f;
+  --fg-green-txt: #0c6631;
+  --fg-gold-txt:  #7d5607;
   --hero-scrim: linear-gradient(to bottom, rgba(248,248,243,.78), rgba(248,248,243,.93));
   --sa-soft: color-mix(in srgb, var(--sa) 12%, var(--bg));
 }
@@ -391,63 +398,129 @@ ul.ticks li::before{
 .mappanel .mp-where{ font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-top:12px; }
 
 /* ---------- gap dashboard ---------- */
-.dash{ margin-top:30px; }
-.kpirow{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(148px,1fr)); }
-.kpi{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:15px 15px 14px; }
-.kpi .kv{ font-family:var(--font-display); font-weight:800; font-size:1.85rem; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:center; gap:8px; font-variant-numeric:tabular-nums; line-height:1; }
+.dash{ margin-top:24px; --dash-dur:.42s; --dash-stagger:38ms; }
+.vh{ position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+a.vh-focusable:focus{ position:static!important; width:auto; height:auto; margin:0 0 12px; clip-path:none; padding:8px 12px; display:inline-block; background:var(--surface); border:1px solid var(--fg-red); border-radius:8px; font-size:12.5px; color:var(--ink); text-decoration:none; }
+
+.dash-asof{ font-family:var(--font-mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:0 0 14px; display:flex; flex-wrap:wrap; gap:6px 12px; align-items:center; }
+.dash-asof > span{ min-width:0; }
+.dash-asof .rc{ color:var(--ink-2); }
+.dash-copy{ font:inherit; font-family:var(--font-mono); font-size:10px; letter-spacing:.04em; text-transform:uppercase; color:var(--fg-blue-txt); background:none; border:1px solid var(--hair-strong); border-radius:6px; padding:4px 9px; cursor:pointer; min-height:24px; }
+.dash-copy:hover{ border-color:var(--fg-blue); color:var(--ink); }
+
+.kpirow{ display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); }
+.kpirow.pulse .kpi{ animation:kpiPulse .5s ease; }
+@keyframes kpiPulse{ 0%{ box-shadow:0 0 0 0 color-mix(in srgb,var(--fg-red) 42%, transparent); } 100%{ box-shadow:0 0 0 5px transparent; } }
+.kpi{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:15px 15px 14px; scroll-margin-top:90px; }
+.kpi .kv{ font-family:var(--font-display); font-weight:800; font-size:1.78rem; letter-spacing:-0.02em; color:var(--ink); display:flex; align-items:baseline; gap:7px; font-variant-numeric:tabular-nums; line-height:1; }
+.kpi .kv small{ font-size:.48em; font-weight:600; color:var(--muted); letter-spacing:0; }
+.kpi .kv .sev-swatch{ align-self:center; }
 .kpi .kl{ font-size:12px; color:var(--ink-2); margin-top:6px; font-weight:600; }
 .kpi .ks{ font-family:var(--font-mono); font-size:9.5px; color:var(--muted); margin-top:5px; letter-spacing:.02em; }
-.sev-swatch{ width:11px; height:11px; border-radius:3px; display:inline-block; flex:none; }
+.sev-swatch{ width:10px; height:10px; border-radius:2px; display:inline-block; flex:none; }
 .s-crit{ background:var(--sev-crit); } .s-high{ background:var(--sev-high); } .s-mod{ background:var(--sev-mod); }
 
-.dgrid{ display:grid; gap:14px; margin-top:14px; grid-template-columns:1fr; }
-@media (min-width:820px){ .dgrid{ grid-template-columns:1.4fr 1fr; } .dcard--full{ grid-column:1 / -1; } }
-.dcard{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:16px 16px 14px; }
-.dcard figcaption{ font-family:var(--font-mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin:0 0 15px; display:flex; justify-content:space-between; gap:10px; align-items:baseline; }
-.dc-hint{ text-transform:none; letter-spacing:0; font-size:9.5px; color:var(--muted); opacity:.75; }
+.dgrid{ display:grid; gap:14px; margin-top:16px; grid-template-columns:1fr; }
+@media (min-width:860px){ .dgrid{ grid-template-columns:1.5fr 1fr; } .dcard--full{ grid-column:1 / -1; } }
+.dgrid > *{ min-width:0; }
+.kpirow{ min-width:0; }
+.dcard{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:16px 16px 15px; min-width:0; }
+.dcard figcaption{ margin:0; }
+.dcard figcaption h3{ font-family:var(--font-mono); font-size:10.5px; font-weight:500; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin:0; }
+.dc-hint{ font-family:var(--font-mono); font-size:10px; color:var(--ink-2); margin:5px 0 0; }
+.dc-finding{ font-size:12.5px; color:var(--ink-2); margin:11px 0 13px; min-height:1.2em; }
+.dc-finding b{ color:var(--ink); }
 
-.hbars{ display:flex; flex-direction:column; gap:8px; }
-.hrow{ display:grid; grid-template-columns:116px 1fr 24px; gap:10px; align-items:center; background:none; border:0; padding:4px 3px; cursor:pointer; text-align:left; border-radius:7px; font:inherit; font-family:var(--font-body); }
+.hbars{ display:flex; flex-direction:column; gap:7px; }
+.hrow{ display:grid; grid-template-columns:122px 1fr 30px; gap:10px; align-items:center; background:none; border:0; padding:6px 4px; cursor:pointer; text-align:left; border-radius:7px; font:inherit; font-family:var(--font-body); min-height:30px; scroll-margin-top:90px; }
 .hrow:hover{ background:var(--surface-2); }
-.hrow.on{ background:color-mix(in srgb,var(--fg-red) 13%, var(--surface)); }
-.hrow.dim{ opacity:.38; }
-.hrow-l{ font-size:11.5px; color:var(--ink-2); }
-.hrow.on .hrow-l{ color:var(--ink); font-weight:600; }
-.hrow-track{ height:15px; background:var(--surface-2); border-radius:4px; overflow:hidden; display:flex; }
-.hrow-track .seg{ height:100%; display:block; transition:width .4s ease; }
-.hrow-n{ font-family:var(--font-mono); font-size:11.5px; color:var(--ink); text-align:right; font-variant-numeric:tabular-nums; }
-.legend{ display:flex; flex-wrap:wrap; gap:6px; margin-top:13px; }
-.legend .lg{ font:inherit; font-family:var(--font-body); font-size:10.5px; color:var(--ink-2); background:none; border:1px solid var(--hair-strong); border-radius:999px; padding:4px 9px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; }
+.hrow[aria-pressed="true"]{ background:var(--surface-2); box-shadow:inset 0 0 0 1.5px var(--ink); }
+.hrow.dim .hrow-track{ opacity:.3; }
+.hrow.dim .hrow-l,.hrow.dim .hrow-n{ color:var(--muted); }
+.hrow-l{ font-size:11.5px; color:var(--ink-2); line-height:1.25; }
+.hrow[aria-pressed="true"] .hrow-l{ color:var(--ink); font-weight:600; }
+.hrow-track{ position:relative; height:16px; background:var(--surface-2); border-radius:4px; overflow:hidden; display:flex; }
+.hrow-ctx{ position:absolute; left:0; top:0; bottom:0; width:0; background:color-mix(in srgb,var(--ink) 13%,transparent); transition:width var(--dash-dur) ease; }
+.hrow-track .seg{ position:relative; height:100%; width:0; display:block; box-shadow:inset -1px 0 0 var(--surface); transition:width var(--dash-dur) ease calc(var(--i,0) * var(--dash-stagger)); }
+.hrow-track .seg:last-child{ box-shadow:none; }
+.seg[data-sev="high"]{ background-image:repeating-linear-gradient(45deg, rgba(0,0,0,.32) 0 2px, transparent 2px 5px); }
+.seg[data-sev="mod"]{ background-image:repeating-linear-gradient(-45deg, rgba(0,0,0,.30) 0 2px, transparent 2px 5px); }
+:root[data-theme="light"] .seg[data-sev="high"]{ background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.4) 0 2px, transparent 2px 5px); }
+:root[data-theme="light"] .seg[data-sev="mod"]{ background-image:repeating-linear-gradient(-45deg, rgba(255,255,255,.38) 0 2px, transparent 2px 5px); }
+.hrow-n{ font-family:var(--font-mono); font-size:12px; color:var(--ink); text-align:right; font-variant-numeric:tabular-nums; }
+@media (max-width:560px){ .hrow{ grid-template-columns:96px 1fr 26px; gap:8px; } .hrow-l{ font-size:11px; } }
+
+.legend{ display:flex; flex-wrap:wrap; gap:6px; margin-top:14px; }
+.legend .lg{ font:inherit; font-family:var(--font-body); font-size:10.5px; color:var(--ink-2); background:none; border:1px solid var(--hair-strong); border-radius:999px; padding:5px 10px; cursor:pointer; display:inline-flex; align-items:center; gap:6px; min-height:26px; }
 .legend .lg:hover{ color:var(--ink); }
-.legend .lg.on{ border-color:var(--ink); color:var(--ink); }
+.legend .lg[aria-pressed="true"]{ border-color:var(--ink); color:var(--ink); background:var(--surface-2); }
 .legend .lg .sw{ width:9px; height:9px; border-radius:2px; flex:none; }
 .legend .lg b{ font-family:var(--font-mono); }
 
-.donutwrap{ display:flex; flex-direction:column; align-items:center; gap:4px; }
-.donut{ width:148px; height:148px; }
-.donut circle{ transition:opacity .25s, stroke-dashoffset .4s ease, stroke-dasharray .4s ease; }
-.donut-num{ font-family:var(--font-display); font-weight:800; font-size:26px; fill:var(--ink); }
-.donut-lbl{ font-family:var(--font-mono); font-size:7.5px; fill:var(--muted); letter-spacing:.12em; text-transform:uppercase; }
+.donutwrap{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+.donut{ width:146px; height:146px; }
+.donut .track{ stroke:var(--surface-2); }
+.donut circle[data-src]{ transition:stroke-dasharray var(--dash-dur) ease, stroke-dashoffset var(--dash-dur) ease, opacity .2s; }
+.donut-num{ font-family:var(--font-display); font-weight:800; font-size:25px; fill:var(--ink); font-variant-numeric:tabular-nums; }
+.donut-lbl{ font-family:var(--font-mono); font-size:7px; fill:var(--muted); letter-spacing:.14em; text-transform:uppercase; }
 
-.matrix{ overflow-x:auto; }
-.mgrid{ display:grid; grid-template-columns:140px repeat(3,minmax(72px,150px)) 44px; gap:4px; min-width:480px; max-width:660px; }
-.mhead{ font-family:var(--font-mono); font-size:9px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); text-align:center; align-self:end; padding-bottom:5px; line-height:1.3; }
-.mrowh{ font-size:11px; color:var(--ink-2); align-self:center; }
-.mcell{ font:inherit; font-family:var(--font-mono); font-size:13px; color:var(--ink); border:1px solid var(--hair); border-radius:6px; min-height:34px; cursor:pointer; display:grid; place-items:center; font-variant-numeric:tabular-nums; transition:border-color .15s; }
-.mcell:hover{ border-color:var(--fg-blue); }
-.mcell.on{ border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink); }
-.mcell.zero{ color:var(--muted); cursor:default; }
-.mtot{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted); display:grid; place-items:center; font-variant-numeric:tabular-nums; }
-.mtot--grand{ color:var(--ink); }
+.matrix{ overflow-x:auto; margin-top:2px; }
+table.mgrid{ border-collapse:separate; border-spacing:4px; table-layout:fixed; width:100%; min-width:470px; max-width:660px; }
+table.mgrid td,table.mgrid th{ padding:0; }
+table.mgrid thead th{ font-family:var(--font-mono); font-size:9px; font-weight:500; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); vertical-align:bottom; padding-bottom:5px; line-height:1.3; text-align:center; }
+table.mgrid tbody th[scope="row"],table.mgrid tfoot th{ font-family:var(--font-body); font-size:11px; font-weight:400; color:var(--ink-2); text-align:left; width:128px; }
+.mcell{ font:inherit; font-family:var(--font-mono); font-size:13px; color:var(--ink); border:1px solid var(--hair); border-radius:6px; width:100%; min-height:38px; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; background:var(--surface); font-variant-numeric:tabular-nums; transition:border-color .15s; scroll-margin-top:90px; }
+.mcell:hover{ border-color:var(--ink); }
+.mcell[aria-pressed="true"]{ border-color:var(--ink); box-shadow:inset 0 0 0 1.5px var(--ink); }
+.mcell .mnum small{ font-size:.68em; color:var(--muted); }
+.mcell .mstrip{ width:66%; height:3px; border-radius:2px; background:var(--surface-2); overflow:hidden; display:flex; }
+.mcell .mstrip i{ height:100%; transition:width var(--dash-dur) ease; }
+td.mcell.zero{ color:var(--muted); border-style:dashed; min-height:38px; display:grid; place-items:center; font-family:var(--font-mono); font-size:13px; }
+td.mtot{ font-family:var(--font-mono); font-size:11.5px; color:var(--muted); text-align:center; vertical-align:middle; font-variant-numeric:tabular-nums; }
+td.mtot--grand{ color:var(--ink); }
+.matrix .mcell:focus-visible{ outline:3px solid var(--ink); outline-offset:-3px; }
 
-.phases3{ display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(176px,1fr)); }
-.pcol{ border:1px solid var(--hair); border-radius:var(--radius-sm); padding:13px 13px 15px; background:var(--surface-2); }
-.pcol-h{ font-size:12px; color:var(--ink-2); } .pcol-h b{ font-family:var(--font-display); color:var(--ink); }
-.pcol-w{ font-family:var(--font-mono); font-size:9.5px; color:var(--muted); margin-top:2px; }
-.pcol-n{ font-family:var(--font-display); font-weight:800; font-size:1.65rem; color:var(--ink); margin:9px 0 9px; font-variant-numeric:tabular-nums; line-height:1; }
+.burnsvg{ width:100%; height:auto; display:block; margin-top:4px; }
+.burnsvg .b-grid{ stroke:var(--hair); stroke-width:1; }
+.burnsvg .b-axis{ stroke:var(--hair-strong); stroke-width:1; }
+.burnsvg .b-area{ fill:color-mix(in srgb,var(--fg-red) 13%, transparent); transition:d var(--dash-dur) ease; }
+.burnsvg .b-line{ fill:none; stroke:var(--fg-red); stroke-width:2.5; stroke-linejoin:round; }
+.burnsvg .b-crit{ fill:none; stroke:var(--sev-crit); stroke-width:2; stroke-dasharray:5 3; stroke-linejoin:round; }
+.burnsvg .b-tick{ font-family:var(--font-mono); font-size:9px; fill:var(--muted); }
+.burnsvg .b-cursor{ transition:transform var(--dash-dur) ease; }
+.burnsvg .b-cursor line{ stroke:var(--ink); stroke-width:1.5; }
+.burnsvg .b-cursor circle{ fill:var(--fg-red); }
+.burnsvg .b-cursor circle.c-crit{ fill:var(--sev-crit); }
+.scrub{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.scrub-btn{ font:inherit; font-family:var(--font-body); font-size:11.5px; cursor:pointer; padding:6px 12px; border-radius:999px; border:1px solid var(--hair-strong); background:var(--surface); color:var(--ink-2); min-height:28px; }
+.scrub-btn:hover{ color:var(--ink); }
+.scrub-btn[aria-pressed="true"]{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.scrub-read{ font-size:12.5px; color:var(--ink-2); margin:11px 0 0; }
+.scrub-read b{ color:var(--ink); font-variant-numeric:tabular-nums; }
 
-.dash-reset{ font:inherit; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.04em; color:var(--fg-red); background:none; border:0; padding:0 0 0 10px; cursor:pointer; }
-.dash-reset:hover{ color:var(--ink); }
+#gapTip{ position:fixed; top:0; left:0; z-index:80; max-width:250px; padding:7px 10px; border-radius:7px; background:var(--ink); color:var(--bg); font-family:var(--font-mono); font-size:11px; line-height:1.45; white-space:pre-line; pointer-events:none; box-shadow:0 8px 22px -8px rgba(0,0,0,.55); }
+#gapTip[hidden]{ display:none; }
+
+.gap-empty{ grid-column:1 / -1; border:1px dashed var(--hair-strong); border-radius:var(--radius); padding:28px 20px; text-align:center; color:var(--ink-2); font-size:13.5px; }
+.gap-empty button{ font:inherit; margin-left:6px; color:var(--fg-red); background:none; border:0; cursor:pointer; text-decoration:underline; }
+
+.dash-reset{ font:inherit; font-family:var(--font-mono); font-size:10.5px; letter-spacing:.04em; color:var(--fg-red); background:none; border:1px solid var(--hair-strong); border-radius:6px; padding:4px 10px; cursor:pointer; min-height:24px; margin-left:10px; }
+.dash-reset:hover{ color:var(--ink); border-color:var(--fg-red); }
+
+#gaps .fbtn,#gaps .hrow,#gaps .lg,#gaps .mcell,#gaps .scrub-btn,#gaps .dash-reset{ scroll-margin-top:92px; }
+
+@media (prefers-reduced-motion: reduce){
+  .dash{ --dash-dur:0s; --dash-stagger:0ms; }
+  .kpirow.pulse .kpi{ animation:none; }
+  .hrow-ctx,.hrow-track .seg,.donut circle[data-src],.mcell .mstrip i,.burnsvg .b-cursor,.burnsvg .b-area{ transition:none!important; }
+}
+@media (forced-colors: active){
+  .hrow-track .seg,.donut circle,.burnsvg .b-line,.burnsvg .b-crit,.burnsvg .b-area{ forced-color-adjust:none; }
+  .fbtn[aria-pressed="true"]{ background:Highlight; color:HighlightText; border-color:Highlight; }
+  .hrow[aria-pressed="true"],.legend .lg[aria-pressed="true"],.mcell[aria-pressed="true"],.scrub-btn[aria-pressed="true"]{ outline:2px solid Highlight; }
+  .mcell,td.mcell.zero{ border:1px solid CanvasText; }
+  :focus-visible{ outline-color:Highlight; }
+}
 
 /* ---------- gap map ---------- */
 .filterbar{ display:flex; flex-wrap:wrap; gap:8px; margin:24px 0 4px; align-items:center; }
@@ -457,8 +530,9 @@ ul.ticks li::before{
   padding:6px 12px; border-radius:999px; border:1px solid var(--hair-strong);
   background:var(--surface); color:var(--ink-2);
 }
-.fbtn:hover{ border-color:var(--sa); color:var(--ink); }
-.fbtn[aria-pressed="true"]{ background:var(--sa); border-color:var(--sa); color:var(--on-accent); }
+.fbtn:hover{ border-color:var(--ink); color:var(--ink); }
+.fbtn[aria-pressed="true"]{ background:var(--ink); border-color:var(--ink); color:var(--bg); font-weight:600; }
+.fbtn[data-fval="all"][aria-pressed="true"]{ background:var(--surface-2); border-color:var(--hair-strong); color:var(--muted); font-weight:500; }
 .gapgrid{ display:grid; gap:14px; margin-top:20px; grid-template-columns:repeat(auto-fill,minmax(min(100%,335px),1fr)); }
 .gap{
   background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius);
@@ -470,9 +544,9 @@ ul.ticks li::before{
 .gap .ev{ font-size:12.8px; color:var(--ink-2); margin:0; }
 .gap .rsp{ font-size:12.8px; color:var(--ink); margin:0; padding-top:9px; border-top:1px dashed var(--hair-strong); }
 .gap .rsp b{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--fg-green); display:block; margin-bottom:2px; font-weight:500; }
-.src-conf{ color:var(--fg-blue); border-color:color-mix(in srgb,var(--fg-blue) 40%,var(--hair)); background:color-mix(in srgb,var(--fg-blue) 12%,var(--surface)); }
-.src-brief{ color:var(--fg-green); border-color:color-mix(in srgb,var(--fg-green) 40%,var(--hair)); background:color-mix(in srgb,var(--fg-green) 12%,var(--surface)); }
-.src-council{ color:var(--fg-gold); border-color:color-mix(in srgb,var(--fg-gold) 42%,var(--hair)); background:color-mix(in srgb,var(--fg-gold) 12%,var(--surface)); }
+.src-conf{ color:var(--fg-blue-txt); border-color:color-mix(in srgb,var(--fg-blue) 40%,var(--hair)); background:color-mix(in srgb,var(--fg-blue) 12%,var(--surface)); }
+.src-brief{ color:var(--fg-green-txt); border-color:color-mix(in srgb,var(--fg-green) 40%,var(--hair)); background:color-mix(in srgb,var(--fg-green) 12%,var(--surface)); }
+.src-council{ color:var(--fg-gold-txt); border-color:color-mix(in srgb,var(--fg-gold) 42%,var(--hair)); background:color-mix(in srgb,var(--fg-gold) 12%,var(--surface)); }
 .gapmeta{ font-size:11.5px; color:var(--muted); margin-top:16px; font-family:var(--font-mono); }
 
 /* ---------- building blocks ---------- */
@@ -800,66 +874,89 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
 </section>
 
 <!-- ============ GAP MAP ============ -->
-<section class="section" id="gaps" style="--sa: var(--fg-red)">
+<section class="section" id="gaps" style="--sa: var(--fg-red)" aria-labelledby="gapsTitle">
   <div class="inner">
     <p class="eyebrow">What has to be fixed</p>
-    <h2>The gap map</h2>
+    <h2 id="gapsTitle">The gap map</h2>
     <p class="standfirst">
-      A live register of what a unified system has to close. It combines the gaps raised on the conference
-      floor, the priorities in this brief, and further gaps the advisory review adds. Every tile, bar and
-      cell below is a filter: the whole board and the cards update together.
+      A live register of what a unified system has to close, drawn from the conference floor, this brief and
+      the advisory review. Every tile, bar, cell and block below is a filter, and the whole board, the
+      projection and the cards recompute together.
     </p>
 
+    <a class="vh vh-focusable" href="#gapGrid">Skip the gap charts and filters</a>
+
     <div class="dash" id="gapDash">
-      <div class="kpirow">
-        <div class="kpi"><div class="kv" id="kpiTotal">29</div><div class="kl">gaps in view</div><div class="ks" id="kpiTotalSub">of 29 in the register</div></div>
-        <div class="kpi"><div class="kv"><span id="kpiCrit">8</span><span class="sev-swatch s-crit"></span></div><div class="kl">critical, fix now</div><div class="ks" id="kpiCritSub">8 critical &middot; 15 high &middot; 6 moderate</div></div>
-        <div class="kpi"><div class="kv" id="kpiDomains">6</div><div class="kl">domains affected</div><div class="ks">the gaps reach every part</div></div>
-        <div class="kpi"><div class="kv" id="kpiP1">7</div><div class="kl">year-one actions</div><div class="ks">worked in roadmap Phase 1</div></div>
-        <div class="kpi"><div class="kv" id="kpiCouncil">17</div><div class="kl">from the review</div><div class="ks">beyond the floor and the brief</div></div>
+      <p class="dash-asof">
+        <span>Register &middot; 29 entries &middot; static snapshot</span>
+        <span class="rc" id="dashRc">view recomputed on load</span>
+        <button class="dash-copy" id="dashCopy" type="button">Copy link to this view</button>
+      </p>
+
+      <div class="kpirow" id="kpiRow">
+        <div class="kpi"><div class="kv"><span id="kpiTotal">29</span><small id="kpiTotalDen">/ 29</small></div><div class="kl">gaps in view</div><div class="ks">of the full register</div></div>
+        <div class="kpi"><div class="kv"><span id="kpiCrit">8</span><span class="sev-swatch s-crit" aria-hidden="true"></span></div><div class="kl">critical, fix now</div><div class="ks" id="kpiCritSub">8 critical, 15 high, 6 moderate</div></div>
+        <div class="kpi"><div class="kv" id="kpiBlocks">9</div><div class="kl">building blocks engaged</div><div class="ks">of 9 that answer the register</div></div>
+        <div class="kpi"><div class="kv" id="kpiP1">7</div><div class="kl">worked in year one</div><div class="ks">roadmap Phase 1, months 0 to 12</div></div>
+        <div class="kpi"><div class="kv" id="kpiCouncil">17</div><div class="kl">added by the review</div><div class="ks">beyond the floor and the brief</div></div>
       </div>
 
       <div class="dgrid">
         <figure class="dcard">
-          <figcaption>Gaps by domain <span class="dc-hint">click a bar to filter</span></figcaption>
-          <div id="chartDomain" class="hbars"></div>
+          <figcaption><h3>Gaps by domain</h3></figcaption>
+          <p class="dc-hint">Select a bar to filter the register by domain.</p>
+          <p class="dc-finding" id="findDomain"></p>
+          <div id="chartDomain" class="hbars" role="group" aria-label="Gaps by domain, selectable"></div>
           <div class="legend" id="sevLegend">
-            <button class="lg" type="button" data-sev="crit"><span class="sw s-crit"></span>Critical</button>
-            <button class="lg" type="button" data-sev="high"><span class="sw s-high"></span>High</button>
-            <button class="lg" type="button" data-sev="mod"><span class="sw s-mod"></span>Moderate</button>
+            <button class="lg" type="button" data-sev="crit" aria-pressed="false"><span class="sw s-crit" aria-hidden="true"></span>Critical</button>
+            <button class="lg" type="button" data-sev="high" aria-pressed="false"><span class="sw s-high" aria-hidden="true"></span>High</button>
+            <button class="lg" type="button" data-sev="mod" aria-pressed="false"><span class="sw s-mod" aria-hidden="true"></span>Moderate</button>
           </div>
         </figure>
         <figure class="dcard">
-          <figcaption>By source</figcaption>
+          <figcaption><h3>By source</h3></figcaption>
+          <p class="dc-hint">Where each gap was first raised.</p>
+          <p class="dc-finding" id="findSource"></p>
           <div id="chartSource" class="donutwrap"></div>
+          <p class="vh" id="srcSummary"></p>
         </figure>
         <figure class="dcard dcard--full">
-          <figcaption>Domain &times; source <span class="dc-hint">click a cell to filter both</span></figcaption>
+          <figcaption><h3>Domain by source</h3></figcaption>
+          <p class="dc-hint">Full register. Select a cell to filter by that domain and source.</p>
           <div id="chartMatrix" class="matrix"></div>
         </figure>
         <figure class="dcard dcard--full">
-          <figcaption>When the register gets worked through</figcaption>
-          <div id="chartPhase" class="phases3"></div>
+          <figcaption><h3>Answered by</h3></figcaption>
+          <p class="dc-hint">Which of the nine building blocks carries each gap. Select a bar to filter.</p>
+          <p class="dc-finding" id="findCov"></p>
+          <div id="chartCoverage" class="hbars" role="group" aria-label="Gaps by building block, selectable"></div>
+        </figure>
+        <figure class="dcard dcard--full">
+          <figcaption><h3>The roadmap over time</h3></figcaption>
+          <p class="dc-hint">A projection of the gaps in view: how many stay open as each roadmap phase is delivered. Not a filter.</p>
+          <div id="chartBurn"></div>
+          <div class="scrub" id="burnScrub" role="group" aria-label="Roadmap point"></div>
+          <p class="scrub-read" id="burnRead"></p>
         </figure>
       </div>
     </div>
 
-    <div class="filterbar" role="group" aria-label="Filter gaps by severity">
-      <span class="flabel">Severity</span>
+    <div class="filterbar" role="group" aria-labelledby="fSevLbl">
+      <span class="flabel" id="fSevLbl">Severity</span>
       <button class="fbtn" data-fkey="sev" data-fval="all" aria-pressed="true">All</button>
       <button class="fbtn" data-fkey="sev" data-fval="crit" aria-pressed="false">Critical</button>
       <button class="fbtn" data-fkey="sev" data-fval="high" aria-pressed="false">High</button>
       <button class="fbtn" data-fkey="sev" data-fval="mod" aria-pressed="false">Moderate</button>
     </div>
-    <div class="filterbar" role="group" aria-label="Filter gaps by source">
-      <span class="flabel">Source</span>
+    <div class="filterbar" role="group" aria-labelledby="fSrcLbl">
+      <span class="flabel" id="fSrcLbl">Source</span>
       <button class="fbtn" data-fkey="src" data-fval="all" aria-pressed="true">All</button>
       <button class="fbtn" data-fkey="src" data-fval="conf" aria-pressed="false">Conference floor</button>
       <button class="fbtn" data-fkey="src" data-fval="brief" aria-pressed="false">This brief</button>
       <button class="fbtn" data-fkey="src" data-fval="council" aria-pressed="false">Advisory review adds</button>
     </div>
-    <div class="filterbar" role="group" aria-label="Filter gaps by domain">
-      <span class="flabel">Domain</span>
+    <div class="filterbar" role="group" aria-labelledby="fDomLbl">
+      <span class="flabel" id="fDomLbl">Domain</span>
       <button class="fbtn" data-fkey="dom" data-fval="all" aria-pressed="true">All</button>
       <button class="fbtn" data-fkey="dom" data-fval="learning" aria-pressed="false">Learning</button>
       <button class="fbtn" data-fkey="dom" data-fval="teachers" aria-pressed="false">Teachers</button>
@@ -868,7 +965,15 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
       <button class="fbtn" data-fkey="dom" data-fval="equity" aria-pressed="false">Equity and inclusion</button>
       <button class="fbtn" data-fkey="dom" data-fval="system" aria-pressed="false">System and financing</button>
     </div>
+    <div class="filterbar" role="group" aria-labelledby="fPhaseLbl">
+      <span class="flabel" id="fPhaseLbl">Phase</span>
+      <button class="fbtn" data-fkey="phase" data-fval="all" aria-pressed="true">All</button>
+      <button class="fbtn" data-fkey="phase" data-fval="1" aria-pressed="false">Phase 1</button>
+      <button class="fbtn" data-fkey="phase" data-fval="2" aria-pressed="false">Phase 2</button>
+      <button class="fbtn" data-fkey="phase" data-fval="3" aria-pressed="false">Phase 3</button>
+    </div>
 
+    <h3 class="vh">Gap register</h3>
     <div class="gapgrid" id="gapGrid">
 
       <article class="gap" data-src="conf" data-dom="learning">
@@ -1074,8 +1179,10 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
         <p class="rsp"><b>System response</b> A shared education continuity protocol and a regional disaster-risk financing facility line in the roadmap.</p>
       </article>
 
+      <p class="gap-empty" id="gapEmpty" hidden>No gaps match this combination.<button type="button" id="gapEmptyClear">Clear filters</button></p>
     </div>
     <p class="gapmeta"><span id="gapCount"></span><button class="dash-reset" id="dashReset" type="button" hidden>clear all filters</button></p>
+    <p class="vh" id="gapStatus" role="status" aria-live="polite" aria-atomic="true"></p>
   </div>
 </section>
 
@@ -1650,216 +1757,567 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
   }
 
   /* ---------- gap dashboard ---------- */
-  var gaps = Array.prototype.slice.call(document.querySelectorAll("#gapGrid .gap"));
-  if (gaps.length){
+  var gapGrid = document.getElementById("gapGrid");
+  if (gapGrid){
+    var mqR = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var $id = function(id){ return document.getElementById(id); };
+
+    var DOM = [["system","System & finance"],["learning","Learning"],["teachers","Teachers"],["data","Data & AI"],["equity","Equity"],["mobility","Mobility"]];
+    var SRC = [["conf","Conference floor","--fg-blue"],["brief","This brief","--fg-green"],["council","Advisory review adds","--fg-gold"]];
+    var SEV = [["crit","critical","--sev-crit"],["high","high","--sev-high"],["mod","moderate","--sev-mod"]];
+    var BLK = [["01","Regional Scorecard"],["02","Foundational Learning Framework"],["03","Teacher Qualification Passport"],["04","Regional Data Warehouse"],["05","Large-scale Assessment"],["06","Community & Commons"],["07","Stakeholder Engagement"],["08","AI Safety & Governance"],["G","Governance & roadmap"]];
     var GC = { crit:"var(--sev-crit)", high:"var(--sev-high)", mod:"var(--sev-mod)" };
-    var DOMAINS = [["system","System & finance"],["learning","Learning"],["teachers","Teachers"],
-                   ["data","Data & AI"],["equity","Equity"],["mobility","Mobility"]];
-    var SOURCES = [["conf","Conference floor","var(--fg-blue)"],["brief","This brief","var(--fg-green)"],
-                   ["council","Advisory review adds","var(--fg-gold)"]];
-    var PHASES  = [["1","Foundation","0 to 12 months"],["2","Build","12 to 30 months"],["3","Scale","30 to 60 months"]];
-    /* severity + roadmap phase per gap, keyed by headline */
+    var domName = {}, srcName = {}, sevName = {}, blkName = {};
+    DOM.forEach(function(d){ domName[d[0]] = d[1]; });
+    SRC.forEach(function(s){ srcName[s[0]] = s[1]; });
+    SEV.forEach(function(s){ sevName[s[0]] = s[1]; });
+    BLK.forEach(function(b){ blkName[b[0]] = b[1]; });
+
+    /* severity, roadmap phase, primary building block per gap, keyed by headline */
     var META = {
-      "No shared definition of foundational proficiency": ["crit","1"],
-      "Foundational learning is not integrated across the region": ["high","1"],
-      "Early childhood is treated as optional": ["high","2"],
-      "Language of instruction policy diverges, and there is a book famine": ["high","2"],
-      "Over-age and out-of-school children are missed": ["high","3"],
-      "Teacher development is episodic and uneven": ["high","2"],
-      "No recognised \"East African teacher\"": ["crit","2"],
-      "No teacher mutual recognition agreement": ["crit","1"],
-      "Teacher registries cannot talk to each other, and fraud is hard to catch": ["high","1"],
-      "Mobility could drain the poorest districts": ["mod","3"],
-      "No single regional data warehouse": ["crit","1"],
-      "Data does not become decisions": ["high","2"],
-      "AI is arriving in classrooms with no safety floor": ["high","2"],
-      "Child-data protection is not harmonised": ["high","2"],
-      "The middle tier has data it cannot use": ["high","2"],
-      "Cross-border teaching is not practical": ["high","3"],
-      "No equivalency table for mobile and displaced learners": ["high","2"],
-      "School years and exam calendars do not line up": ["mod","3"],
-      "Children with disabilities are unseen and unassessed": ["crit","2"],
-      "Crisis and refugee education is treated as an exception": ["high","2"],
-      "Gender parity is measured, gender outcomes are not": ["mod","2"],
-      "Parents, learners and communities are not really engaged": ["high","2"],
-      "Information does not flow after the conference": ["crit","1"],
-      "Learning resources and research are not shared": ["mod","2"],
-      "No funding model for the regional system itself": ["crit","3"],
-      "Non-state schools are outside regional quality assurance": ["mod","3"],
-      "Commitments have no teeth": ["crit","3"],
-      "One timeline for eight very different states will fail": ["high","1"],
-      "Climate shocks close schools with no regional response": ["mod","3"]
+      "No shared definition of foundational proficiency": ["crit","1","02"],
+      "Foundational learning is not integrated across the region": ["high","1","02"],
+      "Early childhood is treated as optional": ["high","2","02"],
+      "Language of instruction policy diverges, and there is a book famine": ["high","2","02"],
+      "Over-age and out-of-school children are missed": ["high","3","02"],
+      "Teacher development is episodic and uneven": ["high","2","03"],
+      "No recognised \"East African teacher\"": ["crit","2","03"],
+      "No teacher mutual recognition agreement": ["crit","1","03"],
+      "Teacher registries cannot talk to each other, and fraud is hard to catch": ["high","1","04"],
+      "Mobility could drain the poorest districts": ["mod","3","03"],
+      "No single regional data warehouse": ["crit","1","04"],
+      "Data does not become decisions": ["high","2","04"],
+      "AI is arriving in classrooms with no safety floor": ["high","2","08"],
+      "Child-data protection is not harmonised": ["high","2","04"],
+      "The middle tier has data it cannot use": ["high","2","04"],
+      "Cross-border teaching is not practical": ["high","3","03"],
+      "No equivalency table for mobile and displaced learners": ["high","2","05"],
+      "School years and exam calendars do not line up": ["mod","3","05"],
+      "Children with disabilities are unseen and unassessed": ["crit","2","05"],
+      "Crisis and refugee education is treated as an exception": ["high","2","02"],
+      "Gender parity is measured, gender outcomes are not": ["mod","2","01"],
+      "Parents, learners and communities are not really engaged": ["high","2","07"],
+      "Information does not flow after the conference": ["crit","1","07"],
+      "Learning resources and research are not shared": ["mod","2","06"],
+      "No funding model for the regional system itself": ["crit","3","G"],
+      "Non-state schools are outside regional quality assurance": ["mod","3","01"],
+      "Commitments have no teeth": ["crit","3","G"],
+      "One timeline for eight very different states will fail": ["high","1","G"],
+      "Climate shocks close schools with no regional response": ["mod","3","G"]
     };
-    gaps.forEach(function(g){
-      var t = (g.querySelector("h4").textContent || "").trim();
-      var m = META[t] || ["high","2"];
-      g.dataset.sev = m[0]; g.dataset.phase = m[1];
+
+    var recs = Array.prototype.slice.call(gapGrid.querySelectorAll(".gap")).map(function(el, i){
+      var t = (el.querySelector("h4").textContent || "").trim();
+      var m = META[t];
+      if (!m){ m = ["high","2","G"]; if (window.console) console.warn("gap-map: no META for headline:", t); }
+      el.querySelector("h4").id = "gap-h-" + i;
+      el.setAttribute("aria-labelledby", "gap-h-" + i);
+      el.dataset.sev = m[0]; el.dataset.phase = m[1]; el.dataset.block = m[2];
+      return { el:el, src:el.dataset.src, dom:el.dataset.dom, sev:m[0], phase:m[1], block:m[2] };
     });
+    var N = recs.length;
 
-    var state = { src:"all", dom:"all", sev:"all" };
-    var fbtns = Array.prototype.slice.call(document.querySelectorAll("#gaps .fbtn"));
-    var gapCount = document.getElementById("gapCount");
-    var resetBtn = document.getElementById("dashReset");
-    var byId = function(id){ return document.getElementById(id); };
-    var count = function(arr, key, val){ return arr.filter(function(g){ return g.dataset[key] === val; }).length; };
-    var match = function(g){
-      return (state.src === "all" || g.dataset.src === state.src)
-          && (state.dom === "all" || g.dataset.dom === state.dom)
-          && (state.sev === "all" || g.dataset.sev === state.sev);
+    var state = { src:"all", dom:"all", sev:"all", phase:"all", block:"all" };
+    var VOCAB = { src:["conf","brief","council"], dom:DOM.map(function(d){ return d[0]; }),
+                  sev:["crit","high","mod"], phase:["1","2","3"], block:BLK.map(function(b){ return b[0]; }) };
+    var KEYS = Object.keys(VOCAB);
+    var active = function(){ return KEYS.some(function(k){ return state[k] !== "all"; }); };
+    var labelFor = function(k, v){
+      if (k === "sev") return sevName[v] + " severity";
+      if (k === "src") return srcName[v];
+      if (k === "dom") return domName[v];
+      if (k === "phase") return "Phase " + v;
+      if (k === "block") return v === "G" ? "Governance and roadmap" : "Block " + v;
+      return v;
     };
-    var active = function(){ return state.src !== "all" || state.dom !== "all" || state.sev !== "all"; };
-    function setFilter(k, v, toggle){
-      state[k] = (toggle && state[k] === v) ? "all" : v;
-      render();
+    function matchExcept(r, ex){
+      for (var i = 0; i < KEYS.length; i++){
+        var k = KEYS[i];
+        if (ex && ex.indexOf(k) > -1) continue;
+        if (state[k] !== "all" && r[k] !== state[k]) return false;
+      }
+      return true;
     }
-    function reset(){ state = { src:"all", dom:"all", sev:"all" }; render(); }
+    function viewFor(){ var ex = Array.prototype.slice.call(arguments); return recs.filter(function(r){ return matchExcept(r, ex); }); }
+    function sevSplit(arr){ var o = { crit:0, high:0, mod:0 }; arr.forEach(function(r){ o[r.sev]++; }); return o; }
+    function countKey(arr, key, val){ var n = 0; arr.forEach(function(r){ if (r[key] === val) n++; }); return n; }
 
-    function renderDomain(vis){
-      var host = byId("chartDomain"); host.innerHTML = "";
-      var maxAll = Math.max.apply(null, DOMAINS.map(function(d){ return count(gaps,"dom",d[0]); }));
-      DOMAINS.forEach(function(d){
-        var rows = vis.filter(function(g){ return g.dataset.dom === d[0]; });
-        var c = { crit:0, high:0, mod:0 };
-        rows.forEach(function(g){ c[g.dataset.sev]++; });
-        var w = function(v){ return (v / maxAll * 100).toFixed(2) + "%"; };
+    /* ---- number tween (one shared rAF, interruptible) ---- */
+    var tw = new Map(), rafId = 0;
+    function tweenTo(el, to){
+      var from = parseInt(el.textContent, 10);
+      if (isNaN(from)) from = to;
+      if (from === to || mqR.matches){ el.textContent = to; tw.delete(el); return; }
+      tw.set(el, { from:from, to:to, t0:performance.now(), d:Math.min(520, 220 + Math.abs(to - from) * 20) });
+      if (!rafId) rafId = requestAnimationFrame(twStep);
+    }
+    function twStep(now){
+      rafId = 0;
+      tw.forEach(function(a, el){
+        var p = Math.min(1, (now - a.t0) / a.d), e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(a.from + (a.to - a.from) * e);
+        if (p === 1) tw.delete(el);
+      });
+      if (tw.size) rafId = requestAnimationFrame(twStep);
+    }
+
+    /* ---- tooltip singleton ---- */
+    var tip = document.createElement("div");
+    tip.id = "gapTip"; tip.hidden = true; tip.setAttribute("role", "tooltip");
+    document.body.appendChild(tip);
+    function tipShow(el){
+      var m = el.getAttribute("data-tip");
+      if (!m){ tip.hidden = true; return; }
+      tip.textContent = m; tip.hidden = false;
+      var r = el.getBoundingClientRect(), tr = tip.getBoundingClientRect();
+      var x = Math.min(Math.max(8, r.left + r.width / 2 - tr.width / 2), window.innerWidth - tr.width - 8);
+      var y = r.top - tr.height - 9; if (y < 6) y = r.bottom + 9;
+      tip.style.transform = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)";
+    }
+    var tipHide = function(){ tip.hidden = true; };
+    document.addEventListener("pointerover", function(e){
+      var el = e.target.closest && e.target.closest("[data-tip]");
+      if (el) tipShow(el); else tipHide();
+    });
+    document.addEventListener("focusin", function(e){
+      var el = e.target.closest && e.target.closest("[data-tip]");
+      if (el) tipShow(el); else tipHide();
+    });
+    document.addEventListener("focusout", tipHide);
+    window.addEventListener("scroll", tipHide, { passive:true });
+    document.addEventListener("keydown", function(e){ if (e.key === "Escape") tipHide(); });
+
+    /* ---- build charts once ---- */
+    var svgNS = "http://www.w3.org/2000/svg";
+    function buildBars(host, defs, key){
+      return defs.map(function(d, i){
         var b = document.createElement("button");
-        b.type = "button";
-        b.className = "hrow" + (state.dom === d[0] ? " on" : "") + (state.dom !== "all" && state.dom !== d[0] ? " dim" : "");
-        b.innerHTML =
-          '<span class="hrow-l">' + d[1] + '</span>'
-        + '<span class="hrow-track">'
-        +   '<i class="seg" style="width:' + w(c.crit) + ';background:' + GC.crit + '"></i>'
-        +   '<i class="seg" style="width:' + w(c.high) + ';background:' + GC.high + '"></i>'
-        +   '<i class="seg" style="width:' + w(c.mod)  + ';background:' + GC.mod  + '"></i>'
-        + '</span>'
-        + '<span class="hrow-n">' + rows.length + '</span>';
-        b.addEventListener("click", function(){ setFilter("dom", d[0], true); });
+        b.type = "button"; b.className = "hrow"; b.style.setProperty("--i", i);
+        b.setAttribute("aria-pressed", "false");
+        b.dataset.fk = key + ":" + d[0];
+        b.innerHTML = '<span class="hrow-l"></span><span class="hrow-track">'
+          + '<i class="hrow-ctx"></i>'
+          + '<i class="seg" data-sev="crit"></i><i class="seg" data-sev="high"></i><i class="seg" data-sev="mod"></i>'
+          + '</span><span class="hrow-n">0</span>';
+        b.querySelector(".hrow-l").textContent = (key === "block" ? d[0] + " · " + d[1] : d[1]);
+        b.querySelectorAll(".seg").forEach(function(s){ s.style.backgroundColor = GC[s.dataset.sev]; });
+        b.addEventListener("click", function(){ setState(key, d[0], true); });
         host.appendChild(b);
+        var segs = b.querySelectorAll(".seg");
+        return { el:b, key:d[0], ctx:b.querySelector(".hrow-ctx"),
+                 seg:{ crit:segs[0], high:segs[1], mod:segs[2] }, n:b.querySelector(".hrow-n") };
       });
     }
+    var domRows = buildBars($id("chartDomain"), DOM, "dom");
+    var covRows = buildBars($id("chartCoverage"), BLK, "block");
+    var domMax = Math.max.apply(null, DOM.map(function(d){ return countKey(recs, "dom", d[0]); }));
+    var covMax = Math.max.apply(null, BLK.map(function(b){ return countKey(recs, "block", b[0]); }));
 
-    function renderSource(vis){
-      var host = byId("chartSource");
-      var counts = SOURCES.map(function(s){ return count(vis,"src",s[0]); });
-      var total = counts.reduce(function(a,b){ return a + b; }, 0) || 1;
-      var R = 54, CIRC = 2 * Math.PI * R, off = 0, segs = "";
-      SOURCES.forEach(function(s, i){
-        var len = counts[i] / total * CIRC;
-        segs += '<circle r="' + R + '" cx="70" cy="70" fill="none" stroke="' + s[2] + '" stroke-width="15" '
-             + 'stroke-dasharray="' + len.toFixed(2) + ' ' + (CIRC - len).toFixed(2) + '" '
-             + 'stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 70 70)" '
-             + (state.src !== "all" && state.src !== s[0] ? 'opacity="0.25"' : '') + '></circle>';
-        off += len;
-      });
-      host.innerHTML =
-        '<svg viewBox="0 0 140 140" class="donut" aria-hidden="true">' + segs
-      + '<text x="70" y="67" text-anchor="middle" class="donut-num">' + vis.length + '</text>'
-      + '<text x="70" y="83" text-anchor="middle" class="donut-lbl">in view</text></svg>'
-      + '<div class="legend">' + SOURCES.map(function(s, i){
-          return '<button class="lg' + (state.src === s[0] ? " on" : "") + '" type="button" data-src="' + s[0] + '">'
-               + '<span class="sw" style="background:' + s[2] + '"></span>' + s[1] + ' <b>' + counts[i] + '</b></button>';
-        }).join("") + '</div>';
-      host.querySelectorAll(".lg[data-src]").forEach(function(bx){
-        bx.addEventListener("click", function(){ setFilter("src", bx.dataset.src, true); });
-      });
-    }
+    /* donut */
+    var R = 54, CIRC = 2 * Math.PI * R, dHost = $id("chartSource");
+    dHost.innerHTML =
+      '<svg viewBox="0 0 140 140" class="donut" aria-hidden="true">'
+      + '<circle class="track" r="' + R + '" cx="70" cy="70" fill="none" stroke-width="15"></circle>'
+      + '<g transform="rotate(-90 70 70)">'
+      + SRC.map(function(s){ return '<circle data-src="' + s[0] + '" r="' + R + '" cx="70" cy="70" fill="none" stroke="var(' + s[2] + ')" stroke-width="15"></circle>'; }).join("")
+      + '</g>'
+      + '<text x="70" y="66" text-anchor="middle" class="donut-num" id="donutNum">0</text>'
+      + '<text x="70" y="82" text-anchor="middle" class="donut-lbl">in view</text></svg>'
+      + '<div class="legend" id="srcLegend"></div>';
+    var donutNum = $id("donutNum");
+    var donutArc = {};
+    dHost.querySelectorAll("circle[data-src]").forEach(function(c){ donutArc[c.dataset.src] = c; });
+    var srcLeg = SRC.map(function(s){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "lg"; b.dataset.src = s[0]; b.dataset.fk = "src:" + s[0];
+      b.setAttribute("aria-pressed", "false");
+      b.innerHTML = '<span class="sw" style="background:var(' + s[2] + ')" aria-hidden="true"></span>' + s[1] + ' <b>0</b>';
+      b.addEventListener("click", function(){ setState("src", s[0], true); });
+      $id("srcLegend").appendChild(b);
+      return { el:b, key:s[0], n:b.querySelector("b") };
+    });
+    var srcSummary = $id("srcSummary");
 
-    function renderMatrix(){
-      /* the matrix is a stable navigator: full-register counts, always clickable */
-      var host = byId("chartMatrix");
-      var full = function(dom, src){
-        return gaps.filter(function(g){ return g.dataset.dom === dom && g.dataset.src === src; }).length;
-      };
-      var maxCell = 1;
-      DOMAINS.forEach(function(d){ SOURCES.forEach(function(s){ maxCell = Math.max(maxCell, full(d[0], s[0])); }); });
-      var h = '<div class="mgrid"><div></div>';
-      SOURCES.forEach(function(s){ h += '<div class="mhead">' + s[1] + '</div>'; });
-      h += '<div class="mhead">All</div>';
-      DOMAINS.forEach(function(d){
-        h += '<div class="mrowh">' + d[1] + '</div>';
-        SOURCES.forEach(function(s){
-          var n = full(d[0], s[0]);
-          var t = n ? (14 + 58 * n / maxCell) : 0;
-          var sel = state.dom === d[0] && state.src === s[0];
-          h += '<button class="mcell' + (sel ? " on" : "") + (n === 0 ? " zero" : "") + '" type="button" '
-             + 'data-dom="' + d[0] + '" data-src="' + s[0] + '" aria-label="' + d[1] + ', ' + s[1] + ': ' + n + ' gaps" '
-             + 'style="background:color-mix(in srgb, var(--fg-blue) ' + t.toFixed(0) + '%, var(--surface))">' + (n || "") + '</button>';
+    /* matrix table */
+    var regMx = {};
+    DOM.forEach(function(d){ SRC.forEach(function(s){
+      regMx[d[0] + "|" + s[0]] = recs.filter(function(r){ return r.dom === d[0] && r.src === s[0]; });
+    }); });
+    var mCell = {}, mRowTot = {}, mColTot = {}, mGrand;
+    (function buildMatrix(){
+      var t = document.createElement("table"); t.className = "mgrid";
+      var cap = document.createElement("caption"); cap.className = "vh";
+      cap.textContent = "Domain by source. The number in each cell is the count in the current view; the denominator is the full-register count. Select a cell to filter the register by that domain and source.";
+      t.appendChild(cap);
+      var thead = document.createElement("thead"), hr = document.createElement("tr");
+      hr.appendChild(document.createElement("td"));
+      SRC.forEach(function(s){ var th = document.createElement("th"); th.scope = "col"; th.textContent = s[1]; hr.appendChild(th); });
+      var thAll = document.createElement("th"); thAll.scope = "col"; thAll.textContent = "All"; hr.appendChild(thAll);
+      thead.appendChild(hr); t.appendChild(thead);
+      var tb = document.createElement("tbody");
+      DOM.forEach(function(d){
+        var tr = document.createElement("tr");
+        var rh = document.createElement("th"); rh.scope = "row"; rh.textContent = d[1]; tr.appendChild(rh);
+        SRC.forEach(function(s){
+          var td = document.createElement("td");
+          var reg = regMx[d[0] + "|" + s[0]];
+          if (reg.length === 0){
+            td.className = "mcell zero";
+            td.tabIndex = -1;
+            td.setAttribute("aria-label", d[1] + ", " + s[1] + ": no gaps recorded");
+            td.innerHTML = '<span aria-hidden="true">0</span>';
+          } else {
+            var btn = document.createElement("button");
+            btn.type = "button"; btn.className = "mcell";
+            btn.setAttribute("aria-pressed", "false");
+            btn.dataset.dom = d[0]; btn.dataset.src = s[0]; btn.dataset.fk = "cell:" + d[0] + "|" + s[0];
+            btn.innerHTML = '<span class="mnum">0</span><span class="mstrip"><i data-sev="crit"></i><i data-sev="high"></i><i data-sev="mod"></i></span>';
+            btn.querySelectorAll(".mstrip i").forEach(function(x){ x.style.backgroundColor = GC[x.dataset.sev]; });
+            btn.addEventListener("click", function(){ setCell(d[0], s[0]); });
+            td.appendChild(btn);
+            mCell[d[0] + "|" + s[0]] = { btn:btn, num:btn.querySelector(".mnum"),
+              seg:{ crit:btn.querySelector('.mstrip i[data-sev="crit"]'),
+                    high:btn.querySelector('.mstrip i[data-sev="high"]'),
+                    mod:btn.querySelector('.mstrip i[data-sev="mod"]') } };
+          }
+          tr.appendChild(td);
         });
-        h += '<div class="mtot">' + count(gaps,"dom",d[0]) + '</div>';
+        var tot = document.createElement("td"); tot.className = "mtot"; tot.textContent = "0";
+        mRowTot[d[0]] = tot; tr.appendChild(tot);
+        tb.appendChild(tr);
       });
-      h += '<div class="mrowh">All</div>';
-      SOURCES.forEach(function(s){ h += '<div class="mtot">' + count(gaps,"src",s[0]) + '</div>'; });
-      h += '<div class="mtot mtot--grand">' + gaps.length + '</div></div>';
-      host.innerHTML = h;
-      host.querySelectorAll(".mcell").forEach(function(bx){
-        if (bx.classList.contains("zero")) return;
-        bx.addEventListener("click", function(){
-          if (state.dom === bx.dataset.dom && state.src === bx.dataset.src){ state.dom = "all"; state.src = "all"; }
-          else { state.dom = bx.dataset.dom; state.src = bx.dataset.src; }
-          render();
-        });
+      t.appendChild(tb);
+      var tf = document.createElement("tfoot"), fr = document.createElement("tr");
+      var fh = document.createElement("th"); fh.scope = "row"; fh.textContent = "All"; fr.appendChild(fh);
+      SRC.forEach(function(s){ var td = document.createElement("td"); td.className = "mtot"; td.textContent = "0"; mColTot[s[0]] = td; fr.appendChild(td); });
+      var g = document.createElement("td"); g.className = "mtot mtot--grand"; g.textContent = "0"; mGrand = g; fr.appendChild(g);
+      tf.appendChild(fr); t.appendChild(tf);
+      $id("chartMatrix").appendChild(t);
+    })();
+
+    /* burn-down */
+    var BW = 620, BH = 210, bpadL = 34, bpadR = 14, bpadT = 12, bpadB = 34;
+    var MONTHS = [0, 12, 30, 60];
+    var STOPS = [
+      { m:0,  lbl:"Now",             sub:"month 0" },
+      { m:12, lbl:"End of Phase 1",   sub:"month 12" },
+      { m:30, lbl:"End of Phase 2",   sub:"month 30" },
+      { m:60, lbl:"Delivered, 2030",  sub:"month 60" }
+    ];
+    var burnStop = 0;
+    var bHost = $id("chartBurn");
+    function bx(m){ return bpadL + (m / 60) * (BW - bpadL - bpadR); }
+    function by(v, vmax){ return bpadT + (1 - v / vmax) * (BH - bpadT - bpadB); }
+    function burnSeries(vis){
+      var open = [vis.length], crit = [countKey(vis, "sev", "crit")];
+      [1, 2, 3].forEach(function(ph){
+        var ps = String(ph);
+        open.push(open[open.length - 1] - countKey(vis, "phase", ps));
+        crit.push(crit[crit.length - 1] - vis.filter(function(r){ return r.phase === ps && r.sev === "crit"; }).length);
       });
+      return { open:open, crit:crit };
+    }
+    (function buildBurn(){
+      var s = ['<svg viewBox="0 0 ' + BW + ' ' + BH + '" class="burnsvg" role="img" aria-label="Projected open gaps as each roadmap phase is delivered">'];
+      [0, 0.25, 0.5, 0.75, 1].forEach(function(f){
+        var yy = bpadT + f * (BH - bpadT - bpadB);
+        s.push('<line class="b-grid" x1="' + bpadL + '" x2="' + (BW - bpadR) + '" y1="' + yy.toFixed(1) + '" y2="' + yy.toFixed(1) + '"/>');
+      });
+      s.push('<line class="b-axis" x1="' + bpadL + '" x2="' + bpadL + '" y1="' + bpadT + '" y2="' + (BH - bpadB) + '"/>');
+      s.push('<line class="b-axis" x1="' + bpadL + '" x2="' + (BW - bpadR) + '" y1="' + (BH - bpadB) + '" y2="' + (BH - bpadB) + '"/>');
+      MONTHS.forEach(function(m){
+        s.push('<text class="b-tick" x="' + bx(m).toFixed(1) + '" y="' + (BH - bpadB + 15) + '" text-anchor="middle">m' + m + '</text>');
+      });
+      s.push('<path class="b-area" id="bArea" d=""/>');
+      s.push('<path class="b-line" id="bLine" d=""/>');
+      s.push('<path class="b-crit" id="bCrit" d=""/>');
+      s.push('<g class="b-cursor" id="bCursor"><line y1="' + bpadT + '" y2="' + (BH - bpadB) + '"/><circle id="bDotOpen" r="4"/><circle id="bDotCrit" class="c-crit" r="3.5"/></g>');
+      s.push('</svg>');
+      bHost.innerHTML = s.join("");
+      var sc = $id("burnScrub");
+      STOPS.forEach(function(st, i){
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "scrub-btn";
+        b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+        b.textContent = st.lbl;
+        b.addEventListener("click", function(){ burnStop = i; paintBurn(lastVis); });
+        sc.appendChild(b);
+      });
+    })();
+    function paintBurn(vis){
+      var ser = burnSeries(vis);
+      var vmax = Math.max(1, ser.open[0]);
+      var lp = MONTHS.map(function(m, i){ return bx(m).toFixed(1) + " " + by(ser.open[i], vmax).toFixed(1); });
+      var cp = MONTHS.map(function(m, i){ return bx(m).toFixed(1) + " " + by(ser.crit[i], vmax).toFixed(1); });
+      $id("bLine").setAttribute("d", "M" + lp.join(" L"));
+      $id("bCrit").setAttribute("d", "M" + cp.join(" L"));
+      $id("bArea").setAttribute("d", "M" + bx(0).toFixed(1) + " " + (BH - bpadB) + " L" + lp.join(" L") + " L" + bx(60).toFixed(1) + " " + (BH - bpadB) + " Z");
+      var st = STOPS[burnStop];
+      $id("bCursor").style.transform = "translateX(" + (bx(st.m) - bpadL).toFixed(1) + "px)";
+      $id("bDotOpen").setAttribute("cx", bpadL); $id("bDotOpen").setAttribute("cy", by(ser.open[burnStop], vmax).toFixed(1));
+      $id("bDotCrit").setAttribute("cx", bpadL); $id("bDotCrit").setAttribute("cy", by(ser.crit[burnStop], vmax).toFixed(1));
+      $id("burnScrub").querySelectorAll(".scrub-btn").forEach(function(b, i){ b.setAttribute("aria-pressed", i === burnStop ? "true" : "false"); });
+      var openN = ser.open[burnStop], critN = ser.crit[burnStop], done = ser.open[0] - openN;
+      $id("burnRead").innerHTML = st.lbl + ", " + st.sub + ": <b>" + openN + "</b> of " + ser.open[0]
+        + " gaps still open, <b>" + critN + "</b> critical. <b>" + done + "</b> delivered.";
     }
 
-    function renderPhase(vis){
-      var host = byId("chartPhase"); host.innerHTML = "";
-      var maxAll = Math.max.apply(null, PHASES.map(function(p){ return count(gaps,"phase",p[0]); }));
-      PHASES.forEach(function(p){
-        var rows = vis.filter(function(g){ return g.dataset.phase === p[0]; });
-        var c = { crit:0, high:0, mod:0 };
-        rows.forEach(function(g){ c[g.dataset.sev]++; });
-        var w = function(v){ return (v / maxAll * 100).toFixed(2) + "%"; };
-        var el = document.createElement("div");
-        el.className = "pcol";
-        el.innerHTML =
-          '<div class="pcol-h"><b>Phase ' + p[0] + '</b> ' + p[1] + '</div>'
-        + '<div class="pcol-w">' + p[2] + '</div>'
-        + '<div class="pcol-n">' + rows.length + '</div>'
-        + '<div class="hrow-track">'
-        +   '<i class="seg" style="width:' + w(c.crit) + ';background:' + GC.crit + '"></i>'
-        +   '<i class="seg" style="width:' + w(c.high) + ';background:' + GC.high + '"></i>'
-        +   '<i class="seg" style="width:' + w(c.mod)  + ';background:' + GC.mod  + '"></i>'
-        + '</div>';
-        host.appendChild(el);
+    /* ---- paint (mutate in place) ---- */
+    var lastVis = recs.slice();
+    function paintBarSet(rows, key, max, vis, ctx){
+      rows.forEach(function(r){
+        var inV = vis.filter(function(x){ return x[key] === r.key; });
+        var inC = ctx.filter(function(x){ return x[key] === r.key; });
+        var c = sevSplit(inV);
+        r.ctx.style.width = (inC.length / max * 100).toFixed(2) + "%";
+        r.seg.crit.style.width = (c.crit / max * 100).toFixed(2) + "%";
+        r.seg.high.style.width = (c.high / max * 100).toFixed(2) + "%";
+        r.seg.mod.style.width  = (c.mod  / max * 100).toFixed(2) + "%";
+        tweenTo(r.n, inV.length);
+        var sel = state[key] === r.key;
+        r.el.setAttribute("aria-pressed", sel ? "true" : "false");
+        r.el.classList.toggle("dim", state[key] !== "all" && !sel);
+        var nm = (key === "block" ? (r.key === "G" ? "Governance and roadmap" : "Block " + r.key + ", " + blkName[r.key]) : domName[r.key]);
+        var full = countKey(recs, key, r.key);
+        r.el.setAttribute("aria-label", nm + ": " + inV.length + " gaps in view, " + c.crit + " critical, " + c.high + " high, " + c.mod + " moderate. Full register " + full + ". " + (sel ? "Selected. " : "") + "Select to filter.");
+        r.el.setAttribute("data-tip", nm + "\n" + inV.length + " in view · " + c.crit + " crit, " + c.high + " high, " + c.mod + " mod · " + full + " in register");
       });
     }
 
     function render(){
-      var vis = gaps.filter(match);
-      gaps.forEach(function(g){ g.classList.toggle("hide", !match(g)); });
+      var focusKey = (document.activeElement && document.activeElement.closest
+        && document.activeElement.closest("#gapDash")) ? document.activeElement.dataset.fk : null;
 
-      byId("kpiTotal").textContent = vis.length;
-      byId("kpiTotalSub").textContent = "of " + gaps.length + " in the register";
-      var cc = count(vis,"sev","crit"), ch = count(vis,"sev","high"), cm = count(vis,"sev","mod");
-      byId("kpiCrit").textContent = cc;
-      byId("kpiCritSub").textContent = cc + " critical · " + ch + " high · " + cm + " moderate";
-      var doms = {}; vis.forEach(function(g){ doms[g.dataset.dom] = 1; });
-      byId("kpiDomains").textContent = Object.keys(doms).length;
-      byId("kpiP1").textContent = count(vis,"phase","1");
-      byId("kpiCouncil").textContent = count(vis,"src","council");
+      var vis = recs.filter(function(r){ return matchExcept(r, null); });
+      lastVis = vis;
+      recs.forEach(function(r){ r.el.classList.toggle("hide", vis.indexOf(r) < 0); });
 
-      renderDomain(vis); renderSource(vis); renderMatrix(); renderPhase(vis);
+      /* KPIs */
+      tweenTo($id("kpiTotal"), vis.length);
+      $id("kpiTotalDen").textContent = "/ " + N;
+      var sc = sevSplit(vis);
+      tweenTo($id("kpiCrit"), sc.crit);
+      $id("kpiCritSub").textContent = sc.crit + " critical, " + sc.high + " high, " + sc.mod + " moderate";
+      var blkSet = {}; vis.forEach(function(r){ blkSet[r.block] = 1; });
+      tweenTo($id("kpiBlocks"), Object.keys(blkSet).length);
+      tweenTo($id("kpiP1"), countKey(vis, "phase", "1"));
+      tweenTo($id("kpiCouncil"), countKey(vis, "src", "council"));
 
+      /* domain + coverage bars */
+      paintBarSet(domRows, "dom", domMax, vis, viewFor("dom"));
+      paintBarSet(covRows, "block", covMax, vis, viewFor("block"));
+
+      /* donut (context = all filters except src) */
+      var dctx = viewFor("src");
+      var counts = SRC.map(function(s){ return countKey(dctx, "src", s[0]); });
+      var tot = counts.reduce(function(a, b){ return a + b; }, 0) || 1;
+      var off = 0;
+      SRC.forEach(function(s, i){
+        var len = counts[i] / tot * CIRC, arc = donutArc[s[0]];
+        arc.style.strokeDasharray = len.toFixed(2) + " " + (CIRC - len).toFixed(2);
+        arc.style.strokeDashoffset = (-off).toFixed(2);
+        arc.style.opacity = (state.src === "all" || state.src === s[0]) ? "1" : "0.22";
+        off += len;
+      });
+      tweenTo(donutNum, vis.length);
+      srcLeg.forEach(function(l, i){
+        tweenTo(l.n, countKey(vis, "src", l.key));
+        var sel = state.src === l.key;
+        l.el.setAttribute("aria-pressed", sel ? "true" : "false");
+        l.el.setAttribute("data-tip", srcName[l.key] + "\n" + countKey(vis, "src", l.key) + " in view · " + countKey(recs, "src", l.key) + " in register");
+      });
+      srcSummary.textContent = "Donut chart. " + vis.length + " gaps in view: "
+        + SRC.map(function(s, i){ return countKey(vis, "src", s[0]) + " from " + s[1].toLowerCase(); }).join(", ") + ".";
+
+      /* matrix: register geometry, in-view number */
+      var mctx = viewFor("dom", "src");
+      DOM.forEach(function(d){
+        SRC.forEach(function(s){
+          var cell = mCell[d[0] + "|" + s[0]]; if (!cell) return;
+          var reg = regMx[d[0] + "|" + s[0]];
+          var inV = mctx.filter(function(r){ return r.dom === d[0] && r.src === s[0]; });
+          var rs = sevSplit(reg), tt = reg.length || 1;
+          cell.seg.crit.style.width = (rs.crit / tt * 100) + "%";
+          cell.seg.high.style.width = (rs.high / tt * 100) + "%";
+          cell.seg.mod.style.width  = (rs.mod  / tt * 100) + "%";
+          var denom = active() ? '<small>/' + reg.length + '</small>' : '';
+          cell.num.innerHTML = inV.length + denom;
+          var sel = state.dom === d[0] && state.src === s[0];
+          cell.btn.setAttribute("aria-pressed", sel ? "true" : "false");
+          cell.btn.style.opacity = (active() && inV.length === 0) ? "0.5" : "1";
+          cell.btn.setAttribute("aria-label", domName[d[0]] + ", " + srcName[s[0]] + ": " + inV.length + " in view of " + reg.length + " in the register, " + rs.crit + " critical. Select to filter both.");
+          cell.btn.setAttribute("data-tip", domName[d[0]] + " × " + srcName[s[0]] + "\n" + inV.length + " in view of " + reg.length + " · " + rs.crit + " crit");
+        });
+        var rn = countKey(vis, "dom", d[0]); mRowTot[d[0]].textContent = rn;
+      });
+      SRC.forEach(function(s){ mColTot[s[0]].textContent = countKey(vis, "src", s[0]); });
+      mGrand.textContent = vis.length;
+
+      /* burn-down (projection of the current view) */
+      paintBurn(vis);
+
+      /* filter chips */
       fbtns.forEach(function(b){
         if (b.dataset.fkey in state)
           b.setAttribute("aria-pressed", b.dataset.fval === state[b.dataset.fkey] ? "true" : "false");
       });
-      Array.prototype.slice.call(document.querySelectorAll("#sevLegend .lg")).forEach(function(b){
-        b.classList.toggle("on", state.sev === b.dataset.sev);
-      });
-      if (gapCount) gapCount.textContent = "Showing " + vis.length + " of " + gaps.length + " gaps"
-        + (active() ? "  ·  filtered" : "");
-      if (resetBtn) resetBtn.hidden = !active();
+      sevLegBtns.forEach(function(b){ b.setAttribute("aria-pressed", state.sev === b.dataset.sev ? "true" : "false"); });
+
+      /* findings */
+      var domT = tally(vis, "dom"), topD = topKey(domT);
+      $id("findDomain").innerHTML = vis.length
+        ? "<b>" + (topD ? domName[topD] : "None") + "</b> carries the most in view (" + (domT[topD] || 0) + " of " + vis.length + "), " + sc.crit + " critical."
+        : "No gaps in view.";
+      $id("findSource").innerHTML = "Conference floor <b>" + countKey(vis, "src", "conf") + "</b> · this brief <b>"
+        + countKey(vis, "src", "brief") + "</b> · review adds <b>" + countKey(vis, "src", "council") + "</b>.";
+      var covT = tally(vis, "block"), topB = topKey(covT);
+      $id("findCov").innerHTML = vis.length
+        ? "<b>" + (topB === "G" ? "Governance" : "Block " + topB) + "</b> carries the most (" + (covT[topB] || 0) + "). " + Object.keys(covT).length + " of 9 blocks engaged."
+        : "No gaps in view.";
+
+      /* count + reset + empty */
+      var chips = KEYS.filter(function(k){ return state[k] !== "all"; }).map(function(k){ return labelFor(k, state[k]); });
+      $id("gapCount").textContent = "Showing " + vis.length + " of " + N + " gaps" + (chips.length ? ", filtered by " + chips.join(", ") : "");
+      resetBtn.hidden = !active();
+      $id("gapEmpty").hidden = vis.length > 0;
+
+      /* recompute stamp + pulse */
+      stamp();
+      pulse();
+
+      /* restore focus (safety) */
+      if (focusKey){
+        var back = document.querySelector('#gapDash [data-fk="' + focusKey + '"]');
+        if (back && document.activeElement !== back) back.focus({ preventScroll:true });
+      }
+      announce(vis, chips);
     }
 
+    function tally(arr, key){ var o = {}; arr.forEach(function(r){ o[r[key]] = (o[r[key]] || 0) + 1; }); return o; }
+    function topKey(o){ var k = null, m = -1; Object.keys(o).forEach(function(x){ if (o[x] > m){ m = o[x]; k = x; } }); return k; }
+
+    /* ---- state funnel ---- */
+    var urlT, annT, firstRender = true;
+    function setState(k, v, toggle){
+      var nv = (toggle && state[k] === v) ? "all" : v;
+      if (state[k] === nv) return;
+      state[k] = nv;
+      render(); writeURL();
+    }
+    function setCell(dom, src){
+      if (state.dom === dom && state.src === src){ state.dom = "all"; state.src = "all"; }
+      else { state.dom = dom; state.src = src; }
+      render(); writeURL();
+    }
+    function reset(){
+      var hadFocus = document.activeElement === resetBtn;
+      KEYS.forEach(function(k){ state[k] = "all"; });
+      render(); writeURL();
+      if (hadFocus){ var f = document.querySelector('#gaps .fbtn[data-fkey="sev"][data-fval="all"]'); if (f) f.focus(); }
+    }
+
+    function writeURL(){
+      clearTimeout(urlT);
+      urlT = setTimeout(function(){
+        var q = new URLSearchParams(location.search);
+        KEYS.forEach(function(k){ if (state[k] === "all") q.delete(k); else q.set(k, state[k]); });
+        var s = q.toString();
+        try { history.replaceState(null, "", (s ? "?" + s : location.pathname) + "#gaps"); } catch (e){}
+      }, 300);
+    }
+    function readURL(){
+      var q = new URLSearchParams(location.search);
+      KEYS.forEach(function(k){
+        var v = q.get(k);
+        state[k] = (v && VOCAB[k].indexOf(v) > -1) ? v : "all";
+      });
+    }
+
+    var gapStatus = $id("gapStatus");
+    function announce(vis, chips){
+      clearTimeout(annT);
+      annT = setTimeout(function(){
+        var sc = sevSplit(vis);
+        gapStatus.textContent = "Showing " + vis.length + " of " + N + " gaps"
+          + (chips.length ? ", filtered by " + chips.join(", ") : ", no filters")
+          + ". " + sc.crit + " critical, " + sc.high + " high, " + sc.mod + " moderate.";
+      }, 350);
+    }
+
+    var dashRc = $id("dashRc");
+    function stamp(){
+      if (firstRender) return;
+      var d = new Date();
+      var p = function(n){ return (n < 10 ? "0" : "") + n; };
+      dashRc.textContent = "view recomputed " + p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+    }
+    var kpiRow = $id("kpiRow");
+    function pulse(){
+      if (firstRender || mqR.matches) return;
+      kpiRow.classList.remove("pulse"); void kpiRow.offsetWidth; kpiRow.classList.add("pulse");
+    }
+    kpiRow.addEventListener("animationend", function(){ kpiRow.classList.remove("pulse"); });
+
+    /* ---- roving tabindex (matrix + bar lists) ---- */
+    function roving(container, sel, cols){
+      function nodes(){ return Array.prototype.slice.call(container.querySelectorAll(sel)); }
+      function setIdx(n, focus){
+        var els = nodes(); if (!els.length) return;
+        n = Math.max(0, Math.min(els.length - 1, n));
+        els.forEach(function(el, i){ el.tabIndex = i === n ? 0 : -1; });
+        if (focus){ els[n].focus(); els[n].scrollIntoView({ block:"nearest", inline:"nearest" }); }
+      }
+      container.addEventListener("keydown", function(e){
+        var els = nodes(), i = els.indexOf(document.activeElement);
+        if (i < 0) return;
+        var n;
+        if (e.key === "ArrowRight" && cols > 1) n = i + 1;
+        else if (e.key === "ArrowLeft" && cols > 1) n = i - 1;
+        else if (e.key === "ArrowDown") n = i + cols;
+        else if (e.key === "ArrowUp") n = i - cols;
+        else if (e.key === "Home") n = cols > 1 ? i - (i % cols) : 0;
+        else if (e.key === "End") n = cols > 1 ? i - (i % cols) + cols - 1 : els.length - 1;
+        else return;
+        e.preventDefault(); setIdx(n, true);
+      });
+      container.addEventListener("focusin", function(e){
+        var idx = nodes().indexOf(e.target); if (idx >= 0) setIdx(idx, false);
+      });
+      setIdx(0, false);
+    }
+    roving($id("chartMatrix"), ".mcell", 3);
+    roving($id("chartDomain"), ".hrow", 1);
+    roving($id("chartCoverage"), ".hrow", 1);
+
+    /* ---- wiring ---- */
+    var fbtns = Array.prototype.slice.call(document.querySelectorAll("#gaps .fbtn"));
+    var resetBtn = $id("dashReset");
+    var sevLegBtns = Array.prototype.slice.call(document.querySelectorAll("#sevLegend .lg"));
     fbtns.forEach(function(b){
-      b.addEventListener("click", function(){ state[b.dataset.fkey] = b.dataset.fval; render(); });
+      b.dataset.fk = b.dataset.fkey + ":" + b.dataset.fval;
+      b.addEventListener("click", function(){
+        setState(b.dataset.fkey, b.dataset.fval, b.dataset.fval !== "all");
+      });
     });
-    Array.prototype.slice.call(document.querySelectorAll("#sevLegend .lg")).forEach(function(b){
-      b.addEventListener("click", function(){ setFilter("sev", b.dataset.sev, true); });
+    sevLegBtns.forEach(function(b){
+      b.addEventListener("click", function(){ setState("sev", b.dataset.sev, true); });
     });
-    if (resetBtn) resetBtn.addEventListener("click", reset);
+    resetBtn.addEventListener("click", reset);
+    var ec = $id("gapEmptyClear"); if (ec) ec.addEventListener("click", reset);
+    $id("dashCopy").addEventListener("click", function(){
+      var url = location.href, btn = this, done = function(){ btn.textContent = "Link copied"; setTimeout(function(){ btn.textContent = "Copy link to this view"; }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, done);
+      else { var ta = document.createElement("textarea"); ta.value = url; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (e){} ta.remove(); done(); }
+    });
+    document.getElementById("gaps").addEventListener("keydown", function(e){
+      if (e.key === "Escape" && active()){ e.preventDefault(); reset(); }
+    });
+    mqR.addEventListener && mqR.addEventListener("change", function(){ render(); });
+
+    readURL();
     render();
+    firstRender = false;
+    dashRc.textContent = "view recomputed on load";
   }
 
   /* ---------- assistant accordions ---------- */
