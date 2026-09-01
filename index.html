@@ -129,6 +129,10 @@
   --sev-crit: #cf3b33;
   --sev-high: #a85f0d;
   --sev-mod:  #556f50;
+  --good:     #0c7a2e;
+  --warning:  #9a6b00;
+  --serious:  #b8511f;
+  --critical: #c0271f;
   --fg-blue-txt:  #15607f;
   --fg-green-txt: #0c6631;
   --fg-gold-txt:  #7d5607;
@@ -303,6 +307,7 @@ sup{ font-size:.66em; line-height:0; }
   padding:66px clamp(16px,4vw,40px);
   border-top:5px solid transparent;
   border-image:var(--band) 1;
+  scroll-margin-top:96px;
 }
 .section:nth-of-type(even){ background:var(--surface-2); }
 .section > .inner{ max-width:var(--maxw); margin:0 auto; }
@@ -397,7 +402,78 @@ ul.ticks li::before{
 .mappanel .mp-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
 .mappanel .mp-where{ font-family:var(--font-mono); font-size:11px; color:var(--muted); margin-top:12px; }
 
-/* ---------- gap dashboard ---------- */
+/* ---------- figures: shared visual grammar ---------- */
+#emDefs{ position:absolute; width:0; height:0; overflow:hidden; }
+.fig{ --fig-dur:.42s; --fig-stagger:38ms; margin-top:28px; }
+.figwrap{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:14px 14px 4px; }
+.figsvg{ display:block; width:100%; height:auto; }
+.fig-hint{ font-family:var(--font-mono); font-size:11px; color:var(--muted); text-align:center; margin:12px 0 6px; }
+.fig-src{ font-family:var(--font-mono); font-size:9.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); margin:10px 0 0; }
+.fig-foot{ display:flex; flex-wrap:wrap; gap:10px 20px; align-items:center; margin-top:12px; }
+.fig-toggle{ font:inherit; font-family:var(--font-body); font-size:12.5px; color:var(--ink-2); display:inline-flex; gap:8px; align-items:center; cursor:pointer; user-select:none; }
+.fig-toggle input{ width:16px; height:16px; accent-color:var(--fg-red); flex:none; }
+.fig-read{ font-size:12.5px; color:var(--ink-2); margin:11px 0 0; }
+.fig-read b{ color:var(--ink); font-variant-numeric:tabular-nums; }
+
+.figsvg text{ font-family:var(--font-body); }
+.figsvg .fig-key{ font-family:var(--font-mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase; fill:var(--sa); }
+.figsvg .fig-t{ font-family:var(--font-display); font-weight:700; fill:var(--ink); }
+.figsvg .fig-v{ font-size:11.5px; fill:var(--ink-2); }
+.figsvg .fig-cap{ font-family:var(--font-mono); font-size:9px; letter-spacing:.05em; text-transform:uppercase; fill:var(--muted); }
+.figsvg .node{ fill:var(--surface-2); stroke:var(--hair-strong); stroke-width:2; }
+.figsvg .edge{ fill:none; stroke:var(--hair-strong); stroke-width:2; vector-effect:non-scaling-stroke; }
+.figsvg .edge--up{ stroke-dasharray:5 4; }
+.figsvg .edge--hot{ stroke:var(--sa); stroke-width:3; }
+.figsvg .dimline{ stroke:var(--muted); stroke-width:1; vector-effect:non-scaling-stroke; }
+.figsvg [role="button"]{ cursor:pointer; }
+.figsvg [role="button"] .hit{ fill:transparent; }
+.figsvg [role="button"]:focus-visible{ outline:none; }
+.figsvg [role="button"]:focus-visible .hit{ stroke:var(--focus); stroke-width:3; }
+@media (forced-colors: active){ .figsvg [role="button"]:focus-visible .hit{ stroke:Highlight; } }
+
+/* motion verbs (pathLength=1 -> pure CSS draw-on; final state is default) */
+.fig [data-draw]{ stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset var(--fig-dur) ease calc(var(--i,0) * var(--fig-stagger)); }
+.fig.on [data-draw]{ stroke-dashoffset:0; }
+.fig [data-rise]{ opacity:0; transform:translateY(10px); transition:opacity var(--fig-dur) ease calc(var(--i,0) * var(--fig-stagger)), transform var(--fig-dur) ease calc(var(--i,0) * var(--fig-stagger)); }
+.fig.on [data-rise]{ opacity:1; transform:none; }
+.fig [data-wipe]{ transform:scaleX(0); transform-origin:left; transition:transform var(--fig-dur) ease calc(var(--i,0) * var(--fig-stagger)); }
+.fig.on [data-wipe]{ transform:scaleX(1); }
+
+@media (prefers-reduced-motion: reduce){
+  .fig{ --fig-dur:0s; --fig-stagger:0ms; }
+  .fig [data-draw]{ stroke-dashoffset:0 !important; }
+  .fig [data-rise]{ opacity:1 !important; transform:none !important; }
+  .fig [data-wipe]{ transform:scaleX(1) !important; }
+  .fig [data-loop]{ animation:none !important; }
+}
+@media (forced-colors: active){
+  .figsvg .node,.figsvg .lam-cell{ forced-color-adjust:none; fill:Canvas; stroke:CanvasText; }
+  .figsvg .edge,.figsvg .dimline{ stroke:CanvasText; }
+  .figsvg .lam-cell.sel,.figsvg [aria-pressed="true"] .lam-cell{ outline:2px solid Highlight; }
+}
+
+/* ---------- #system: the lamina ---------- */
+.sysfig .figsvg{ max-height:460px; }
+.lam-str .lam-rect{ fill:var(--surface-2); stroke:var(--hair-strong); stroke-width:2; }
+.lam-str[data-l="continental"] .lam-rect{ fill:none; stroke-dasharray:4 3; }
+.lam-str[data-l="regional"] .lam-rect{ fill:var(--surface-3); }
+.lam-str[data-l="subnat"] .lam-rect{ fill:var(--surface-3); }
+.lam-str .lam-comp{ fill:var(--surface); stroke:var(--hair-strong); stroke-width:1.5; }
+.lam-em .lam-cell{ stroke:var(--surface); stroke-width:1.25; transition:fill .15s; }
+.lam-em .lam-cg:hover .lam-cell,.lam-em .lam-cg.lit .lam-cell{ stroke:var(--ink); stroke-width:2; }
+.lam-em .lam-cg[aria-pressed="true"] .lam-cell{ stroke:var(--ink); stroke-width:2.5; }
+.lam-em .lam-cg:focus-visible{ outline:none; }
+.lam-em .lam-cg:focus-visible .lam-cell{ stroke:var(--focus); stroke-width:3; }
+@media (forced-colors: active){ .lam-em .lam-cg:focus-visible .lam-cell{ stroke:Highlight; } }
+.lam-alt{ opacity:0; transition:opacity .22s; pointer-events:none; }
+.fig.alt .lam-alt{ opacity:1; }
+.fig.alt .lam-str,.fig.alt .lam-flows{ opacity:.16; }
+.lam-alt .lam-rect{ fill:var(--surface-3); stroke:var(--muted); stroke-dasharray:none; }
+.lam-alt .alt-flag{ fill:var(--fg-red); }
+.lam-alt text{ fill:var(--muted); }
+.lam-alt .alt-flag-t{ fill:var(--surface); font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; }
+.block.lit{ box-shadow:0 0 0 2px var(--fg-blue); }
+@media (max-width:700px){ .sysfig .fig-v{ display:none; } }
 .dash{ margin-top:24px; --dash-dur:.42s; --dash-stagger:38ms; }
 .vh{ position:absolute!important; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
 a.vh-focusable:focus{ position:static!important; width:auto; height:auto; margin:0 0 12px; clip-path:none; padding:8px 12px; display:inline-block; background:var(--surface); border:1px solid var(--fg-red); border-radius:8px; font-size:12.5px; color:var(--ink); text-decoration:none; }
@@ -698,6 +774,19 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
 </style>
 </head>
 <body>
+
+<svg id="emDefs" aria-hidden="true" focusable="false"><defs>
+  <marker id="emArrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0 0 L8 4 L0 8 Z" fill="context-stroke"></path>
+  </marker>
+  <linearGradient id="emBand" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="var(--fg-green)"></stop><stop offset="0.2" stop-color="var(--fg-green)"></stop>
+    <stop offset="0.2" stop-color="var(--fg-gold)"></stop><stop offset="0.4" stop-color="var(--fg-gold)"></stop>
+    <stop offset="0.4" stop-color="var(--fg-red)"></stop><stop offset="0.6" stop-color="var(--fg-red)"></stop>
+    <stop offset="0.6" stop-color="var(--fg-blue)"></stop><stop offset="0.8" stop-color="var(--fg-blue)"></stop>
+    <stop offset="0.8" stop-color="var(--fg-black)"></stop><stop offset="1" stop-color="var(--fg-black)"></stop>
+  </linearGradient>
+</defs></svg>
 
 <div class="band band-top"></div>
 
@@ -1197,6 +1286,65 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
       on Education, and reports upward to the continental strategy.
     </p>
 
+    <figure class="fig sysfig" id="sysFig">
+      <div class="figwrap">
+        <svg viewBox="0 0 1000 442" class="figsvg" role="group" aria-label="Diagram of five governance layers drawn to scale. Elimu Moja is a thin layer, about seven percent of the stack, made of eight blocks. Mandate and standards flow down; evidence and reporting flow back up. The layers, top to bottom, are Continental, Regional political, Elimu Moja, National, and Sub-national.">
+          <g class="lam-str" data-l="subnat" data-rise style="--i:0">
+            <rect class="lam-rect" x="160" y="316" width="788" height="96" rx="6"></rect>
+            <rect class="lam-comp" x="164" y="324" width="189" height="80"></rect><rect class="lam-comp" x="361" y="324" width="189" height="80"></rect><rect class="lam-comp" x="558" y="324" width="189" height="80"></rect><rect class="lam-comp" x="755" y="324" width="189" height="80"></rect>
+            <text class="fig-key" x="150" y="360" text-anchor="end">Sub-</text><text class="fig-key" x="150" y="373" text-anchor="end">national</text>
+            <text class="fig-v" x="176" y="367">Districts &middot; the middle tier &middot; schools &middot; teachers &middot; families. Where impact is felt.</text>
+          </g>
+          <g class="lam-str" data-l="national" data-rise style="--i:1">
+            <rect class="lam-rect" x="160" y="196" width="788" height="108" rx="6"></rect>
+            <rect class="lam-comp" x="164" y="204" width="149" height="92"></rect><rect class="lam-comp" x="322" y="204" width="149" height="92"></rect><rect class="lam-comp" x="480" y="204" width="149" height="92"></rect><rect class="lam-comp" x="638" y="204" width="149" height="92"></rect><rect class="lam-comp" x="796" y="204" width="149" height="92"></rect>
+            <text class="fig-key" x="150" y="253" text-anchor="end">National</text>
+            <text class="fig-v" x="176" y="253">Ministries &middot; curriculum institutes &middot; teacher services &middot; exam bodies &middot; national EMIS. Custody and delivery stay here.</text>
+          </g>
+          <text class="fig-cap" x="176" y="150">Elimu Moja layer &mdash; drawn to scale, about 7% of the stack</text>
+          <g class="lam-str lam-em" data-l="em" data-rise style="--i:2">
+            <rect class="lam-rect" x="160" y="156" width="788" height="22" rx="3"></rect>
+            <text class="fig-key" x="150" y="171" text-anchor="end">Elimu Moja</text>
+            <g class="lam-cells"></g>
+          </g>
+          <g class="lam-str" data-l="regional" data-rise style="--i:3">
+            <rect class="lam-rect" x="160" y="82" width="788" height="54" rx="6"></rect>
+            <text class="fig-key" x="150" y="105" text-anchor="end">Regional</text><text class="fig-key" x="150" y="118" text-anchor="end">political</text>
+            <text class="fig-v" x="176" y="113">EAC Treaty &middot; Common Market Protocol Art. 11 &middot; Sectoral Council &middot; Regional Forum on Education</text>
+          </g>
+          <g class="lam-str" data-l="continental" data-rise style="--i:4">
+            <rect class="lam-rect" x="40" y="24" width="936" height="44" rx="6"></rect>
+            <text class="fig-key" x="150" y="49" text-anchor="end">Continental</text>
+            <text class="fig-v" x="176" y="49">AU Agenda 2063 &middot; CESA 2026&ndash;35 &middot; Continental Teacher Qualification Framework &middot; CAF-Africa &middot; Addis Convention</text>
+          </g>
+
+          <g class="lam-flows" aria-hidden="true">
+            <path class="edge" data-draw pathLength="1" style="--i:5" d="M122 74 L122 150" marker-end="url(#emArrow)"></path>
+            <text class="fig-cap" x="58" y="96" text-anchor="start">Mandate</text>
+            <path class="edge" data-draw pathLength="1" style="--i:6" d="M600 180 L600 193" marker-end="url(#emArrow)"></path>
+            <text class="fig-cap" x="612" y="190">Standards &middot; data &middot; services</text>
+            <path class="edge edge--up" data-draw pathLength="1" style="--i:7" d="M912 402 L912 62" marker-end="url(#emArrow)"></path>
+            <text class="fig-cap" transform="rotate(-90 932 232)" x="932" y="232" text-anchor="middle">Evidence &middot; reporting</text>
+          </g>
+
+          <g class="lam-alt" aria-hidden="true">
+            <rect class="lam-rect" x="160" y="156" width="788" height="182" rx="6"></rect>
+            <rect class="alt-flag" x="160" y="138" width="210" height="16" rx="3"></rect>
+            <text class="alt-flag-t" x="168" y="150">NOT THE PROPOSAL</text>
+            <text class="fig-cap" x="554" y="244" text-anchor="middle">A new regional agency that absorbs national delivery</text>
+            <text class="fig-cap" x="554" y="260" text-anchor="middle">and competes with ministries</text>
+          </g>
+        </svg>
+        <p class="fig-hint">Hover or focus a segment of the band to see which block it is.</p>
+      </div>
+      <div class="fig-foot">
+        <label class="fig-toggle"><input type="checkbox" id="sysAlt"> Show the alternative Elimu Moja is <em>not</em></label>
+        <p class="fig-src">Structural diagram &middot; five layers drawn to scale</p>
+      </div>
+      <p class="fig-read" id="sysRead" role="status" aria-live="polite"></p>
+    </figure>
+
+    <h3 style="margin-top:40px;">The eight blocks</h3>
     <div class="blocks">
       <div class="block" style="--bc: var(--fg-green)"><span class="bn">Block 01</span><h4>Regional Scorecard</h4><p>One agreed indicator set across access, learning, teachers, inclusion, digital and financing. A shared yardstick for the Council.</p></div>
       <div class="block" style="--bc: var(--fg-gold)"><span class="bn">Block 02</span><h4>Foundational Learning Framework</h4><p>Common minimum proficiency, a playful pedagogy spine, a competency crosswalk, and a pre-primary to upper-primary roadmap.</p></div>
@@ -1208,14 +1356,14 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
       <div class="block" style="--bc: var(--fg-blue)"><span class="bn">Block 08</span><h4>AI Safety and Governance</h4><p>A safeguarding standard for AI in classrooms, a procurement checklist, and AI competency expectations for teachers and learners.</p></div>
     </div>
 
-    <h3 style="margin-top:44px;">How it nests</h3>
-    <div class="stack">
-      <div class="layer top"><span class="lk">Continental</span><span class="lv">African Union Agenda 2063 &middot; Continental Education Strategy for Africa 2026 to 2035 &middot; Continental foundational learning monitoring framework and FLN scorecard &middot; Continental Assessment Framework for Africa &middot; Continental Teacher Qualification Framework &middot; Addis and Global recognition conventions</span></div>
-      <div class="layer"><span class="lk">Regional political</span><span class="lv">EAC Treaty &middot; Common Market Protocol Article 11 &middot; Sectoral Council on Education, Science, Technology, Culture and Sports &middot; Regional Forum on Education</span></div>
-      <div class="layer"><span class="lk">Elimu Moja</span><span class="lv">The eight blocks above: shared standards, shared data, shared services. Owned regionally, governed jointly, run lean.</span></div>
-      <div class="layer"><span class="lk">National</span><span class="lv">Ministries of education &middot; curriculum institutes &middot; teacher services &middot; examination bodies &middot; national EMIS. Custody and delivery stay here.</span></div>
-      <div class="layer base"><span class="lk">Sub-national</span><span class="lv">Regions, counties and districts &middot; the middle tier &middot; schools &middot; teachers &middot; parents and community organisations. Where impact is felt.</span></div>
-    </div>
+    <h3 style="margin-top:40px;">The layers, in detail</h3>
+    <ol class="stack" id="sysStack">
+      <li class="layer top" data-l="continental"><span class="lk">Continental</span><span class="lv">African Union Agenda 2063 &middot; Continental Education Strategy for Africa 2026 to 2035 &middot; Continental foundational learning monitoring framework and FLN scorecard &middot; Continental Assessment Framework for Africa &middot; Continental Teacher Qualification Framework &middot; Addis and Global recognition conventions. Elimu Moja aligns and reports up to these.</span></li>
+      <li class="layer" data-l="regional"><span class="lk">Regional political</span><span class="lv">EAC Treaty &middot; Common Market Protocol Article 11 &middot; Sectoral Council on Education, Science, Technology, Culture and Sports &middot; Regional Forum on Education. These bodies hold the mandate and adopt the standards.</span></li>
+      <li class="layer" data-l="em"><span class="lk">Elimu Moja</span><span class="lv">The eight blocks: shared standards, shared data, shared services. Owned regionally, governed jointly, run lean. Drawn to scale it is about 7 percent of the institutional stack, thin by design. Mandate and standards flow down into it; evidence and reporting flow back up out of it.</span></li>
+      <li class="layer" data-l="national"><span class="lk">National</span><span class="lv">Ministries of education &middot; curriculum institutes &middot; teacher services &middot; examination bodies &middot; national EMIS. Custody and delivery stay here; Elimu Moja does not replace them.</span></li>
+      <li class="layer base" data-l="subnat"><span class="lk">Sub-national</span><span class="lv">Regions, counties and districts &middot; the middle tier &middot; schools &middot; teachers &middot; parents and community organisations. Where impact is felt, and where the evidence starts its journey back up.</span></li>
+    </ol>
     <p class="lede" style="margin-top:22px;max-width:64ch;">
       Principle of subsidiarity: nothing is done regionally that a state can do well alone. The region does
       the things that only make sense together, comparability, recognition, shared infrastructure and
@@ -1736,7 +1884,7 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
         }
       });
     }, { rootMargin: "-40% 0px -55% 0px", threshold: 0 });
-    ["why","gaps","scorecard","fln","passport","data","governance"].forEach(function(id){
+    ["why","gaps","system","scorecard","fln","passport","data","community","governance"].forEach(function(id){
       var el = document.getElementById(id);
       if (el) spy.observe(el);
     });
@@ -1754,6 +1902,140 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.04 });
     items.forEach(function(el){ rev.observe(el); });
     setTimeout(function(){ items.forEach(function(el){ el.classList.add("in"); }); }, 2600);
+  }
+
+  /* ============ viz kit (shared) ============ */
+  var NS = "http://www.w3.org/2000/svg";
+  var mqRk = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function prefersReduced(){ return mqRk.matches; }
+  function qs(s, c){ return (c || document).querySelector(s); }
+  function qsa(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+  function svgEl(tag, attrs, kids){
+    var el = document.createElementNS(NS, tag);
+    if (attrs) Object.keys(attrs).forEach(function(k){ el.setAttribute(k, attrs[k]); });
+    if (kids) kids.forEach(function(k){ el.appendChild(typeof k === "string" ? document.createTextNode(k) : k); });
+    return el;
+  }
+
+  /* shared tooltip singleton (#gapTip), pointer + keyboard, aria-describedby */
+  var tip = document.getElementById("gapTip");
+  if (!tip){ tip = document.createElement("div"); tip.id = "gapTip"; tip.hidden = true; tip.setAttribute("role", "tooltip"); document.body.appendChild(tip); }
+  var tipCur = null;
+  function tipShow(el){
+    var m = el.getAttribute("data-tip");
+    if (!m){ tipHide(); return; }
+    tip.textContent = m; tip.hidden = false;
+    if (tipCur && tipCur !== el) tipCur.removeAttribute("aria-describedby");
+    tipCur = el; el.setAttribute("aria-describedby", "gapTip");
+    var r = el.getBoundingClientRect(), tr = tip.getBoundingClientRect();
+    var x = Math.min(Math.max(8, r.left + r.width / 2 - tr.width / 2), window.innerWidth - tr.width - 8);
+    var y = r.top - tr.height - 9; if (y < 6) y = r.bottom + 9;
+    tip.style.transform = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)";
+  }
+  function tipHide(){ tip.hidden = true; if (tipCur){ tipCur.removeAttribute("aria-describedby"); tipCur = null; } }
+  document.addEventListener("pointerover", function(e){
+    var el = e.target.closest && e.target.closest("[data-tip]");
+    if (el) tipShow(el); else tipHide();
+  });
+  document.addEventListener("focusin", function(e){
+    var el = e.target.closest && e.target.closest("[data-tip]");
+    if (el) tipShow(el); else tipHide();
+  });
+  document.addEventListener("focusout", tipHide);
+  window.addEventListener("scroll", tipHide, { passive:true });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") tipHide(); });
+
+  /* roving tabindex for a set of like controls */
+  function roving(container, sel, cols){
+    if (!container) return;
+    function nodes(){ return Array.prototype.slice.call(container.querySelectorAll(sel)); }
+    function setIdx(n, focus){
+      var els = nodes(); if (!els.length) return;
+      n = Math.max(0, Math.min(els.length - 1, n));
+      els.forEach(function(el, i){ el.tabIndex = i === n ? 0 : -1; });
+      if (focus){ els[n].focus(); els[n].scrollIntoView({ block:"nearest", inline:"nearest" }); }
+    }
+    container.addEventListener("keydown", function(e){
+      var els = nodes(), i = els.indexOf(document.activeElement);
+      if (i < 0) return;
+      var n;
+      if (e.key === "ArrowRight" && cols > 1) n = i + 1;
+      else if (e.key === "ArrowLeft" && cols > 1) n = i - 1;
+      else if (e.key === "ArrowDown") n = i + cols;
+      else if (e.key === "ArrowUp") n = i - cols;
+      else if (e.key === "Home") n = cols > 1 ? i - (i % cols) : 0;
+      else if (e.key === "End") n = cols > 1 ? i - (i % cols) + cols - 1 : els.length - 1;
+      else return;
+      e.preventDefault(); setIdx(n, true);
+    });
+    container.addEventListener("focusin", function(e){
+      var idx = nodes().indexOf(e.target); if (idx >= 0) setIdx(idx, false);
+    });
+    setIdx(0, false);
+  }
+
+  /* fire fn once when el is genuinely in view; no IO -> fire now; fn in try/catch */
+  function onReveal(el, fn, opts){
+    opts = opts || {};
+    var done = false;
+    function run(){ if (done) return; done = true; try { fn(el); } catch (e){ if (window.console) console.warn("viz:", e); } }
+    if (!("IntersectionObserver" in window) || !el){ run(); return; }
+    var io = new IntersectionObserver(function(ents){
+      ents.forEach(function(en){ if (en.isIntersecting){ io.disconnect(); run(); } });
+    }, { threshold: opts.threshold || 0.25, rootMargin: opts.rootMargin || "0px 0px -8% 0px" });
+    io.observe(el);
+  }
+
+  /* ARIA-tabs step-through over data-step buttons / data-panel panels */
+  function stepper(container, opts){
+    opts = opts || {};
+    var btns = qsa(opts.btnSel || "[data-step]", container);
+    var panels = qsa(opts.panelSel || "[data-panel]", container);
+    if (!btns.length) return { go:function(){}, index:function(){ return 0; } };
+    var idx = 0, wrap = opts.wrap !== false;
+    btns.forEach(function(b, i){
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-selected", i === 0 ? "true" : "false");
+      b.tabIndex = i === 0 ? 0 : -1;
+      b.addEventListener("click", function(){ go(i); });
+      b.addEventListener("keydown", function(e){
+        var n = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") n = idx + 1;
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") n = idx - 1;
+        else if (e.key === "Home") n = 0;
+        else if (e.key === "End") n = btns.length - 1;
+        else return;
+        e.preventDefault();
+        if (n < 0) n = wrap ? btns.length - 1 : 0;
+        if (n >= btns.length) n = wrap ? 0 : btns.length - 1;
+        go(n, true);
+      });
+    });
+    panels.forEach(function(p){ p.setAttribute("role", "tabpanel"); p.tabIndex = 0; });
+    function go(i, focus){
+      idx = i;
+      btns.forEach(function(b, k){
+        var on = k === i;
+        b.setAttribute("aria-selected", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;
+        if (on && focus) b.focus();
+      });
+      panels.forEach(function(p, k){ p.hidden = k !== i; });
+      if (opts.onStep) try { opts.onStep(i, btns[i]); } catch (e){}
+    }
+    go(0);
+    return { go:go, next:function(){ go(Math.min(idx + 1, btns.length - 1)); }, prev:function(){ go(Math.max(idx - 1, 0)); }, index:function(){ return idx; } };
+  }
+
+  /* module registry */
+  var VIZ = {};
+  function registerViz(id, init){ VIZ[id] = init; }
+  function bootViz(){
+    Object.keys(VIZ).forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      try { VIZ[id](el); } catch (e){ if (window.console) console.warn("viz[" + id + "]:", e); }
+    });
   }
 
   /* ---------- gap dashboard ---------- */
@@ -1861,31 +2143,7 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
       if (tw.size) rafId = requestAnimationFrame(twStep);
     }
 
-    /* ---- tooltip singleton ---- */
-    var tip = document.createElement("div");
-    tip.id = "gapTip"; tip.hidden = true; tip.setAttribute("role", "tooltip");
-    document.body.appendChild(tip);
-    function tipShow(el){
-      var m = el.getAttribute("data-tip");
-      if (!m){ tip.hidden = true; return; }
-      tip.textContent = m; tip.hidden = false;
-      var r = el.getBoundingClientRect(), tr = tip.getBoundingClientRect();
-      var x = Math.min(Math.max(8, r.left + r.width / 2 - tr.width / 2), window.innerWidth - tr.width - 8);
-      var y = r.top - tr.height - 9; if (y < 6) y = r.bottom + 9;
-      tip.style.transform = "translate(" + Math.round(x) + "px," + Math.round(y) + "px)";
-    }
-    var tipHide = function(){ tip.hidden = true; };
-    document.addEventListener("pointerover", function(e){
-      var el = e.target.closest && e.target.closest("[data-tip]");
-      if (el) tipShow(el); else tipHide();
-    });
-    document.addEventListener("focusin", function(e){
-      var el = e.target.closest && e.target.closest("[data-tip]");
-      if (el) tipShow(el); else tipHide();
-    });
-    document.addEventListener("focusout", tipHide);
-    window.addEventListener("scroll", tipHide, { passive:true });
-    document.addEventListener("keydown", function(e){ if (e.key === "Escape") tipHide(); });
+    /* tooltip singleton + roving() are provided by the shared viz kit above */
 
     /* ---- build charts once ---- */
     var svgNS = "http://www.w3.org/2000/svg";
@@ -2258,33 +2516,7 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     }
     kpiRow.addEventListener("animationend", function(){ kpiRow.classList.remove("pulse"); });
 
-    /* ---- roving tabindex (matrix + bar lists) ---- */
-    function roving(container, sel, cols){
-      function nodes(){ return Array.prototype.slice.call(container.querySelectorAll(sel)); }
-      function setIdx(n, focus){
-        var els = nodes(); if (!els.length) return;
-        n = Math.max(0, Math.min(els.length - 1, n));
-        els.forEach(function(el, i){ el.tabIndex = i === n ? 0 : -1; });
-        if (focus){ els[n].focus(); els[n].scrollIntoView({ block:"nearest", inline:"nearest" }); }
-      }
-      container.addEventListener("keydown", function(e){
-        var els = nodes(), i = els.indexOf(document.activeElement);
-        if (i < 0) return;
-        var n;
-        if (e.key === "ArrowRight" && cols > 1) n = i + 1;
-        else if (e.key === "ArrowLeft" && cols > 1) n = i - 1;
-        else if (e.key === "ArrowDown") n = i + cols;
-        else if (e.key === "ArrowUp") n = i - cols;
-        else if (e.key === "Home") n = cols > 1 ? i - (i % cols) : 0;
-        else if (e.key === "End") n = cols > 1 ? i - (i % cols) + cols - 1 : els.length - 1;
-        else return;
-        e.preventDefault(); setIdx(n, true);
-      });
-      container.addEventListener("focusin", function(e){
-        var idx = nodes().indexOf(e.target); if (idx >= 0) setIdx(idx, false);
-      });
-      setIdx(0, false);
-    }
+    /* roving() is provided by the shared viz kit */
     roving($id("chartMatrix"), ".mcell", 3);
     roving($id("chartDomain"), ".hrow", 1);
     roving($id("chartCoverage"), ".hrow", 1);
@@ -2319,6 +2551,98 @@ figure.chart figcaption{ font-size:12px; color:var(--muted); margin-top:10px; li
     firstRender = false;
     dashRc.textContent = "view recomputed on load";
   }
+
+  /* ============ viz modules ============ */
+
+  /* #system: the lamina */
+  registerViz("system", function(sec){
+    var fig = sec.querySelector("#sysFig");
+    if (!fig) return;
+    var lamCells = fig.querySelector(".lam-cells");
+    var readEl = fig.querySelector("#sysRead");
+    var BLKS = [
+      ["01","Regional Scorecard","--fg-green"],["02","Foundational Learning Framework","--fg-gold"],
+      ["03","Teacher Qualification Passport","--fg-red"],["04","Regional Data Warehouse","--fg-blue"],
+      ["05","Large-scale Competency Assessment","--fg-green"],["06","Community of Practice and Commons","--fg-gold"],
+      ["07","Stakeholder Engagement","--fg-red"],["08","AI Safety and Governance","--fg-blue"]
+    ];
+    var gbc = {};
+    qsa("#gapGrid .gap").forEach(function(g){ var b = g.dataset.block; if (b) gbc[b] = (gbc[b] || 0) + 1; });
+    var X0 = 160, W = 788, G = 2, cw = (W - G * 7) / 8;
+    var cards = qsa("#system .blocks .block");
+    cards.forEach(function(c, i){ c.dataset.b = BLKS[i][0]; });
+    var defaultRead = "Elimu Moja is a thin regional layer: eight blocks sitting between eight national systems and one regional promise, about seven percent of the institutional stack. Select a segment for detail.";
+    var sel = null;
+
+    function lit(b, on){
+      var cg = lamCells.querySelector('.lam-cg[data-b="' + b + '"]');
+      if (cg) cg.classList.toggle("lit", on);
+      var card = cards[parseInt(b, 10) - 1];
+      if (card) card.classList.toggle("lit", on);
+    }
+    function choose(b){
+      sel = (sel === b) ? null : b;
+      qsa(".lam-cg", lamCells).forEach(function(cg){
+        var on = cg.dataset.b === sel;
+        cg.setAttribute("aria-pressed", on ? "true" : "false");
+        lit(cg.dataset.b, !!on);
+      });
+      var alt = sec.querySelector("#sysAlt");
+      if (alt && alt.checked) return;
+      if (sel){
+        var m = BLKS[parseInt(sel, 10) - 1];
+        readEl.textContent = "Block " + sel + ", " + m[1] + ". Part of the Elimu Moja layer. Answers " + (gbc[sel] || 0) + " of the 29 gaps in the register.";
+      } else {
+        readEl.textContent = defaultRead;
+      }
+    }
+
+    BLKS.forEach(function(b, i){
+      var x = X0 + i * (cw + G);
+      var g = svgEl("g", {
+        "class": "lam-cg", role: "button", tabindex: "0", "data-b": b[0], "aria-pressed": "false",
+        "aria-label": "Block " + b[0] + ", " + b[1] + ". Answers " + (gbc[b[0]] || 0) + " of the 29 gaps in the register.",
+        "data-tip": "Block " + b[0] + " · " + b[1] + "\nAnswers " + (gbc[b[0]] || 0) + " of 29 gaps"
+      });
+      g.appendChild(svgEl("rect", {
+        "class": "lam-cell", x: x.toFixed(1), y: "156", width: cw.toFixed(1), height: "22", rx: "2",
+        fill: "color-mix(in srgb, var(" + b[2] + ") 50%, var(--surface))"
+      }));
+      g.appendChild(svgEl("text", { "class": "fig-cap", x: (x + cw / 2).toFixed(1), y: "170.5", "text-anchor": "middle" }, [b[0]]));
+      lamCells.appendChild(g);
+      g.addEventListener("click", function(){ choose(b[0]); });
+      g.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); choose(b[0]); } });
+      g.addEventListener("pointerenter", function(){ lit(b[0], true); });
+      g.addEventListener("pointerleave", function(){ if (sel !== b[0]) lit(b[0], false); });
+      g.addEventListener("focusin", function(){ lit(b[0], true); });
+      g.addEventListener("focusout", function(){ if (sel !== b[0]) lit(b[0], false); });
+    });
+
+    cards.forEach(function(c){
+      c.addEventListener("pointerenter", function(){ lit(c.dataset.b, true); });
+      c.addEventListener("pointerleave", function(){ if (sel !== c.dataset.b) lit(c.dataset.b, false); });
+    });
+
+    roving(lamCells, ".lam-cg", 8);
+
+    var alt = sec.querySelector("#sysAlt");
+    if (alt) alt.addEventListener("change", function(){
+      fig.classList.toggle("alt", alt.checked);
+      readEl.textContent = alt.checked
+        ? "The alternative Elimu Moja is not: a new regional agency that absorbs national delivery and competes with ministries. Rejected. The proposal keeps custody and delivery national."
+        : (sel ? readEl.textContent : defaultRead);
+    });
+
+    sec.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && sel){ e.preventDefault(); choose(sel); }
+    });
+
+    readEl.textContent = defaultRead;
+    if (location.hash === "#system") fig.classList.add("on");
+    onReveal(fig, function(){ fig.classList.add("on"); });
+  });
+
+  bootViz();
 
   /* ---------- assistant accordions ---------- */
   Array.prototype.slice.call(document.querySelectorAll(".qbtn")).forEach(function(btn){
