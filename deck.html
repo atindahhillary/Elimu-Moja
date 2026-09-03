@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SELution &middot; the pitch, in fifteen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="SELution in fifteen slides: a play-based programme for SEL, foundational literacy and numeracy, unplugged coding and robotics across East African classrooms.">
+<meta name="theme-color" content="#fbf8f1">
+<link rel="canonical" href="https://atindahhillary.github.io/SELutionKe/deck.html">
+<meta property="og:title" content="SELution: the pitch, in fifteen slides">
+<meta property="og:description" content="One play-based programme, four strands, eight countries that already agreed on the destination.">
+<meta property="og:url" content="https://atindahhillary.github.io/SELutionKe/deck.html">
+<meta property="og:image" content="https://atindahhillary.github.io/SELutionKe/assets/preview.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='11'%20fill='%23fbf8f1'/%3E%3Ccircle%20cx='11'%20cy='11'%20r='5'%20fill='%2312924c'/%3E%3Ccircle%20cx='29'%20cy='11'%20r='5'%20fill='%23d99b06'/%3E%3Ccircle%20cx='11'%20cy='29'%20r='5'%20fill='%23e0473a'/%3E%3Ccircle%20cx='29'%20cy='29'%20r='5'%20fill='%232b8fc4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Lexend:wght@300..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  html,body{ height:100%; margin:0; overflow:hidden; background:var(--paper); }
+  .deck{ position:fixed; inset:0; overflow:hidden; }
+  body::before{ content:""; position:fixed; inset-block-start:0; inset-inline:0; block-size:5px; background-image:var(--ribbon); z-index:60; }
+
+  .slide{ position:absolute; inset:0; display:grid; place-items:center; padding:clamp(48px,7vh,88px) clamp(20px,6vw,90px) clamp(64px,10vh,110px);
+    opacity:0; visibility:hidden; transform:translateY(14px); transition:opacity .42s var(--ease-out), transform .42s var(--ease-out);
+    overflow-y:auto; overscroll-behavior:contain; }
+  .slide.is-active{ opacity:1; visibility:visible; transform:none; }
+  .slide.prev{ transform:translateY(-14px); }
+  .inner{ width:min(100%, 1040px); }
+
+  .kick{ font-family:var(--font-display); font-size:clamp(.72rem,.68rem + .3vw,.82rem); font-variation-settings:"opsz" 12,"wght" 650,"SOFT" 0;
+    text-transform:uppercase; letter-spacing:.18em; color:var(--gold-ink); margin:0 0 clamp(14px,2.4vh,22px); display:flex; align-items:center; gap:12px; }
+  .kick::before{ content:""; inline-size:34px; block-size:4px; border-radius:2px; background-image:var(--ribbon); }
+  .slide h1{ font-size:clamp(2.4rem,1.2rem + 5.4vw,5rem); line-height:1.02; letter-spacing:-.022em;
+    font-variation-settings:"wght" 600,"SOFT" 40,"WONK" 0; margin:0 0 .3em; max-inline-size:20ch; }
+  .slide h2{ font-size:clamp(1.7rem,1rem + 3vw,3rem); line-height:1.08; letter-spacing:-.018em;
+    font-variation-settings:"wght" 600,"SOFT" 30,"WONK" 0; margin:0 0 .5em; max-inline-size:22ch; }
+  .slide .wonk{ font-style:italic; font-variation-settings:"wght" 600,"SOFT" 90,"WONK" 1; text-decoration:underline;
+    text-decoration-color:var(--gold); text-decoration-thickness:.07em; text-underline-offset:.12em; }
+  .slide .say{ font-size:clamp(1.1rem,.95rem + 1vw,1.6rem); color:var(--ink-2); font-weight:350; line-height:1.5; max-inline-size:52ch; margin:0 0 1em; }
+  .slide p{ font-size:clamp(1rem,.94rem + .5vw,1.2rem); color:var(--ink-2); line-height:1.6; max-inline-size:60ch; }
+  .slide strong{ color:var(--ink); font-weight:600; }
+  .slide ul{ margin:.6em 0 0; padding:0; list-style:none; display:grid; gap:.7em; max-inline-size:60ch; }
+  .slide ul li{ font-size:clamp(1rem,.94rem + .5vw,1.18rem); color:var(--ink-2); line-height:1.5; padding-inline-start:1.4em; position:relative; }
+  .slide ul li::before{ content:""; position:absolute; inset-inline-start:0; inset-block-start:.55em; inline-size:9px; block-size:9px;
+    border-radius:50% 50% 50% 2px; background:var(--c,var(--green)); }
+
+  /* layouts */
+  .two{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,4vw,64px); align-items:center; }
+  @media (max-width:860px){ .two{ grid-template-columns:1fr; gap:24px; } .two .media{ order:-1; } }
+  .media{ margin:0; }
+  .media img{ width:100%; height:auto; aspect-ratio:4 / 3; object-fit:cover; display:block;
+    border:1px solid var(--hairline); box-shadow:var(--shadow-2);
+    border-start-start-radius:var(--r-xl); border-start-end-radius:var(--r-xl); border-end-end-radius:var(--r-xl); border-end-start-radius:var(--r-cut); }
+  .media figcaption{ margin-block-start:12px; font-family:var(--font-display); font-variation-settings:"wght" 520,"SOFT" 24;
+    font-size:1rem; color:var(--ink); line-height:1.3; }
+
+  .dstats{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(14px,2vw,26px); margin:0 0 1.2em; }
+  @media (max-width:760px){ .dstats{ grid-template-columns:1fr 1fr; } }
+  .dstat b{ display:block; font-family:var(--font-display); font-variation-settings:"wght" 600,"SOFT" 30; font-size:clamp(2.4rem,1.4rem + 4vw,4.2rem);
+    line-height:.95; letter-spacing:-.03em; color:var(--ink); font-variant-numeric:lining-nums tabular-nums; }
+  .dstat span{ display:block; margin-block-start:.5em; font-family:var(--font-body); font-size:.9rem; font-weight:400; letter-spacing:normal; font-variation-settings:normal; color:var(--ink-2); line-height:1.35; }
+  .dstat i{ font-size:.42em; font-style:normal; color:var(--ink-2); font-weight:600; margin-inline-start:2px; }
+
+  .strandrow{ display:flex; flex-wrap:wrap; gap:10px; margin:1.1em 0 0; }
+  .strandrow span{ font-size:.92rem; font-weight:600; color:var(--ink-2); background:var(--surface); border:1px solid var(--hairline);
+    padding:8px 15px; border-radius:var(--r-md) var(--r-md) var(--r-md) var(--r-cut); }
+  .strandrow span.on{ background:var(--ink); color:var(--ink-on-fill); border-color:var(--ink); }
+
+  .flow{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px; margin:.4em 0 1.2em; }
+  .flow b{ background:var(--surface); border:2px solid var(--c,var(--green)); color:var(--ink); font-weight:600;
+    padding:10px 18px; font-size:1rem; border-radius:var(--r-md) var(--r-md) var(--r-md) var(--r-cut); }
+  .flow em{ color:var(--ink-2); opacity:.6; font-style:normal; }
+
+  table.map{ width:100%; border-collapse:separate; border-spacing:0 7px; font-size:clamp(.9rem,.85rem + .35vw,1.05rem); }
+  table.map td{ background:var(--surface); border-block:1px solid var(--hairline); padding:13px 15px; vertical-align:top; color:var(--ink-2); }
+  table.map td:first-child{ border-inline-start:1px solid var(--hairline); border-start-start-radius:var(--r-md); border-end-start-radius:var(--r-cut);
+    font-weight:700; color:var(--ink); white-space:nowrap; }
+  table.map td:last-child{ border-inline-end:1px solid var(--hairline); border-start-end-radius:var(--r-md); border-end-end-radius:var(--r-md); }
+  table.map td:first-child::before{ content:""; display:inline-block; inline-size:9px; block-size:9px; border-radius:50% 50% 50% 2px;
+    background:var(--rc,var(--green)); margin-inline-end:9px; vertical-align:middle; }
+
+  .asks{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,2.5vw,32px); }
+  @media (max-width:760px){ .asks{ grid-template-columns:1fr; } }
+  .asks h3{ font-family:var(--font-display); font-variation-settings:"wght" 560,"SOFT" 20; font-size:1.15rem; margin:0 0 .4em; }
+  .asks p{ font-size:1rem; }
+
+  .dpeople{ display:flex; gap:clamp(20px,4vw,44px); flex-wrap:wrap; margin:1.2em 0 0; }
+  .dperson{ display:flex; gap:16px; align-items:center; }
+  .dperson img{ inline-size:74px; block-size:74px; object-fit:cover; border:3px solid var(--c,var(--green)); border-radius:50% 50% 50% 10px; }
+  .dperson b{ display:block; font-family:var(--font-display); font-variation-settings:"wght" 560,"SOFT" 20; font-size:1.15rem; color:var(--ink); }
+  .dperson span{ display:block; font-size:.92rem; color:var(--ink-2); }
+  .dperson a{ font-size:.92rem; font-weight:600; }
+  .foot-note{ margin-block-start:1.6em; font-size:.85rem; color:var(--muted); max-inline-size:74ch; }
+
+  /* accent slides */
+  .slide.accent{ background:var(--green); }
+  .slide.accent.gold{ background:var(--gold-ink); }
+  .slide.accent .kick{ color:rgb(255 255 255 / .75); }
+  .slide.accent .kick::before{ background:rgb(255 255 255 / .5); }
+  .slide.accent h1, .slide.accent h2, .slide.accent strong{ color:#fff; }
+  .slide.accent .say, .slide.accent p, .slide.accent .dstat span, .slide.accent .dstat i{ color:rgb(255 255 255 / .85); }
+  .slide.accent .dstat b{ color:#fff; }
+  .slide.accent .dperson b{ color:#fff; }
+  .slide.accent .dperson span{ color:rgb(255 255 255 / .82); }
+  .slide.accent .dperson img{ border-color:rgb(255 255 255 / .9); }
+  .slide.accent .wonk{ text-decoration-color:rgb(255 255 255 / .7); }
+
+  /* chrome */
+  .hud{ position:fixed; inset-block-end:0; inset-inline:0; z-index:50; display:flex; align-items:center; gap:14px;
+    padding:14px clamp(16px,4vw,32px); pointer-events:none; }
+  .hud .bar{ flex:1; block-size:4px; background:var(--hairline-strong); border-radius:2px; overflow:hidden; }
+  .hud .bar i{ display:block; block-size:100%; background-image:var(--ribbon); inline-size:6.6%; transition:inline-size .42s var(--ease-out); }
+  .hud .count{ font-family:var(--font-mono, ui-monospace, monospace); font-size:.8rem; color:var(--ink-2); font-variant-numeric:tabular-nums; }
+  .slide.accent ~ .hud .count{ }
+  .nav{ position:fixed; inset-block-end:12px; inset-inline-end:clamp(16px,4vw,32px); z-index:51; display:flex; gap:8px; }
+  .nav button{ pointer-events:auto; inline-size:42px; block-size:42px; display:grid; place-items:center; cursor:pointer;
+    background:var(--surface); border:1.5px solid var(--hairline-strong); color:var(--ink);
+    border-start-start-radius:var(--r-md); border-start-end-radius:var(--r-md); border-end-end-radius:var(--r-md); border-end-start-radius:var(--r-cut); }
+  .nav button:hover{ border-color:var(--ink); }
+  .nav button:disabled{ opacity:.35; cursor:not-allowed; }
+  .nav svg{ inline-size:20px; block-size:20px; }
+  .home{ position:fixed; inset-block-start:16px; inset-inline-end:clamp(16px,4vw,32px); z-index:51; pointer-events:auto;
+    font-family:var(--font-body); font-weight:600; font-size:.85rem; text-decoration:none; color:var(--ink-2);
+    background:var(--surface); border:1.5px solid var(--hairline-strong); padding:8px 14px;
+    border-start-start-radius:var(--r-md); border-start-end-radius:var(--r-md); border-end-end-radius:var(--r-md); border-end-start-radius:var(--r-cut); }
+  .home:hover{ color:var(--ink); border-color:var(--ink); }
+  .brand{ position:fixed; inset-block-start:16px; inset-inline-start:clamp(16px,4vw,32px); z-index:51;
+    display:flex; align-items:center; gap:9px; font-family:var(--font-display); font-variation-settings:"wght" 600,"SOFT" 40;
+    font-size:1.1rem; letter-spacing:-.02em; color:var(--ink); text-decoration:none; }
+  .brand .dots{ display:flex; gap:3px; } .brand .dots i{ inline-size:8px; block-size:8px; border-radius:50% 50% 50% 2px; }
+  .brand .dots i:nth-child(1){ background:var(--green); } .brand .dots i:nth-child(2){ background:var(--gold); }
+  .brand .dots i:nth-child(3){ background:var(--red); } .brand .dots i:nth-child(4){ background:var(--blue); }
+  .hint{ position:fixed; inset-block-end:64px; inset-inline:0; text-align:center; z-index:50; font-size:.8rem; color:var(--muted);
+    transition:opacity .4s; pointer-events:none; }
+  .hint.gone{ opacity:0; }
+
+  @media (prefers-reduced-motion: reduce){
+    .slide{ transition:none; } .hud .bar i{ transition:none; }
+  }
+  @media (max-width:600px){
+    .brand span:last-child, .home{ display:none; }
+  }
+</style>
+</head>
+<body>
+<a class="brand" href="index.html"><span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>SELution</span></a>
+<a class="home" href="index.html">Full site &rarr;</a>
+
+<main class="deck" id="deck" aria-roledescription="slideshow">
+
+  <!-- 1 -->
+  <section class="slide" aria-label="Slide 1 of 15">
+    <div class="inner">
+      <p class="kick">A regional play-based learning initiative</p>
+      <h1>Learning through <span class="wonk">play</span>, made regional.</h1>
+      <p class="say">One programme. Four strands. Eight countries that already agreed on the destination.</p>
+      <div class="strandrow"><span>SEL</span><span>Literacy &amp; numeracy</span><span>Unplugged coding</span><span>Robotics</span></div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide" aria-label="Slide 2 of 15">
+    <div class="inner">
+      <p class="kick">The opening</p>
+      <h2>The region agreed. It just hasn&rsquo;t reached the classroom.</h2>
+      <p>The 2nd EAC Regional Education Conference put <strong>foundational learning</strong>, <strong>social and emotional learning</strong> and <strong>parental engagement</strong> at the centre of the agenda, and named the same method every time: <strong>play</strong>.</p>
+      <p>That consensus is real, it is regional, and right now it lives in communiqu&eacute;s.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide accent" aria-label="Slide 3 of 15">
+    <div class="inner">
+      <p class="kick">The challenge, in numbers</p>
+      <h2>Not behind on coding and robotics. Not started.</h2>
+      <div class="dstats">
+        <div class="dstat"><b data-to="26" data-dp="0">0<i>%</i></b><span>Grade 3 pupils reading at grade level, region-wide</span></div>
+        <div class="dstat"><b data-to="14" data-dp="0">0<i>%</i></b><span>Primary schools timetabling and assessing SEL</span></div>
+        <div class="dstat"><b data-to="1.4" data-dp="1">0.0<i>%</i></b><span>Primary schools running any coding activity</span></div>
+        <div class="dstat"><b data-to="0.7" data-dp="1">0.0<i>%</i></b><span>Schools with a robotics kit in pupils&rsquo; hands</span></div>
+      </div>
+      <p>Illustrative figures across the eight EAC partner states. These are not four separate problems: a child who cannot read a sequence of instructions cannot debug one.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide" aria-label="Slide 4 of 15">
+    <div class="inner">
+      <p class="kick">The idea</p>
+      <h2>Four strands, one pathway</h2>
+      <p>Each strand is structured play with a clear learning target, a teacher script, and simple materials. They share <strong>one training pathway</strong> and <strong>one progress record</strong>, so a school runs them as a single programme, not four projects.</p>
+      <div class="strandrow"><span>01 &nbsp;SEL</span><span>02 &nbsp;Literacy &amp; numeracy</span><span>03 &nbsp;Unplugged coding</span><span>04 &nbsp;Robotics</span></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide" aria-label="Slide 5 of 15">
+    <div class="inner two" style="--c: var(--green)">
+      <div>
+        <p class="kick">Strand 01</p>
+        <h2>Social &amp; emotional learning</h2>
+        <p>Naming feelings, turn-taking, calming routines, friendship and conflict repair. The backbone the other three strands lean on.</p>
+        <ul><li>A 20-minute circle game: pass a feelings ball, act out a scenario, agree one class rule.</li><li>No printing. Six Bricks games open and close the circle.</li></ul>
+      </div>
+      <figure class="media"><img src="assets/gallery/circle-time.jpg" alt="A class of pupils on the floor, each with coloured bricks, a teacher holding up a stack" loading="lazy"><figcaption>Twenty-five children, one box of bricks, every hand busy.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide" aria-label="Slide 6 of 15">
+    <div class="inner two" style="--c: var(--gold)">
+      <div>
+        <p class="kick">Strand 02</p>
+        <h2>Foundational literacy &amp; numeracy</h2>
+        <p>Letter sounds, decoding, number sense and early operations through games, songs and manipulatives, mapped to the national curriculum.</p>
+        <ul><li>Teams build words or number bonds from Six Bricks and bottle-cap tiles against a timer.</li><li>The score is the assessment.</li></ul>
+      </div>
+      <figure class="media"><img src="assets/gallery/sentence-en.jpg" alt="Word bricks on a whiteboard spelling a sentence" loading="lazy"><figcaption>A sentence you build with your hands stays built.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide" aria-label="Slide 7 of 15">
+    <div class="inner two" style="--c: var(--red)">
+      <div>
+        <p class="kick">Strand 03</p>
+        <h2>Unplugged coding</h2>
+        <p>Sequencing, loops, debugging and algorithms with no device: floor grids, arrow cards, children as the robot.</p>
+        <ul><li>One child writes an arrow-card program, another walks the grid, the class debugs the wrong turns.</li><li>Pure logic, zero electricity.</li></ul>
+      </div>
+      <figure class="media"><img src="assets/gallery/coding-grid.jpg" alt="A paper grid and a long row of instruction bricks laid out as a program" loading="lazy"><figcaption>An arrow-card program and a paper grid. This is what coding costs here.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide" aria-label="Slide 8 of 15">
+    <div class="inner two" style="--c: var(--blue)">
+      <div>
+        <p class="kick">Strand 04</p>
+        <h2>Robotics</h2>
+        <p>The same computational thinking with a physical build: low-cost motors, recycled materials, one kit shared across a cluster on a rota.</p>
+        <ul><li>Strands 03 and 04 are one continuum. Robotics is added when a cluster is ready for a shared kit.</li><li>A school can start with strands 01 and 02 alone.</li></ul>
+      </div>
+      <figure class="media"><img src="assets/gallery/lego-showroom.jpg" alt="A team member beside display cases of large LEGO Technic machine models" loading="lazy"><figcaption>From six bricks to this. The path is the same one.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide" aria-label="Slide 9 of 15">
+    <div class="inner" style="--c: var(--green)">
+      <p class="kick">The method</p>
+      <h2>Play is the spine, not a decoration</h2>
+      <p><strong>Construction, not instruction.</strong> Children build understanding by making and re-making, not by being told. Every strand runs on the same five-beat cycle.</p>
+      <div class="flow"><b>Goal</b><em>&rarr;</em><b>Game</b><em>&rarr;</em><b>Roles</b><em>&rarr;</em><b>Reflect</b><em>&rarr;</em><b>Record</b></div>
+      <p>The record takes ten seconds per child and feeds one simple progress view, aggregated to class, school and cluster.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide" aria-label="Slide 10 of 15">
+    <div class="inner two" style="--c: var(--gold)">
+      <div>
+        <p class="kick">What it is built on</p>
+        <h2>Proven methods, packaged</h2>
+        <ul><li><strong>Six Bricks</strong>, an established DUPLO approach for self-regulation, memory, sequencing and early numeracy.</li><li>Floor grids and arrow cards for unplugged coding.</li><li>Bottle-cap tiles for letters and number bonds.</li><li>Recycled-parts builds for robotics.</li></ul>
+        <p>SELution did not invent these. It packages them into one pathway and one record, adapted to each national curriculum.</p>
+      </div>
+      <figure class="media"><img src="assets/gallery/six-tower.jpg" alt="A stack of six coloured DUPLO bricks on a table" loading="lazy"><figcaption>Six bricks. The entire kit for two of the four strands.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="slide" aria-label="Slide 11 of 15">
+    <div class="inner">
+      <p class="kick">The references</p>
+      <h2>Every strand delivers a commitment the region already made</h2>
+      <table class="map"><tbody>
+        <tr style="--rc: var(--green)"><td>SEL</td><td>Conference emphasis on social and emotional learning and wellbeing.</td></tr>
+        <tr style="--rc: var(--gold)"><td>Literacy &amp; numeracy</td><td>FLN as the headline conference priority and national foundational-learning targets.</td></tr>
+        <tr style="--rc: var(--red)"><td>Unplugged coding</td><td>Digital-skills commitments, framed for classrooms with no devices or power.</td></tr>
+        <tr style="--rc: var(--blue)"><td>Robotics</td><td>STEM and innovation goals; from consuming technology to building it.</td></tr>
+        <tr style="--rc: var(--gold)"><td>Play</td><td>The repeated conference call for playful, child-centred pedagogy.</td></tr>
+        <tr style="--rc: var(--green)"><td>Parents</td><td>The parental-engagement commitment: take-home prompts and a termly showcase.</td></tr>
+      </tbody></table>
+    </div>
+  </section>
+
+  <!-- 12 -->
+  <section class="slide" aria-label="Slide 12 of 15">
+    <div class="inner two" style="--c: var(--red)">
+      <div>
+        <p class="kick">How a pilot runs</p>
+        <h2>A cluster, a term, a clear before-and-after</h2>
+        <ul><li><strong>Cluster and baseline.</strong> 8 to 15 schools in one district; a short play-based assessment.</li><li><strong>Train the trainers.</strong> A cascade: master trainers, district facilitators, teachers.</li><li><strong>Run the strands.</strong> 3 to 4 short sessions a week; robotics kits on a rota.</li><li><strong>Engage parents.</strong> Weekly take-home prompts, a termly showcase.</li><li><strong>Measure and decide.</strong> Endline repeats the baseline; scale is a joint call.</li></ul>
+      </div>
+      <figure class="media"><img src="assets/gallery/peer-coaching.jpg" alt="A facilitator coaching one pupil at a desk" loading="lazy"><figcaption>One learner coaching the next. The cascade, in miniature.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide" aria-label="Slide 13 of 15">
+    <div class="inner two" style="--c: var(--blue)">
+      <div>
+        <p class="kick">Where this is</p>
+        <h2>Early, honest, and already moving</h2>
+        <ul><li><strong>Teach for Kenya</strong> in conversation about hosting a first pilot.</li><li>Interested contacts in <strong>Kenya, Uganda, Tanzania and South Sudan</strong>.</li><li>Grounded in the 2nd EAC Regional Education Conference agenda.</li><li>Status: <strong>seeking pilot funding</strong>, one or two district clusters, one to two terms.</li></ul>
+      </div>
+      <figure class="media"><img src="assets/gallery/team-office.jpg" alt="The team in an office full of play materials" loading="lazy"><figcaption>Built by people who run the sessions, not just write about them.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 14 -->
+  <section class="slide" aria-label="Slide 14 of 15">
+    <div class="inner">
+      <p class="kick">The ask, by who you are</p>
+      <h2>Four open conversations</h2>
+      <div class="asks">
+        <div><h3>Implementing partners</h3><p>Host a first pilot in a cluster of your schools; provide teachers for training and coaching. You get a ready curriculum, all materials and the measurement dashboard.</p></div>
+        <div><h3>Country contacts</h3><p>Name a district and a local implementer; open the door to the district office. You get a pilot on a shared regional model with comparable data.</p></div>
+        <div><h3>Ministries &amp; EAC</h3><p>A letter of support, a curriculum officer for the FLN mapping, a seat at the endline review. No pilot-stage cost, full visibility of results.</p></div>
+        <div><h3>Funders</h3><p>Fund one or two district-cluster pilots and the coaching layer; agree the evidence threshold up front. Four-country reach from one comparable design.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 -->
+  <section class="slide accent gold" aria-label="Slide 15 of 15">
+    <div class="inner">
+      <p class="kick">Talk to us</p>
+      <h1>Two people, one WhatsApp away.</h1>
+      <p class="say">Message either of us with the district and the partner you have in mind. A first pilot can be scoped in a fortnight.</p>
+      <div class="dpeople">
+        <div class="dperson" style="--c:#fff"><img src="assets/people/rodgers.jpg" alt="Rodgers Mayero"><div><b>Rodgers Mayero</b><span>+254 724 510102</span><a href="https://wa.me/254724510102" style="color:#fff">WhatsApp</a> &middot; <a href="https://www.linkedin.com/in/rodgers-mayero-71498911a/" style="color:#fff">LinkedIn</a></div></div>
+        <div class="dperson" style="--c:#fff"><img src="assets/people/hillary.jpg" alt="Hillary Atindah"><div><b>Hillary Atindah</b><span>+254 790 780579</span><a href="https://wa.me/254790780579" style="color:#fff">WhatsApp</a> &middot; <a href="https://www.linkedin.com/in/hillary-atindah-60590817a/" style="color:#fff">LinkedIn</a></div></div>
+      </div>
+      <p class="foot-note" style="color:rgb(255 255 255 / .8)">info@selutionke.com &middot; the full site and concept note are one click away. SELution is an independent regional initiative, not an EAC publication; figures shown are illustrative.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="hud"><div class="bar"><i id="pbar"></i></div><span class="count" id="pcount">1 / 15</span></div>
+<div class="nav">
+  <button id="prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button id="next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+<p class="hint" id="hint">Arrow keys, space or swipe &middot; press 1 to 9 to jump</p>
+
+<script>
+(function(){
+  "use strict";
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var N = slides.length;
+  var prevBtn = document.getElementById("prev"), nextBtn = document.getElementById("next");
+  var pbar = document.getElementById("pbar"), pcount = document.getElementById("pcount"), hint = document.getElementById("hint");
+  var i = 0, hintTimer;
+
+  function clamp(n){ return Math.max(0, Math.min(N - 1, n)); }
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(el){
+    var to = parseFloat(el.getAttribute("data-to")), dp = parseInt(el.getAttribute("data-dp") || "0", 10);
+    var suffix = el.querySelector("i") ? el.querySelector("i").outerHTML : "";
+    if (reduce){ el.firstChild.nodeValue = to.toFixed(dp); return; }
+    var t0 = null, dur = 1100;
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var p = Math.min(1, (ts - t0) / dur);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.firstChild.nodeValue = (to * e).toFixed(dp);
+      if (p < 1) requestAnimationFrame(step);
+      else el.firstChild.nodeValue = to.toFixed(dp);
+    }
+    el.firstChild.nodeValue = (0).toFixed(dp);
+    requestAnimationFrame(step);
+  }
+  function render(){
+    slides.forEach(function(s, k){
+      s.classList.toggle("is-active", k === i);
+      s.classList.toggle("prev", k < i);
+    });
+    var active = slides[i];
+    if (active) Array.prototype.forEach.call(active.querySelectorAll("[data-to]"), countUp);
+    pbar.style.inlineSize = ((i + 1) / N * 100) + "%";
+    pcount.textContent = (i + 1) + " / " + N;
+    prevBtn.disabled = i === 0;
+    nextBtn.disabled = i === N - 1;
+    if (location.hash !== "#" + (i + 1)) history.replaceState(null, "", "#" + (i + 1));
+  }
+  function go(n){
+    n = clamp(n);
+    if (n === i) return;
+    i = n; render();
+    if (hint && !hint.classList.contains("gone")){ hint.classList.add("gone"); }
+  }
+  function fromHash(){
+    var h = parseInt((location.hash || "").slice(1), 10);
+    if (h >= 1 && h <= N) i = h - 1;
+    render();
+  }
+
+  prevBtn.addEventListener("click", function(){ go(i - 1); });
+  nextBtn.addEventListener("click", function(){ go(i + 1); });
+  window.addEventListener("hashchange", fromHash);
+
+  document.addEventListener("keydown", function(e){
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " " || e.key === "Spacebar"){ e.preventDefault(); go(i + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp"){ e.preventDefault(); go(i - 1); }
+    else if (e.key === "Home"){ e.preventDefault(); go(0); }
+    else if (e.key === "End"){ e.preventDefault(); go(N - 1); }
+    else if (/^[1-9]$/.test(e.key)){ go(parseInt(e.key, 10) - 1); }
+    else if (e.key === "0"){ go(9); }
+  });
+
+  /* click left / right third of the screen to page (ignore links, buttons) */
+  document.querySelector(".deck").addEventListener("click", function(e){
+    if (e.target.closest("a, button")) return;
+    var x = e.clientX / window.innerWidth;
+    if (x > 0.6) go(i + 1); else if (x < 0.4) go(i - 1);
+  });
+
+  /* swipe */
+  var sx = 0, sy = 0;
+  document.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  document.addEventListener("touchend", function(e){
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5){ go(i + (dx < 0 ? 1 : -1)); }
+  }, {passive:true});
+
+  fromHash();
+  hintTimer = setTimeout(function(){ if (hint) hint.classList.add("gone"); }, 6000);
+})();
+</script>
+</body>
+</html>
