@@ -617,3 +617,13 @@ table.matrix caption b{color:var(--ink-2)}
   font-size:.92rem; font-weight:600; color:var(--ink-2); text-decoration:none; }
 .person .li:hover{ color:var(--blue-ink); }
 .person .li svg{ width:18px; height:18px; flex:none; }
+
+/* ---------- in-the-room: video clips ---------- */
+.room-sub{ margin:var(--s-8) 0 var(--s-3); text-align:center; font-size:1.15rem;
+  font-variation-settings:"wght" 520,"SOFT" 20; }
+.clips{ display:grid; gap:var(--s-4); grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr)); text-align:start; }
+.clip{ margin:0; background:var(--surface); border:1px solid var(--hairline); box-shadow:var(--shadow-1); overflow:clip;
+  border-start-start-radius:var(--r-lg); border-start-end-radius:var(--r-lg); border-end-end-radius:var(--r-lg); border-end-start-radius:var(--r-cut); }
+.clip video{ display:block; width:100%; height:auto; aspect-ratio:16 / 10; object-fit:cover; background:#000; }
+.clip figcaption{ padding:var(--s-4) var(--s-4) var(--s-5); font-family:var(--font-display);
+  font-variation-settings:"wght" 520,"SOFT" 24; font-size:1.05rem; line-height:1.32; color:var(--ink); text-wrap:balance; }
