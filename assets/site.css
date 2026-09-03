@@ -603,3 +603,11 @@ table.matrix caption b{color:var(--ink-2)}
 /* keep card / table / list bodies left-aligned for reading */
 .trio, .strands, .methods, .aligntbl, .path, .tract, .tabbar,
 .askpanel, .people, .cycle, .ch-grid, .matrix-wrap, .kpis{ text-align:start; }
+
+/* ---------- in-the-room gallery ---------- */
+.gallery{ display:grid; gap:var(--s-4); grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); text-align:start; }
+.shot{ margin:0; background:var(--surface); border:1px solid var(--hairline); box-shadow:var(--shadow-1); overflow:clip;
+  border-start-start-radius:var(--r-lg); border-start-end-radius:var(--r-lg); border-end-end-radius:var(--r-lg); border-end-start-radius:var(--r-cut); }
+.shot img{ display:block; width:100%; height:auto; aspect-ratio:4 / 3; object-fit:cover; background:var(--surface-sunken); }
+.shot figcaption{ padding:var(--s-4) var(--s-4) var(--s-5); font-family:var(--font-display);
+  font-variation-settings:"wght" 520,"SOFT" 24; font-size:1.05rem; line-height:1.32; color:var(--ink); text-wrap:balance; }
