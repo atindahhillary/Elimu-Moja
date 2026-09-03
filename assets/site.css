@@ -611,3 +611,9 @@ table.matrix caption b{color:var(--ink-2)}
 .shot img{ display:block; width:100%; height:auto; aspect-ratio:4 / 3; object-fit:cover; background:var(--surface-sunken); }
 .shot figcaption{ padding:var(--s-4) var(--s-4) var(--s-5); font-family:var(--font-display);
   font-variation-settings:"wght" 520,"SOFT" 24; font-size:1.05rem; line-height:1.32; color:var(--ink); text-wrap:balance; }
+
+/* ---------- contact: linkedin link ---------- */
+.person .li{ display:inline-flex; align-items:center; gap:8px; margin-block-start:var(--s-3);
+  font-size:.92rem; font-weight:600; color:var(--ink-2); text-decoration:none; }
+.person .li:hover{ color:var(--blue-ink); }
+.person .li svg{ width:18px; height:18px; flex:none; }
