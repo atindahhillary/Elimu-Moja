@@ -33,6 +33,13 @@
   table.cn thead th{ font-family:var(--font-mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); font-weight:400; }
   table.cn td:first-child{ color:var(--ink); font-weight:600; white-space:nowrap; }
   .barcode{ height:5px; background:var(--band); border-radius:3px; margin:0 0 22px; }
+  .figs{ display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:9px; margin:8px 0 12px; }
+  .fig{ background:var(--surface-2); border:1px solid var(--hair); border-radius:8px; padding:12px 12px 11px; }
+  .fig b{ display:block; font-family:var(--font-display); font-weight:700; font-size:22px; line-height:1;
+    letter-spacing:-.02em; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .fig span{ display:block; margin-top:6px; font-size:11px; color:var(--ink-2); line-height:1.35; }
+  .fig.lead{ border-color:color-mix(in srgb, var(--sa) 50%, transparent); background:color-mix(in srgb, var(--sa) 9%, var(--surface-2)); }
+  .figcap{ font-size:12px; color:var(--muted); margin:2px 0 11px; max-width:74ch; }
   .foot2{ border-top:1px solid var(--hair); margin-top:34px; padding-top:14px; font-size:12.5px; color:var(--muted); }
   .noprint{ }
   .toolbar{ position:sticky; top:0; z-index:5; display:flex; gap:9px; justify-content:flex-end; padding:10px 0; background:linear-gradient(var(--bg),var(--bg) 70%,transparent); }
@@ -42,7 +49,7 @@
     .toolbar, .flagband, .topbar{ display:none !important; }
     .doc{ padding:0; max-width:none; }
     .doc h2{ break-after:avoid; }
-    .doc p, .doc ul, table.cn{ break-inside:avoid; }
+    .doc p, .doc ul, table.cn, .figs, .fig{ break-inside:avoid; }
     a{ color:#000; text-decoration:none; }
   }
 </style>
@@ -72,10 +79,11 @@
   <h1>SELution</h1>
   <p class="sub1">Learning through play, made regional.</p>
   <p style="margin-top:12px">
-    A play-based programme that delivers four connected strands, social and emotional learning,
-    foundational literacy and numeracy, unplugged coding, and robotics, through one teacher-training
-    pathway and one measurement spine. Designed for low-resource East African classrooms and built
-    directly on the priorities set at the 2nd EAC Regional Education Conference.
+    A play-based programme that delivers four connected strands: social and emotional learning,
+    foundational literacy and numeracy, and computational thinking that begins fully unplugged and
+    grows into robotics. One teacher-training pathway, one measurement spine. Designed for
+    low-resource East African classrooms and built directly on the priorities set at the 2nd EAC
+    Regional Education Conference.
   </p>
 
   <h2>1. The opportunity</h2>
@@ -98,8 +106,8 @@
   <ul>
     <li><b>SEL.</b> Naming emotions, turn-taking, calming routines, friendship and conflict repair. The backbone for the other three.</li>
     <li><b>Foundational literacy &amp; numeracy.</b> Letter sounds, decoding, number sense and early operations through games and manipulatives, mapped to the national curriculum.</li>
-    <li><b>Unplugged coding.</b> Sequencing, loops and debugging with no device: floor grids, arrow cards, children as the &ldquo;robot&rdquo;.</li>
-    <li><b>Robotics.</b> The same computational thinking with a physical build, using low-cost and recycled parts and one kit shared across a cluster of schools.</li>
+    <li><b>Unplugged coding.</b> The first and largest part of the robotics journey, and the main way pupils meet computational thinking. With no device at all, children write programs as sequences of arrow cards, run them on a chalk floor grid, and debug the wrong turns together. Sequencing, loops, conditionals and decomposition, learned as a game before a single motor is involved. Every school can run this from Grade 1.</li>
+    <li><b>Robotics.</b> The same thinking, now driving a physical build. Because every child has already programmed and debugged unplugged, the shared low-cost kit extends a skill they already own rather than introducing a new subject. One kit per cluster, on a rota, for clusters that are ready.</li>
   </ul>
   <h3>Play is the method</h3>
   <p>
@@ -109,8 +117,10 @@
     behave as one programme, and the record is the raw material for measurement.
   </p>
   <p>
-    A school can begin with SEL and foundational learning alone. Unplugged coding needs nothing but
-    cards and chalk; robotics is added when a cluster is ready for a shared kit.
+    Unplugged coding is the on-ramp: a full curriculum of computational thinking runs on cards and
+    chalk, so every school can start and no school is blocked by hardware. Robotics is the next step
+    for a District/County cluster that is ready, not a barrier to entry. A school can also begin with
+    SEL and foundational learning alone and add the others later.
   </p>
 
   <h2>3. Alignment to regional commitments</h2>
@@ -119,8 +129,8 @@
     <tbody>
       <tr><td>SEL</td><td>Conference emphasis on social and emotional learning and learner wellbeing.</td></tr>
       <tr><td>Literacy &amp; numeracy</td><td>FLN as the headline conference priority and national foundational-learning targets.</td></tr>
-      <tr><td>Unplugged coding</td><td>Digital-skills and 21st-century-competency commitments, made to work without devices or power.</td></tr>
-      <tr><td>Robotics</td><td>STEM and innovation goals; moving from consuming technology to building it.</td></tr>
+      <tr><td>Unplugged coding</td><td>Digital-skills and 21st-century-competency commitments delivered from Grade 1 with no devices or power. The computational-thinking foundation every robotics programme needs.</td></tr>
+      <tr><td>Robotics</td><td>STEM and innovation goals, reached by extending a computational-thinking skill pupils already hold from the unplugged strand.</td></tr>
       <tr><td>Play</td><td>Repeated conference call for playful, child-centred, activity-based pedagogy.</td></tr>
       <tr><td>Parent role</td><td>Parental-engagement commitment: take-home play prompts and a termly community showcase in every strand.</td></tr>
     </tbody>
@@ -128,7 +138,7 @@
 
   <h2>4. The pilot model</h2>
   <dl class="kv">
-    <dt>Unit</dt><dd>One district cluster, 8 to 15 schools.</dd>
+    <dt>Unit</dt><dd>One District/County cluster, 8 to 15 schools.</dd>
     <dt>Duration</dt><dd>One to two school terms, with baseline and endline assessment.</dd>
     <dt>Delivered by</dt><dd>An implementing partner working inside the existing school system, not a parallel structure.</dd>
     <dt>Teacher input</dt><dd>2 to 3 days of hands-on training, then fortnightly coaching visits.</dd>
@@ -138,7 +148,47 @@
   </dl>
   <p>Sequence: cluster and baseline &rarr; train teachers &rarr; run strands &rarr; engage parents &rarr; measure and report &rarr; joint decision on scale against a pre-agreed evidence threshold.</p>
 
-  <h2>5. What we are seeking</h2>
+  <h2>5. Impact projection, in figures</h2>
+  <p>
+    SELution has no pilot data yet. The figures below are a projection, built from
+    <b>Care for Education</b>&rsquo;s published Six Bricks programme in South Africa (run with the
+    Department of Basic Education, UNICEF and the LEGO Foundation) and its demonstrated ratios.
+  </p>
+
+  <h3>One District/County cluster, one year</h3>
+  <div class="figs">
+    <div class="fig lead"><b>1</b><span>District/County cluster</span></div>
+    <div class="fig"><b>8 to 15</b><span>primary schools</span></div>
+    <div class="fig"><b>~70</b><span>lower-primary teachers trained via the cascade</span></div>
+    <div class="fig"><b>~2,500</b><span>children in structured play every week</span></div>
+    <div class="fig"><b>~6</b><span>Six Bricks per child; 1 robotics kit per cluster</span></div>
+  </div>
+
+  <h3>What the method has already delivered (Care for Education, South Africa)</h3>
+  <div class="figs">
+    <div class="fig"><b>27,500+</b><span>foundation-phase teachers trained</span></div>
+    <div class="fig"><b>~4,000</b><span>schools</span></div>
+    <div class="fig"><b>~950,000</b><span>children reached</span></div>
+    <div class="fig"><b>15+</b><span>countries running Six Bricks, incl. Kenya, Tanzania, Uganda, Ethiopia</span></div>
+    <div class="fig"><b>58+</b><span>active Six Bricks facilitators</span></div>
+  </div>
+
+  <h3>If a pilot clears its threshold and scales</h3>
+  <p class="figcap" style="margin-bottom:8px">Eight EAC partner states, three District/County clusters each, over three years.</p>
+  <div class="figs">
+    <div class="fig"><b>~290</b><span>primary schools</span></div>
+    <div class="fig"><b>~1,700</b><span>teachers trained</span></div>
+    <div class="fig"><b>~60,000</b><span>children in structured play</span></div>
+    <div class="fig"><b>8</b><span>partner states, one shared model and record</span></div>
+  </div>
+
+  <p class="figcap">
+    Assumptions, from Care for Education&rsquo;s South Africa programme: about <b>35 children</b> per
+    trained teacher, and about <b>6 lower-primary teachers</b> per school. SELution cluster and scale
+    numbers are illustrative, not commitments; a pilot&rsquo;s real baseline and endline set the model.
+  </p>
+
+  <h2>6. What we are seeking</h2>
   <h3>Implementing partners (for example Teach for Kenya)</h3>
   <ul>
     <li>Host a first pilot in a cluster of your schools; provide teachers or fellows for training and coaching.</li>
@@ -146,7 +196,7 @@
   </ul>
   <h3>Country contacts (Kenya, Uganda, Tanzania, South Sudan)</h3>
   <ul>
-    <li>Name a district and a local implementer; open the door to the district education office; help localise take-home materials.</li>
+    <li>Name a District/County and a local implementer; open the door to the District/County education office; help localise take-home materials.</li>
     <li>In return: a pilot on a shared regional model with comparable data, and first call on the trainer-of-trainers pathway.</li>
   </ul>
   <h3>Ministries and EAC bodies</h3>
@@ -156,11 +206,11 @@
   </ul>
   <h3>Funders</h3>
   <ul>
-    <li>Fund one or two district-cluster pilots and the teacher-coaching layer; agree the evidence threshold for scale up front.</li>
+    <li>Fund one or two District/County-cluster pilots and the teacher-coaching layer; agree the evidence threshold for scale up front.</li>
     <li>In return: four-country regional reach from one comparable pilot design, low unit cost, and a clean per-child before-and-after.</li>
   </ul>
 
-  <h2>6. Status and contact</h2>
+  <h2>7. Status and contact</h2>
   <dl class="kv">
     <dt>Stage</dt><dd>Design and partnership. Programme defined; no funded pilot yet.</dd>
     <dt>Implementing partner</dt><dd>Teach for Kenya, in conversation.</dd>
