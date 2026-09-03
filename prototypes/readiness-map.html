@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Regional readiness map &middot; SELution</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A working prototype of the Elimu Moja regional scorecard: fourteen indicators, six domains, adjustable weights, a composite index and a gap to 2030.">
+<meta name="theme-color" content="#0c110d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='9'%20fill='%230c110d'/%3E%3Crect%20y='6'%20width='40'%20height='5.6'%20fill='%2337c46f'/%3E%3Crect%20y='13.6'%20width='40'%20height='5.6'%20fill='%23f2c218'/%3E%3Crect%20y='21.2'%20width='40'%20height='5.6'%20fill='%23e64134'/%3E%3Crect%20y='28.8'%20width='40'%20height='5.6'%20fill='%233aa7dd'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@110,600;110,700;110,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/proto.css">
+<style>
+  :root{ --sa: var(--fg-green); }
+  .heat td.h{ text-align:center; font-family:var(--font-mono); font-size:12px; color:var(--ink);
+    font-variant-numeric:tabular-nums; position:relative; }
+  .heat td.h span{ position:relative; z-index:1; }
+  .heat td.h::before{ content:""; position:absolute; inset:3px; border-radius:4px;
+    background:var(--sa); opacity:calc(var(--s) / 130); }
+  .rank{ font-family:var(--font-mono); color:var(--muted); font-size:12px; }
+  .delta{ font-family:var(--font-mono); font-size:12px; font-variant-numeric:tabular-nums; }
+  .delta.up{ color:var(--good); } .delta.dn{ color:var(--critical); }
+  .cty{ display:flex; align-items:center; gap:8px; white-space:nowrap; }
+  .cty img{ width:19px; height:14px; object-fit:cover; border-radius:2px; flex:none; box-shadow:0 0 0 1px var(--hair-strong); }
+  .wt .lab{ display:flex; justify-content:space-between; align-items:baseline; }
+  .wt .lab b{ color:var(--ink); font-weight:500; text-transform:none; letter-spacing:0; font-family:var(--font-body); font-size:13.5px; }
+</style>
+</head>
+<body>
+<a class="skip vh" href="#app">Skip to the prototype</a>
+<div class="flagband"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" fill="#141a15"/><rect y="7" width="40" height="6.5" fill="#37c46f"/><rect y="14.5" width="40" height="6.5" fill="#f2c218"/><rect y="22" width="40" height="6.5" fill="#e64134"/><rect y="29.5" width="40" height="6.5" fill="#3aa7dd"/></svg>
+      <span>SELution</span>
+    </a>
+    <span class="crumb">Prototypes / <b>Readiness map</b></span>
+    <span class="spacer"></span>
+    <a class="iconbtn" href="index.html">All prototypes</a>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Theme</button>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <nav class="protonav" aria-label="Prototypes"><a href="index.html">All prototypes</a><a href="unplugged-coding.html">Unplugged coding</a><a href="readiness-map.html" aria-current="page">Readiness map</a></nav>
+
+  <div class="hd">
+    <p class="eyebrow">Baseline tool &middot; prototype</p>
+    <h1>Regional readiness map</h1>
+    <p class="lede">
+      Fourteen indicators, six domains, eight partner states. Change what the region says it values
+      and watch the ranking rearrange itself. That argument, held once and settled, is the whole point
+      of a shared scorecard.
+    </p>
+    <p class="tests">
+      <b>Task to test.</b> You chair the Sectoral Council. Decide the weighting the region will use,
+      then name the two states that most need support and the single indicator you would fund first.
+    </p>
+  </div>
+
+  <div class="synth">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Synthetic values, plausible not accurate &middot; 2019 and 2024 &middot; 2030 targets are illustrative</span>
+  </div>
+
+  <div class="split">
+    <!-- ============ controls ============ -->
+    <div>
+      <div class="card">
+        <h3>Weighting</h3>
+        <p class="sub">What the region values</p>
+        <div id="weights" class="wt"></div>
+        <div class="btnrow">
+          <button class="btn ghost sm" id="wEqual" type="button">Equal</button>
+          <button class="btn ghost sm" id="wLearn" type="button">Learning first</button>
+          <button class="btn ghost sm" id="wEquity" type="button">Equity first</button>
+        </div>
+        <p class="hint" id="wSum"></p>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Reference year</h3>
+        <p class="sub">Baseline or latest</p>
+        <div class="chips" role="group" aria-label="Reference year" id="years">
+          <button class="chip" type="button" data-y="2019" aria-pressed="false">2019</button>
+          <button class="chip" type="button" data-y="2024" aria-pressed="true">2024</button>
+        </div>
+        <label class="sw" style="margin-top:14px">
+          <input type="checkbox" id="showTarget"> Show distance to the 2030 target
+        </label>
+        <div class="btnrow">
+          <button class="btn ghost sm" id="exportCsv" type="button">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Method</h3>
+        <p class="sub">How the index is built</p>
+        <ol style="margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.7">
+          <li>Each indicator is rescaled to 0&ndash;100 against a fixed floor and ceiling, so a score means
+          the same thing every year.</li>
+          <li>Indicators where less is better, such as the pupil&ndash;teacher ratio, are inverted.</li>
+          <li>A domain score is the mean of its indicators.</li>
+          <li>The composite is the weighted mean of the six domains.</li>
+        </ol>
+        <p class="note"><b>The known flaw.</b> A mean hides a zero. A state can look mid-table while
+        failing one indicator completely. The distance-to-target view exists to expose that.</p>
+      </div>
+    </div>
+
+    <!-- ============ output ============ -->
+    <div>
+      <div class="kpis" id="kpis"></div>
+
+      <div class="card">
+        <h3 id="rankTitle">Composite index</h3>
+        <p class="sub" id="rankSub">Weighted across six domains</p>
+        <div id="rankChart"></div>
+      </div>
+
+      <div class="card pad0" style="margin-top:16px">
+        <div style="padding:17px 18px 0">
+          <h3>Domain scores</h3>
+          <p class="sub">Click a state for the indicator detail</p>
+        </div>
+        <div class="tw" style="padding:0 18px 17px">
+          <table class="dt heat" id="tbl">
+            <caption class="vh">Domain scores by partner state</caption>
+            <thead><tr id="thead"></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px" id="detailCard" hidden>
+        <h3 id="detailTitle">Indicator detail</h3>
+        <p class="sub" id="detailSub"></p>
+        <div class="tw">
+          <table class="dt">
+            <caption class="vh">Indicator values, targets and gaps</caption>
+            <thead><tr>
+              <th>Indicator</th><th>Domain</th><th class="num">Value</th>
+              <th class="num">2030 target</th><th class="num">Score</th><th>Gap to target</th>
+            </tr></thead>
+            <tbody id="detailBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <p><a href="index.html">All prototypes</a> &middot; <a href="../index.html#eac">SELution and the EAC agenda</a></p>
+  </footer>
+</main>
+
+<script src="../assets/proto.js"></script>
+<script>
+EM.boot(function () {
+  var $ = EM.$, el = EM.el, fmt = EM.fmt;
+
+  /* ---------- domains ---------- */
+  var DOMAINS = [
+    { id: "access",  name: "Access",     hue: "var(--fg-green)" },
+    { id: "learn",   name: "Learning",   hue: "var(--fg-gold)" },
+    { id: "teach",   name: "Teachers",   hue: "var(--fg-red)" },
+    { id: "incl",    name: "Inclusion",  hue: "var(--fg-blue)" },
+    { id: "digital", name: "Digital",    hue: "var(--fg-green)" },
+    { id: "money",   name: "Financing",  hue: "var(--fg-gold)" }
+  ];
+
+  /* ---------- indicators ----------
+     dir  +1 higher is better, -1 lower is better
+     lo/hi fixed rescaling bounds; target is the illustrative 2030 regional target
+     v: values by year, in country order ke tz ug rw bi ss cd so            */
+  var ORDER = ["ke", "tz", "ug", "rw", "bi", "ss", "cd", "so"];
+  var IND = [
+    { id: "net_pri", d: "access", name: "Primary net enrolment", unit: "%", dir: 1, lo: 20, hi: 100, target: 95,
+      v: { 2019: [82, 84, 79, 92, 88, 36, 70, 25], 2024: [86, 88, 82, 95, 90, 42, 75, 31] } },
+    { id: "comp_low", d: "access", name: "Lower-secondary completion", unit: "%", dir: 1, lo: 10, hi: 90, target: 70,
+      v: { 2019: [68, 34, 32, 42, 31, 12, 47, 14], 2024: [74, 41, 37, 50, 35, 16, 52, 19] } },
+    { id: "oos", d: "access", name: "Out-of-school, ages 6 to 13", unit: "%", dir: -1, lo: 0, hi: 70, target: 5,
+      v: { 2019: [12, 14, 17, 6, 10, 62, 26, 68], 2024: [9, 11, 14, 4, 8, 55, 22, 61] } },
+
+    { id: "read_g3", d: "learn", name: "Reading minimum proficiency, Grade 3", unit: "%", dir: 1, lo: 0, hi: 80, target: 60,
+      v: { 2019: [41, 28, 24, 31, 22, 8, 17, 9], 2024: [48, 33, 28, 38, 25, 11, 20, 12] } },
+    { id: "num_g6", d: "learn", name: "Numeracy minimum proficiency, Grade 6", unit: "%", dir: 1, lo: 0, hi: 75, target: 55,
+      v: { 2019: [38, 26, 22, 29, 20, 7, 15, 8], 2024: [44, 31, 26, 35, 23, 10, 18, 11] } },
+
+    { id: "qual", d: "teach", name: "Trained teachers, primary", unit: "%", dir: 1, lo: 30, hi: 100, target: 95,
+      v: { 2019: [96, 87, 76, 93, 82, 41, 63, 38], 2024: [97, 90, 80, 95, 85, 47, 68, 44] } },
+    { id: "ptr", d: "teach", name: "Pupil to teacher ratio, primary", unit: ":1", dir: -1, lo: 20, hi: 70, target: 35,
+      v: { 2019: [34, 51, 43, 58, 47, 62, 33, 36], 2024: [31, 47, 40, 54, 44, 58, 35, 34] } },
+    { id: "cpd", d: "teach", name: "Teachers with 5+ CPD days a year", unit: "%", dir: 1, lo: 0, hi: 80, target: 60,
+      v: { 2019: [34, 21, 18, 39, 15, 6, 11, 7], 2024: [42, 27, 23, 48, 18, 9, 14, 10] } },
+
+    { id: "gpi", d: "incl", name: "Distance from gender parity, lower secondary", unit: "pts", dir: -1, lo: 0, hi: 35, target: 3,
+      v: { 2019: [3, 6, 5, 4, 7, 28, 14, 31], 2024: [2, 4, 4, 2, 6, 24, 11, 27] } },
+    { id: "dis", d: "incl", name: "Learners with disabilities in mainstream schools", unit: "%", dir: 1, lo: 0, hi: 40, target: 30,
+      v: { 2019: [12, 7, 6, 14, 5, 2, 3, 2], 2024: [17, 10, 9, 19, 7, 3, 5, 3] } },
+
+    { id: "elec", d: "digital", name: "Primary schools with electricity", unit: "%", dir: 1, lo: 0, hi: 100, target: 90,
+      v: { 2019: [63, 38, 29, 51, 22, 6, 18, 11], 2024: [74, 47, 36, 66, 27, 9, 23, 16] } },
+    { id: "conn", d: "digital", name: "Primary schools with internet", unit: "%", dir: 1, lo: 0, hi: 80, target: 60,
+      v: { 2019: [24, 9, 8, 22, 4, 1, 5, 3], 2024: [37, 16, 13, 34, 7, 2, 8, 6] } },
+
+    { id: "gdp_ed", d: "money", name: "Education spending", unit: "% of GDP", dir: 1, lo: 0.5, hi: 6, target: 5,
+      v: { 2019: [4.6, 3.4, 2.6, 3.9, 5.1, 1.5, 2.4, 1.1], 2024: [4.9, 3.7, 2.9, 4.4, 5.3, 1.9, 2.8, 1.6] } },
+    { id: "exec", d: "money", name: "Education budget execution", unit: "%", dir: 1, lo: 40, hi: 100, target: 95,
+      v: { 2019: [88, 82, 79, 91, 74, 51, 61, 48], 2024: [91, 86, 83, 94, 77, 58, 67, 55] } }
+  ];
+
+  var PRESETS = {
+    equal:  { access: 1, learn: 1, teach: 1, incl: 1, digital: 1, money: 1 },
+    learn:  { access: 1, learn: 3, teach: 2, incl: 1, digital: 1, money: 1 },
+    equity: { access: 2, learn: 2, teach: 1, incl: 3, digital: 1, money: 1 }
+  };
+
+  var state = {
+    w: Object.assign({}, PRESETS.equal),
+    year: 2024,
+    target: false,
+    sel: null,
+    sortKey: "composite",
+    sortDir: -1
+  };
+
+  /* ---------- scoring ---------- */
+  function raw(ind, code, year) {
+    var i = ORDER.indexOf(code);
+    return ind.v[year][i];
+  }
+  /* rescale one indicator value to 0-100, direction aware */
+  function score(ind, value) {
+    var t = ind.dir === 1 ? (value - ind.lo) / (ind.hi - ind.lo)
+                          : (ind.hi - value) / (ind.hi - ind.lo);
+    return EM.clamp(t * 100, 0, 100);
+  }
+  function domainScore(code, dom, year) {
+    var list = IND.filter(function (x) { return x.d === dom; });
+    var sum = 0;
+    list.forEach(function (x) { sum += score(x, raw(x, code, year)); });
+    return sum / list.length;
+  }
+  function composite(code, year) {
+    var num = 0, den = 0;
+    DOMAINS.forEach(function (d) {
+      var w = state.w[d.id] || 0;
+      if (!w) return;
+      num += domainScore(code, d.id, year) * w;
+      den += w;
+    });
+    return den ? num / den : 0;
+  }
+  /* how far a state is from meeting every 2030 target, 0 = all met */
+  function targetGap(code, year) {
+    var gaps = IND.map(function (x) {
+      var v = raw(x, code, year);
+      var have = score(x, v), want = score(x, x.target);
+      return Math.max(0, want - have);
+    });
+    return gaps.reduce(function (a, b) { return a + b; }, 0) / gaps.length;
+  }
+
+  function rows() {
+    var out = EM.COUNTRIES.map(function (c) {
+      var r = { c: c.c, name: c.name };
+      DOMAINS.forEach(function (d) { r[d.id] = domainScore(c.c, d.id, state.year); });
+      r.composite = composite(c.c, state.year);
+      r.prev = composite(c.c, 2019);
+      r.delta = r.composite - r.prev;
+      r.gap = targetGap(c.c, state.year);
+      return r;
+    });
+    var k = state.sortKey, dir = state.sortDir;
+    out.sort(function (a, b) {
+      var av = a[k], bv = b[k];
+      if (typeof av === "string") return av.localeCompare(bv) * dir;
+      return (av - bv) * dir;
+    });
+    return out;
+  }
+
+  /* ---------- render: weights ---------- */
+  function renderWeights() {
+    var host = EM.clear($("#weights"));
+    DOMAINS.forEach(function (d) {
+      var val = state.w[d.id];
+      var out = el("span", { class: "v", text: val.toFixed(1) });
+      var input = el("input", {
+        type: "range", min: "0", max: "3", step: "0.5", value: String(val),
+        "aria-label": "Weight for " + d.name,
+        oninput: function () {
+          state.w[d.id] = parseFloat(this.value);
+          out.textContent = state.w[d.id].toFixed(1);
+          render();
+        }
+      });
+      host.appendChild(el("div", { class: "field", style: { margin: "0 0 11px" } }, [
+        el("span", { class: "lab" }, [el("b", { text: d.name }), el("span", { text: "weight" })]),
+        el("div", { class: "rangerow" }, [input, out])
+      ]));
+    });
+  }
+  function setPreset(name) {
+    state.w = Object.assign({}, PRESETS[name]);
+    renderWeights(); render();
+    EM.say("Weighting set to " + name);
+  }
+
+  /* ---------- render: everything else ---------- */
+  function render() {
+    var rs = rows();
+    var byComp = rs.slice().sort(function (a, b) { return b.composite - a.composite; });
+    var rankOf = {}; byComp.forEach(function (r, i) { rankOf[r.c] = i + 1; });
+
+    /* weights summary */
+    var tot = DOMAINS.reduce(function (a, d) { return a + state.w[d.id]; }, 0);
+    $("#wSum").textContent = tot === 0
+      ? "Every weight is zero, so the composite is undefined. Raise at least one."
+      : "Weights are normalised, so only the ratio between them matters.";
+
+    /* KPIs */
+    var mean = rs.reduce(function (a, r) { return a + r.composite; }, 0) / rs.length;
+    var spread = byComp[0].composite - byComp[byComp.length - 1].composite;
+    var meanGap = rs.reduce(function (a, r) { return a + r.gap; }, 0) / rs.length;
+    var improved = rs.filter(function (r) { return r.delta > 0; }).length;
+    EM.clear($("#kpis"));
+    [
+      ["Regional mean", fmt(mean, 1), "composite index, " + state.year],
+      ["Spread", fmt(spread, 1), byComp[0].name + " to " + byComp[byComp.length - 1].name],
+      ["Mean gap to 2030", fmt(meanGap, 1), "index points still to close"],
+      ["Improving", improved + " of 8", "composite up since 2019"]
+    ].forEach(function (k) {
+      $("#kpis").appendChild(el("div", { class: "kpi" }, [
+        el("div", { class: "k", text: k[0] }),
+        el("div", { class: "v", text: k[1] }),
+        el("div", { class: "d", text: k[2] })
+      ]));
+    });
+
+    /* ranking chart */
+    $("#rankTitle").textContent = state.target ? "Distance to the 2030 target" : "Composite index";
+    $("#rankSub").textContent = state.target
+      ? "Index points still to close, lower is better"
+      : "Weighted across six domains, " + state.year;
+    EM.barChart($("#rankChart"), byComp
+      .slice()
+      .sort(function (a, b) { return state.target ? a.gap - b.gap : b.composite - a.composite; })
+      .map(function (r) {
+        return {
+          label: r.name,
+          value: state.target ? r.gap : r.composite,
+          hue: state.target ? "var(--fg-red)" : "var(--fg-green)",
+          note: fmt(state.target ? r.gap : r.composite, 1)
+        };
+      }), { max: 100, dp: 1 });
+
+    /* table */
+    var thead = EM.clear($("#thead"));
+    thead.appendChild(el("th", { scope: "col", "aria-sort": state.sortKey === "name" ? (state.sortDir === 1 ? "ascending" : "descending") : "none", dataset: { key: "name" }, text: "Partner state" }));
+    DOMAINS.forEach(function (d) {
+      thead.appendChild(el("th", { scope: "col", class: "num", "aria-sort": state.sortKey === d.id ? (state.sortDir === 1 ? "ascending" : "descending") : "none", dataset: { key: d.id }, text: d.name }));
+    });
+    thead.appendChild(el("th", { scope: "col", class: "num", "aria-sort": state.sortKey === "composite" ? (state.sortDir === 1 ? "ascending" : "descending") : "none", dataset: { key: "composite" }, text: "Composite" }));
+    thead.appendChild(el("th", { scope: "col", class: "num", text: "vs 2019" }));
+
+    var tbody = EM.clear($("#tbody"));
+    rs.forEach(function (r) {
+      var tr = el("tr", { tabindex: "0", role: "button",
+        "aria-label": "Show indicator detail for " + r.name,
+        onclick: function () { selectCountry(r.c); },
+        onkeydown: function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); selectCountry(r.c); } }
+      });
+      tr.appendChild(el("td", {}, [el("span", { class: "cty" }, [
+        EM.flag(r.c), r.name, el("span", { class: "rank", text: "#" + rankOf[r.c] })
+      ])]));
+      DOMAINS.forEach(function (d) {
+        tr.appendChild(el("td", { class: "num h", style: { "--s": r[d.id].toFixed(1) } },
+          [el("span", { text: fmt(r[d.id], 0) })]));
+      });
+      tr.appendChild(el("td", { class: "num", style: { fontWeight: "600" }, text: fmt(r.composite, 1) }));
+      tr.appendChild(el("td", { class: "num" }, [el("span", {
+        class: "delta " + (r.delta >= 0 ? "up" : "dn"),
+        text: (r.delta >= 0 ? "+" : "") + fmt(r.delta, 1)
+      })]));
+      if (state.sel === r.c) tr.style.background = "var(--sa-soft)";
+      tbody.appendChild(tr);
+    });
+    EM.sortable($("#tbl"), function (key, dir) { state.sortKey = key; state.sortDir = dir; render(); });
+
+    if (state.sel) renderDetail(state.sel);
+  }
+
+  function selectCountry(code) {
+    state.sel = state.sel === code ? null : code;
+    render();
+    if (state.sel) {
+      $("#detailCard").hidden = false;
+      EM.say("Showing indicator detail for " + EM.cname(code));
+    } else {
+      $("#detailCard").hidden = true;
+    }
+  }
+
+  function renderDetail(code) {
+    $("#detailTitle").textContent = EM.cname(code) + ", indicator detail";
+    $("#detailSub").textContent = "All fourteen indicators, " + state.year + ". Click the row again in the table above to close.";
+    var body = EM.clear($("#detailBody"));
+    IND.slice().sort(function (a, b) {
+      var ga = Math.max(0, score(a, a.target) - score(a, raw(a, code, state.year)));
+      var gb = Math.max(0, score(b, b.target) - score(b, raw(b, code, state.year)));
+      return gb - ga;
+    }).forEach(function (x) {
+      var v = raw(x, code, state.year);
+      var s = score(x, v), want = score(x, x.target);
+      var gap = Math.max(0, want - s);
+      var met = gap <= 0.001;
+      var dom = DOMAINS.filter(function (d) { return d.id === x.d; })[0];
+      body.appendChild(el("tr", {}, [
+        el("td", { text: x.name }),
+        el("td", {}, [el("span", { class: "pill plain", text: dom.name })]),
+        el("td", { class: "num", text: fmt(v, x.unit === "% of GDP" ? 1 : 0) + " " + x.unit }),
+        el("td", { class: "num", text: fmt(x.target, x.unit === "% of GDP" ? 1 : 0) }),
+        el("td", { class: "num", text: fmt(s, 0) }),
+        el("td", {}, [ met
+          ? el("span", { class: "pill ok", text: "target met" })
+          : el("span", { class: "pill " + (gap > 40 ? "bad" : "warn"), text: fmt(gap, 0) + " pts short" }) ])
+      ]));
+    });
+  }
+
+  /* ---------- export ---------- */
+  function exportCsv() {
+    var head = ["partner_state"].concat(DOMAINS.map(function (d) { return d.id; }))
+      .concat(["composite_" + state.year, "composite_2019", "change", "gap_to_2030"]);
+    var body = rows().map(function (r) {
+      return [r.name].concat(DOMAINS.map(function (d) { return r[d.id].toFixed(2); }))
+        .concat([r.composite.toFixed(2), r.prev.toFixed(2), r.delta.toFixed(2), r.gap.toFixed(2)]);
+    });
+    var wrow = ["# weights"].concat(DOMAINS.map(function (d) { return d.id + "=" + state.w[d.id]; }));
+    var csv = EM.toCSV([wrow, head].concat(body));
+    if (!EM.download("elimu-moja-scorecard-" + state.year + ".csv", csv)) {
+      EM.copy(csv).then(function (ok) {
+        EM.say(ok ? "Download blocked here, so the CSV is on your clipboard instead."
+                  : "Could not export in this browser.");
+      });
+    }
+  }
+
+  /* ---------- wiring ---------- */
+  $("#wEqual").addEventListener("click", function () { setPreset("equal"); });
+  $("#wLearn").addEventListener("click", function () { setPreset("learn"); });
+  $("#wEquity").addEventListener("click", function () { setPreset("equity"); });
+  $("#exportCsv").addEventListener("click", exportCsv);
+  EM.$$("#years .chip").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.year = parseInt(b.dataset.y, 10);
+      EM.$$("#years .chip").forEach(function (o) {
+        o.setAttribute("aria-pressed", o === b ? "true" : "false");
+      });
+      render();
+      EM.say("Reference year " + state.year);
+    });
+  });
+  $("#showTarget").addEventListener("change", function () {
+    state.target = this.checked; render();
+  });
+
+  renderWeights();
+  render();
+});
+</script>
+</body>
+</html>

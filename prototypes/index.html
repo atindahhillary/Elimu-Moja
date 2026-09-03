@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Programme prototypes &middot; SELution</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Working prototypes for the SELution strands: things a teacher or partner can actually run in a browser to test whether the programme shape is right.">
+<meta name="theme-color" content="#0c110d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='9'%20fill='%230c110d'/%3E%3Crect%20y='6'%20width='40'%20height='5.6'%20fill='%2337c46f'/%3E%3Crect%20y='13.6'%20width='40'%20height='5.6'%20fill='%23f2c218'/%3E%3Crect%20y='21.2'%20width='40'%20height='5.6'%20fill='%23e64134'/%3E%3Crect%20y='28.8'%20width='40'%20height='5.6'%20fill='%233aa7dd'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@110,600;110,700;110,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/proto.css">
+<style>:root{ --sa: var(--fg-gold); }</style>
+</head>
+<body>
+<a class="skip vh" href="#app">Skip to the prototypes</a>
+<div class="flagband"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" fill="#141a15"/><rect y="7" width="40" height="6.5" fill="#37c46f"/><rect y="14.5" width="40" height="6.5" fill="#f2c218"/><rect y="22" width="40" height="6.5" fill="#e64134"/><rect y="29.5" width="40" height="6.5" fill="#3aa7dd"/></svg>
+      <span>SELution</span>
+    </a>
+    <span class="crumb">Programme prototypes</span>
+    <span class="spacer"></span>
+    <a class="iconbtn" href="../index.html">Full site</a>
+    <a class="iconbtn" href="../concept-note.html">Concept note</a>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Theme</button>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <div class="hd">
+    <p class="eyebrow">Test the shape, not the slide</p>
+    <h1>Prototypes for the four strands</h1>
+    <p class="lede">
+      Each prototype here actually runs in the browser: real logic, real state, no server. They exist
+      so a teacher, a partner or a curriculum officer can click through a SELution strand and say what
+      is wrong with the design before anyone commits to a pilot.
+    </p>
+    <p class="tests">
+      <b>Browser only.</b> Nothing is uploaded, nothing is stored except your own local experiments.
+      Any numbers shown are illustrative, not real measurement.
+    </p>
+  </div>
+
+  <div class="synth">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Concept prototypes &middot; synthetic data &middot; SELution is at design stage</span>
+  </div>
+
+  <div class="hub">
+    <a class="hubcard" style="--bc: var(--fg-red)" href="unplugged-coding.html">
+      <span class="bn">Strand 03 &middot; ready</span>
+      <h3>Unplugged coding runner</h3>
+      <p>Write an arrow-card program on a floor grid, run the &ldquo;robot&rdquo;, and debug the wrong turns with the class. No device, no power.</p>
+      <span class="go">Open prototype &rarr;</span>
+    </a>
+    <a class="hubcard" style="--bc: var(--fg-green)" href="readiness-map.html">
+      <span class="bn">Baseline tool &middot; ready</span>
+      <h3>Regional readiness map</h3>
+      <p>Weight the domains that matter for a SELution pilot and see which countries have the most ground to make up.</p>
+      <span class="go">Open prototype &rarr;</span>
+    </a>
+    <div class="hubcard" style="--bc: var(--fg-blue); opacity:.62; cursor:default">
+      <span class="bn">Strand 01 &middot; planned</span>
+      <h3>SEL session player</h3>
+      <p>Step through a circle-game session card: the scenario, the roles, the reflection prompt and the 10-second record.</p>
+      <span class="go">Next to build</span>
+    </div>
+    <div class="hubcard" style="--bc: var(--fg-gold); opacity:.62; cursor:default">
+      <span class="bn">Strand 02 &middot; planned</span>
+      <h3>FLN quick-check</h3>
+      <p>A short play-based literacy and numeracy check that estimates a proficiency band from a handful of game items.</p>
+      <span class="go">Planned</span>
+    </div>
+    <div class="hubcard" style="--bc: var(--fg-blue); opacity:.62; cursor:default">
+      <span class="bn">Strand 04 &middot; planned</span>
+      <h3>Robotics kit rota</h3>
+      <p>Schedule one shared kit across a cluster of schools for a term and see the coverage each school gets.</p>
+      <span class="go">Planned</span>
+    </div>
+    <div class="hubcard" style="--bc: var(--fg-gold); opacity:.62; cursor:default">
+      <span class="bn">Method &middot; planned</span>
+      <h3>Play-cycle session builder</h3>
+      <p>Assemble a session from goal, game, roles, reflect and record, for any strand, and export it as a teacher script.</p>
+      <span class="go">Planned</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:28px">
+    <h3>How to run a useful test</h3>
+    <p class="sub">Suggested protocol for a workshop</p>
+    <ol style="margin:0; padding-left:20px; color:var(--ink-2); font-size:14.5px; line-height:1.75">
+      <li>Give one prototype to someone who does that job, with no explanation.</li>
+      <li>Ask them to complete the task named at the top of the page while thinking aloud.</li>
+      <li>Write down every place they hesitate, guess, or reach for something that is not there.</li>
+      <li>Ask the question that matters: <em>would this help you teach the strand better next week?</em></li>
+      <li>Record what would have to be true for the answer to become yes. That is the real specification.</li>
+    </ol>
+  </div>
+
+  <footer class="foot">
+    <p>SELution is an independent regional initiative. Not an EAC publication.
+    <a href="../index.html">Back to the site</a> &middot; <a href="../regional-brief.html">Regional systems brief</a></p>
+  </footer>
+</main>
+
+<script src="../assets/proto.js"></script>
+<script>EM.boot();</script>
+</body>
+</html>

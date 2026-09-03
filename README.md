@@ -1,37 +1,55 @@
 <a href="https://atindahhillary.github.io/Elimu-Moja/">
-  <img src="assets/preview.png" alt="Open the Elimu Moja site: One education system for one region, from commitments to impact" width="100%">
+  <img src="assets/preview.png" alt="Open the SELution site: learning through play, made regional" width="100%">
 </a>
 
 <p align="center"><strong><a href="https://atindahhillary.github.io/Elimu-Moja/">Open the live site &rarr; atindahhillary.github.io/Elimu-Moja</a></strong></p>
 
-# Elimu Moja
+# SELution
 
-**A concept prototype for a unified East African Community education system and foundational learning framework.**
+**Learning through play, made regional.**
 
-Prepared as an advisory response after the **2nd EAC Regional Education Conference** (Nairobi, August 2026), whose theme was *"Transforming Education in East Africa: From Commitments to Impact, Fostering Resilience and Future-Ready Systems for Sustainable Development."*
+SELution is a play-based programme that delivers four connected strands through one teacher-training
+pathway and one measurement spine:
 
-The conference produced resolutions. Elimu Moja is a proposal for the machinery that turns those resolutions into changes a child in a classroom in Juba, Bujumbura, Kisumu or Mogadishu can feel.
+1. **Social and emotional learning (SEL)**
+2. **Foundational literacy and numeracy (FLN)**
+3. **Unplugged coding**
+4. **Robotics**
 
-> **Elimu Moja** is Kiswahili for *"one education."* The name is a placeholder for discussion.
+Play is the method that runs through all four, not a fifth strand.
+
+It is built on the priorities set at the **2nd EAC Regional Education Conference** (Nairobi, August
+2026), which put FLN, SEL and parental engagement at the centre of the regional agenda and named play
+as the pedagogy that delivers them. SELution is a way to carry that consensus into classrooms.
+
+> SELution is an independent regional initiative. It is not an EAC programme or publication. Partner
+> names and country references on the site describe early-stage conversations, not confirmed
+> commitments.
 
 ---
 
-## What it proposes
+## The programme in one table
 
-One thin regional layer of shared standards, shared data and shared services, sitting under the EAC Sectoral Council and the Regional Forum on Education, aligned upward to the AU Continental Education Strategy for Africa 2026 to 2035.
-
-| # | Building block | In one line |
+| Strand | What it is | The play mechanic |
 |---|---|---|
-| 01 | **Regional Scorecard** | One agreed indicator set across access, learning, teachers, inclusion, digital and financing. |
-| 02 | **Foundational Learning Framework** *(prototype)* | Common minimum proficiency, a playful pedagogy spine, a competency crosswalk, a pre-primary to upper-primary roadmap. |
-| 03 | **Teacher Qualification Passport** | A universal competency assessment, a tiered portable credential, micro-credentials, backed by a Teachers mutual recognition agreement. |
-| 04 | **Regional Data Warehouse + AI assistant** | A federated store with a shared semantic layer, three access tiers, and a plain-language assistant that cites its sources. |
-| 05 | **Large-scale Competency Assessment** | A periodic regional measurement of reading, numeracy and life skills, equated to global metrics, household-based so no child is invisible. |
-| 06 | **Community of Practice + Commons** | Teacher circles by phase and subject, an open resource and research repository, structured regional exchanges. |
-| 07 | **Stakeholder Engagement** | A defined information path from the Secretariat to parents and community organisations, and a live communiqué tracker. |
-| 08 | **AI Safety and Governance** | A safeguarding standard for AI in classrooms, a procurement checklist, and AI competency expectations for teachers and learners. |
+| **SEL** | Naming feelings, turn-taking, calming routines, friendship and conflict repair. | A circle game with a scenario, roles for every child, one agreed class rule. |
+| **Foundational literacy and numeracy** | Letter sounds, decoding, number sense, early operations, mapped to the national curriculum. | Timed team games with bottle-cap tiles; the score is the assessment. |
+| **Unplugged coding** | Sequencing, loops, debugging, algorithms, with no device. | Arrow-card programs on a floor grid; the class debugs the wrong turns together. |
+| **Robotics** | The same computational thinking with a physical build. | Low-cost and recycled parts; one kit shared across a cluster on a rota. |
 
-The site also carries a **gap map**: a register that combines the gaps raised on the conference floor, the priorities in the commissioning brief, and further regional gaps surfaced by a three-track advisory review (no teacher mutual recognition agreement; no basic-education equivalency for mobile and displaced learners; language-of-instruction divergence; the missing examinations-equating function; child-data protection that is not harmonised; a consensus culture with no enforcement; and more).
+Every session runs the same cycle: **goal, game, roles, reflect, record**. The 10-second record per
+child is the raw material for measurement.
+
+---
+
+## A pilot
+
+One district cluster (8 to 15 schools), one to two terms, run by an implementing partner inside the
+existing school system. Baseline and endline assessment, per-child records rolling up to a cluster
+dashboard, and a joint decision on scale against a pre-agreed evidence threshold. Materials are
+deliberately cheap; spend concentrates on teacher coaching.
+
+Full detail: the [concept note](concept-note.html) and the [site](index.html).
 
 ---
 
@@ -39,43 +57,40 @@ The site also carries a **gap map**: a register that combines the gaps raised on
 
 | Path | What it is |
 |---|---|
-| [`index.html`](index.html) | The full interactive site. Self-contained, no build step, no dependencies. |
-| [`assets/`](assets/) | `logo.png` (the EAC flag map), `logo.svg` (wordmark lockup), `preview.png` (social image). |
-| [`docs/conference-summary.md`](docs/conference-summary.md) | The 2nd EAC Regional Education Conference: theme, sub-themes, programme components. |
-| [`docs/gap-register.md`](docs/gap-register.md) | The consolidated gap register, by domain and source. |
-| [`docs/advisory-review-01-integration-and-teachers.md`](docs/advisory-review-01-integration-and-teachers.md) | Advisory brief: regional integration instruments, teacher qualifications and mobility, scorecard precedents. |
-| [`docs/advisory-review-02-foundational-learning.md`](docs/advisory-review-02-foundational-learning.md) | Advisory brief: foundational learning, assessment, SEL, playful and low-tech pedagogy. |
-| [`docs/advisory-review-03-data-systems-and-ai.md`](docs/advisory-review-03-data-systems-and-ai.md) | Advisory brief: EMIS landscape, federated data architecture, AI data assistant, data governance, AI safety. |
+| [`index.html`](index.html) | The SELution site: the offer, the four strands, EAC alignment, the pilot model, and the asks by audience. |
+| [`concept-note.html`](concept-note.html) | One-page concept note, printable / save-as-PDF, for emailing to partners, ministries and funders. |
+| [`prototypes/`](prototypes/) | Working browser prototypes. `unplugged-coding.html` (a programmable floor grid) and `readiness-map.html` (a weighted regional baseline tool) run today; the rest are stubbed. |
+| [`regional-brief.html`](regional-brief.html) | The **regional systems brief** SELution builds on: the earlier concept for a unified EAC education system (scorecard, framework, teacher passport, data warehouse, gap map). Kept as the reference and credibility layer. |
+| [`assets/proto.css`](assets/proto.css), [`assets/proto.js`](assets/proto.js) | Shared design system and runtime for the site and prototypes. No build step, no dependencies. |
+| [`docs/`](docs/) | Conference summary, gap register, and three advisory research briefs from the regional-brief phase. |
 
 ---
 
 ## View it
 
 - **Live:** <https://atindahhillary.github.io/Elimu-Moja/>
-- **Local:** open `index.html` in a browser, or serve the folder:
+- **Local:**
 
 ```bash
 python -m http.server 8000
 # then open http://localhost:8000
 ```
 
-### Enable GitHub Pages (one time)
-
-Settings &rarr; Pages &rarr; Build and deployment &rarr; Source: **Deploy from a branch** &rarr; Branch: **main** / **/(root)** &rarr; Save.
-The site publishes at `https://atindahhillary.github.io/Elimu-Moja/` within a minute or two.
+GitHub Pages: Settings &rarr; Pages &rarr; Source: **Deploy from a branch** &rarr; **main** / **/(root)**.
 
 ---
 
 ## Status and caveats
 
-- This is a **concept prototype for discussion**, not an official EAC document, and not affiliated with the East African Community.
-- All country figures, scorecard values, tracker entries and AI-assistant answers are **illustrative and synthetic**, included to show how the system would work.
-- Framework content is drawn from public sources (listed in the site footer and the `docs/` briefs) and would need validation with each partner state, curriculum institute and teacher service.
+- SELution is at **design and partnership stage**. The programme is defined; there is no funded pilot yet.
+- All figures in the site and prototypes are **illustrative and synthetic**, included to show how the programme and its measurement would work.
+- Strand content is drawn from public sources and playful-pedagogy practice and would need validation with each partner, curriculum institute and teacher service.
 
 ## Credits
 
-Colours and the logo are drawn from the flags of the eight EAC partner states. Typefaces: Archivo, Newsreader, IBM Plex Mono (Google Fonts). Prepared with an advisory review of the conference programme and public sources.
+Colours and the mark are drawn from the flags of the eight EAC partner states. Typefaces: Archivo,
+Hanken Grotesk, IBM Plex Mono (Google Fonts).
 
 ## Licence
 
-Content and documentation: [CC BY 4.0](LICENSE). You may share and adapt with attribution.
+Content and documentation: [CC BY 4.0](LICENSE). Share and adapt with attribution.

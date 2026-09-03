@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Unplugged coding runner &middot; SELution</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A working prototype of the SELution unplugged coding strand: build an arrow-card program on a floor grid, run the robot, and debug the wrong turns.">
+<meta name="theme-color" content="#0c110d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='9'%20fill='%230c110d'/%3E%3Crect%20y='6'%20width='40'%20height='5.6'%20fill='%2337c46f'/%3E%3Crect%20y='13.6'%20width='40'%20height='5.6'%20fill='%23f2c218'/%3E%3Crect%20y='21.2'%20width='40'%20height='5.6'%20fill='%23e64134'/%3E%3Crect%20y='28.8'%20width='40'%20height='5.6'%20fill='%233aa7dd'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@110,600;110,700;110,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/proto.css">
+<style>
+  :root{ --sa: var(--fg-red); }
+  .board{ display:grid; gap:20px; grid-template-columns:minmax(0,1fr) minmax(0,360px); align-items:start; }
+  @media (max-width:880px){ .board{ grid-template-columns:1fr; } }
+
+  .gridwrap{ background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:16px; }
+  svg.grid{ display:block; width:100%; height:auto; }
+  .grid .cell{ fill:var(--surface-2); stroke:var(--hair-strong); stroke-width:1.5; }
+  .grid .cell.wall{ fill:var(--surface-3); }
+  .grid .cell.path{ fill:color-mix(in srgb, var(--fg-red) 18%, var(--surface-2)); }
+  .grid .gx{ font-family:var(--font-mono); font-size:11px; fill:var(--muted); }
+  .grid .star{ fill:var(--fg-gold); stroke:var(--bg); stroke-width:1.5; }
+  .grid .bot{ fill:var(--fg-blue); stroke:var(--bg); stroke-width:2; transition:transform .28s ease; }
+  .grid .bot.crash{ fill:var(--critical); }
+  .grid.reduce .bot{ transition:none; }
+
+  .prog{ display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; min-height:44px; padding:9px; border:1px dashed var(--hair-strong); border-radius:var(--radius-sm); background:var(--surface-2); }
+  .prog:empty::before{ content:"Add arrow cards to build the program"; color:var(--muted); font-size:13px; }
+  .pc{ font-family:var(--font-mono); font-size:15px; width:34px; height:34px; display:grid; place-items:center; border-radius:8px; border:1px solid var(--hair-strong); background:var(--surface); color:var(--ink); position:relative; }
+  .pc.on{ border-color:var(--sa); box-shadow:0 0 0 2px color-mix(in srgb,var(--sa) 35%, transparent); }
+  .pc.bad{ border-color:var(--critical); box-shadow:0 0 0 2px color-mix(in srgb,var(--critical) 40%, transparent); }
+  .pc .i{ position:absolute; top:-7px; left:-6px; font-size:9px; color:var(--muted); background:var(--bg); padding:0 3px; border-radius:4px; }
+
+  .palette{ display:flex; flex-wrap:wrap; gap:7px; }
+  .palette button{ font:inherit; font-family:var(--font-mono); font-size:16px; min-width:42px; min-height:40px; cursor:pointer;
+    background:var(--surface-2); border:1px solid var(--hair-strong); border-radius:9px; color:var(--ink); display:inline-flex; align-items:center; gap:6px; padding:0 11px; }
+  .palette button:hover{ border-color:var(--sa); }
+  .palette button .cap{ font-family:var(--font-body); font-size:11px; color:var(--muted); }
+
+  .verdict{ margin:12px 0 0; padding:11px 13px; border-radius:var(--radius-sm); font-size:14px; border:1px solid var(--hair); background:var(--surface-2); }
+  .verdict.ok{ border-color:color-mix(in srgb,var(--good) 45%, transparent); color:var(--ink); }
+  .verdict.no{ border-color:color-mix(in srgb,var(--critical) 45%, transparent); color:var(--ink); }
+  .verdict b{ color:var(--ink); }
+
+  .levels{ display:flex; flex-wrap:wrap; gap:6px; }
+  .rec{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:8px; }
+  .rec .box{ background:var(--surface-2); border:1px solid var(--hair); border-radius:var(--radius-sm); padding:9px 11px; text-align:center; }
+  .rec .box .k{ font-family:var(--font-mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .rec .box .v{ font-family:var(--font-display); font-weight:700; font-size:18px; }
+</style>
+</head>
+<body>
+<a class="skip vh" href="#app">Skip to the prototype</a>
+<div class="flagband"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="../index.html">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" fill="#141a15"/><rect y="7" width="40" height="6.5" fill="#37c46f"/><rect y="14.5" width="40" height="6.5" fill="#f2c218"/><rect y="22" width="40" height="6.5" fill="#e64134"/><rect y="29.5" width="40" height="6.5" fill="#3aa7dd"/></svg>
+      <span>SELution</span>
+    </a>
+    <span class="crumb">Prototypes / <b>Unplugged coding</b></span>
+    <span class="spacer"></span>
+    <a class="iconbtn" href="index.html">All prototypes</a>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Theme</button>
+  </div>
+</header>
+
+<main class="wrap" id="app">
+  <nav class="protonav" aria-label="Prototypes">
+    <a href="index.html">All prototypes</a>
+    <a href="unplugged-coding.html" aria-current="page">Unplugged coding</a>
+    <a href="readiness-map.html">Readiness map</a>
+  </nav>
+
+  <div class="hd">
+    <p class="eyebrow">Strand 03 &middot; prototype</p>
+    <h1>Unplugged coding runner</h1>
+    <p class="lede">
+      This is the classroom activity as software. Children lay arrow cards to program a &ldquo;robot&rdquo;,
+      run it across a floor grid, and when it goes wrong they step through the program together to find
+      the bug. Sequencing, repetition and debugging, with no device and no electricity.
+    </p>
+    <p class="tests">
+      <b>Task to test.</b> Solve all four challenges. Notice where a child would get stuck, where they
+      would want a &ldquo;repeat&rdquo; card, and whether stepping through to find the bug feels natural.
+    </p>
+  </div>
+
+  <div class="synth">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Concept prototype &middot; the real activity uses printed cards and a chalk grid</span>
+  </div>
+
+  <div class="board">
+    <!-- ======= grid ======= -->
+    <div class="gridwrap">
+      <div class="levels" id="levels" role="group" aria-label="Challenges"></div>
+      <p class="sub" id="goalText" style="margin:12px 0 8px"></p>
+      <svg class="grid" id="grid" viewBox="0 0 420 420" role="img" aria-label="Floor grid with a robot and a target"></svg>
+      <div class="verdict" id="verdict">Build a program, then press Run.</div>
+    </div>
+
+    <!-- ======= controls ======= -->
+    <div>
+      <div class="card">
+        <h3>Arrow cards</h3>
+        <p class="sub">Tap to add to the program</p>
+        <div class="palette" id="palette"></div>
+
+        <p class="lab" style="margin-top:15px">Program</p>
+        <div class="prog" id="prog" aria-live="polite"></div>
+
+        <div class="btnrow">
+          <button class="btn" id="runBtn" type="button">Run</button>
+          <button class="btn ghost sm" id="stepBtn" type="button">Step</button>
+          <button class="btn ghost sm" id="undoBtn" type="button">Remove last</button>
+          <button class="btn ghost sm" id="clearBtn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>Session record</h3>
+        <p class="sub">What a teacher would jot in ten seconds</p>
+        <div class="rec">
+          <div class="box"><div class="k">Attempts</div><div class="v" id="rAtt">0</div></div>
+          <div class="box"><div class="k">Solved</div><div class="v" id="rSolved">0 / 4</div></div>
+          <div class="box"><div class="k">Best cards</div><div class="v" id="rBest">&ndash;</div></div>
+        </div>
+        <p class="hint" id="teachHint" style="margin-top:11px"></p>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h3>What it teaches</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13.5px;color:var(--ink-2);line-height:1.7">
+          <li><b>Sequencing.</b> Order of the cards changes the outcome.</li>
+          <li><b>Debugging.</b> A wrong path is a signal, not a failure. Step to the bad card, fix, re-run.</li>
+          <li><b>Abstraction.</b> Challenge 4 is tedious without a repeat. That is where a &ldquo;loop&rdquo; card is introduced next.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <p><a href="index.html">All prototypes</a> &middot; <a href="../index.html#strands">Read about the four strands</a></p>
+  </footer>
+</main>
+
+<script src="../assets/proto.js"></script>
+<script>
+EM.boot(function () {
+  var $ = EM.$, el = EM.el;
+  var N = 6, PX = 420, GAP = 2, CELL = (PX - GAP * (N + 1)) / N;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* directions: 0 up, 1 right, 2 down, 3 left */
+  var DIRV = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+  var CARDS = {
+    F: { g: "↑", cap: "Forward" },
+    L: { g: "↰", cap: "Turn left" },
+    R: { g: "↱", cap: "Turn right" }
+  };
+
+  var LEVELS = [
+    { name: "1 &middot; straight line", start: [0, 3, 0], goal: [0, 0], walls: [],
+      note: "Three Forward cards. The first taste of a program that runs." },
+    { name: "2 &middot; one corner", start: [0, 5, 0], goal: [3, 2], walls: [],
+      note: "Forward three, turn right, forward three. Children discover that a turn does not move you." },
+    { name: "3 &middot; around a wall", start: [0, 2, 1], goal: [4, 2], walls: [[2, 2]],
+      note: "Forward, forward crashes on the wall. Step to that card, then send the robot up and over." },
+    { name: "4 &middot; the long run", start: [0, 0, 2], goal: [5, 5], walls: [],
+      note: "Solvable, but ten Forward cards is a lot. What if one card meant repeat five times? That is the next lesson." }
+  ];
+
+  var state = { lvl: 0, prog: [], attempts: 0, solved: [false, false, false, false], best: [null, null, null, null], anim: null };
+
+  /* ---------- build grid ---------- */
+  function cellXY(cx, cy) { return [GAP + cx * (CELL + GAP), GAP + cy * (CELL + GAP)]; }
+
+  function drawGrid(pathCells, bot, crash) {
+    var L = LEVELS[state.lvl];
+    var g = EM.clear($("#grid"));
+    g.classList.toggle("reduce", reduce);
+    var wallKey = {};
+    L.walls.forEach(function (w) { wallKey[w[0] + "," + w[1]] = 1; });
+    var pathKey = {};
+    (pathCells || []).forEach(function (p) { pathKey[p[0] + "," + p[1]] = 1; });
+
+    for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+      var xy = cellXY(x, y);
+      var cls = "cell";
+      if (wallKey[x + "," + y]) cls += " wall";
+      else if (pathKey[x + "," + y]) cls += " path";
+      g.appendChild(EM.svg("rect", { class: cls, x: xy[0].toFixed(1), y: xy[1].toFixed(1),
+        width: CELL.toFixed(1), height: CELL.toFixed(1), rx: 6 }));
+    }
+    /* target star */
+    var t = cellXY(L.goal[0], L.goal[1]);
+    g.appendChild(EM.svg("path", { class: "star", transform: "translate(" + (t[0] + CELL / 2).toFixed(1) + "," + (t[1] + CELL / 2).toFixed(1) + ")",
+      d: starPath(CELL * 0.34, CELL * 0.15) }));
+    /* robot: a rounded triangle pointing in its direction */
+    var b = bot || { x: L.start[0], y: L.start[1], d: L.start[2] };
+    var bx = cellXY(b.x, b.y);
+    var cxp = bx[0] + CELL / 2, cyp = bx[1] + CELL / 2;
+    var tri = EM.svg("path", { class: "bot" + (crash ? " crash" : ""),
+      d: "M0 " + (-CELL * 0.3).toFixed(1) + " L " + (CELL * 0.26).toFixed(1) + " " + (CELL * 0.26).toFixed(1) +
+         " L " + (-CELL * 0.26).toFixed(1) + " " + (CELL * 0.26).toFixed(1) + " Z",
+      transform: "translate(" + cxp.toFixed(1) + "," + cyp.toFixed(1) + ") rotate(" + (b.d * 90) + ")" });
+    g.appendChild(tri);
+  }
+  function starPath(R, r) {
+    var p = "";
+    for (var i = 0; i < 10; i++) {
+      var ang = Math.PI / 5 * i - Math.PI / 2;
+      var rad = i % 2 ? r : R;
+      p += (i ? "L" : "M") + (Math.cos(ang) * rad).toFixed(1) + " " + (Math.sin(ang) * rad).toFixed(1);
+    }
+    return p + "Z";
+  }
+
+  /* ---------- simulate ---------- */
+  function simulate(prog) {
+    var L = LEVELS[state.lvl];
+    var bot = { x: L.start[0], y: L.start[1], d: L.start[2] };
+    var wallKey = {};
+    L.walls.forEach(function (w) { wallKey[w[0] + "," + w[1]] = 1; });
+    var frames = [{ bot: Object.assign({}, bot), step: -1, crash: false, path: [[bot.x, bot.y]] }];
+    var path = [[bot.x, bot.y]];
+    for (var i = 0; i < prog.length; i++) {
+      var c = prog[i];
+      if (c === "L") bot.d = (bot.d + 3) % 4;
+      else if (c === "R") bot.d = (bot.d + 1) % 4;
+      else if (c === "F") {
+        var nx = bot.x + DIRV[bot.d][0], ny = bot.y + DIRV[bot.d][1];
+        var off = nx < 0 || ny < 0 || nx >= N || ny >= N;
+        if (off || wallKey[nx + "," + ny]) {
+          frames.push({ bot: Object.assign({}, bot), step: i, crash: true, path: path.slice(), reason: off ? "drove off the grid" : "hit the wall" });
+          return { frames: frames, ok: false, crashStep: i };
+        }
+        bot.x = nx; bot.y = ny; path.push([bot.x, bot.y]);
+      }
+      frames.push({ bot: Object.assign({}, bot), step: i, crash: false, path: path.slice() });
+    }
+    var ok = bot.x === L.goal[0] && bot.y === L.goal[1];
+    return { frames: frames, ok: ok, crashStep: -1, endBot: bot };
+  }
+
+  /* ---------- render program ---------- */
+  function renderProg(activeStep, badStep) {
+    var host = EM.clear($("#prog"));
+    state.prog.forEach(function (c, i) {
+      var d = el("div", { class: "pc" + (i === activeStep ? " on" : "") + (i === badStep ? " bad" : ""),
+        title: CARDS[c].cap }, [CARDS[c].g]);
+      d.appendChild(el("span", { class: "i", text: i + 1 }));
+      host.appendChild(d);
+    });
+  }
+
+  /* ---------- run / step ---------- */
+  function stopAnim() { if (state.anim) { clearTimeout(state.anim); state.anim = null; } }
+
+  function run() {
+    stopAnim();
+    if (!state.prog.length) { verdict("Add some arrow cards first.", ""); return; }
+    state.attempts++;
+    var res = simulate(state.prog);
+    var fi = 0;
+    (function tick() {
+      var f = res.frames[fi];
+      drawGrid(f.path, f.bot, f.crash);
+      renderProg(f.step, f.crash ? f.step : -1);
+      if (fi < res.frames.length - 1) {
+        state.anim = setTimeout(tick, reduce ? 0 : 300);
+        fi++;
+      } else {
+        finish(res);
+      }
+    })();
+    updateRecord();
+  }
+
+  function finish(res) {
+    var L = LEVELS[state.lvl];
+    if (res.ok) {
+      if (!state.solved[state.lvl]) state.solved[state.lvl] = true;
+      var n = state.prog.length;
+      if (state.best[state.lvl] === null || n < state.best[state.lvl]) state.best[state.lvl] = n;
+      verdict("<b>Solved.</b> The robot reached the star in " + n + " cards. " +
+        (state.lvl === 3 ? "Now try it with fewer cards. What is repeating?" : "Try the next challenge."), "ok");
+    } else if (res.crashStep >= 0) {
+      var f = res.frames[res.frames.length - 1];
+      verdict("<b>Crash on card " + (res.crashStep + 1) + ".</b> The robot " + f.reason +
+        ". Press <b>Step</b> to walk through the program and see where it turned wrong.", "no");
+    } else {
+      verdict("<b>Stopped short.</b> The program ran but the robot is not on the star. Which card is missing, or facing the wrong way?", "no");
+    }
+    updateRecord();
+  }
+
+  var stepIdx = 0;
+  function step() {
+    stopAnim();
+    var res = simulate(state.prog);
+    if (stepIdx >= res.frames.length) stepIdx = 0;
+    var f = res.frames[stepIdx];
+    drawGrid(f.path, f.bot, f.crash);
+    renderProg(f.step, f.crash ? f.step : -1);
+    if (stepIdx === 0) verdict("Stepping: start position. Press Step again.", "");
+    else if (f.crash) verdict("Card " + (f.step + 1) + ": the robot " + f.reason + ". This is the bug.", "no");
+    else verdict("Card " + (f.step + 1) + " of " + state.prog.length + " done.", "");
+    stepIdx++;
+    if (stepIdx >= res.frames.length) stepIdx = 0;
+  }
+
+  function verdict(html, cls) {
+    var v = $("#verdict");
+    v.className = "verdict" + (cls ? " " + cls : "");
+    v.innerHTML = html;
+    EM.say(v.textContent);
+  }
+
+  function updateRecord() {
+    $("#rAtt").textContent = state.attempts;
+    $("#rSolved").textContent = state.solved.filter(Boolean).length + " / 4";
+    var b = state.best[state.lvl];
+    $("#rBest").textContent = b === null ? "–" : b;
+    $("#teachHint").textContent = LEVELS[state.lvl].note.replace(/&middot;/g, "·");
+  }
+
+  /* ---------- levels ---------- */
+  function loadLevel(i) {
+    stopAnim();
+    state.lvl = i; state.prog = []; stepIdx = 0;
+    EM.$$("#levels button").forEach(function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+    $("#goalText").innerHTML = "Goal: drive the robot to the gold star.";
+    drawGrid([], null, false);
+    renderProg(-1, -1);
+    verdict("Build a program, then press Run.", "");
+    updateRecord();
+  }
+
+  /* ---------- wiring ---------- */
+  Object.keys(CARDS).forEach(function (k) {
+    $("#palette").appendChild(el("button", { type: "button", title: CARDS[k].cap,
+      onclick: function () { state.prog.push(k); renderProg(-1, -1); stepIdx = 0; }
+    }, [CARDS[k].g, el("span", { class: "cap", text: CARDS[k].cap })]));
+  });
+  LEVELS.forEach(function (L, i) {
+    $("#levels").appendChild(el("button", { class: "chip", type: "button", "aria-pressed": i === 0 ? "true" : "false",
+      html: L.name, onclick: function () { loadLevel(i); } }));
+  });
+  $("#runBtn").addEventListener("click", run);
+  $("#stepBtn").addEventListener("click", step);
+  $("#undoBtn").addEventListener("click", function () { state.prog.pop(); renderProg(-1, -1); stepIdx = 0; });
+  $("#clearBtn").addEventListener("click", function () { state.prog = []; renderProg(-1, -1); stepIdx = 0; drawGrid([], null, false); verdict("Program cleared.", ""); });
+
+  loadLevel(0);
+});
+</script>
+</body>
+</html>
