@@ -6,387 +6,583 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="SELution is a play-based programme for social and emotional learning, foundational literacy and numeracy, unplugged coding and robotics, built to run across East African classrooms and aligned to the East African Community education agenda.">
 <meta name="author" content="SELution, a regional play-based learning initiative">
-<meta name="theme-color" content="#0c110d">
-<link rel="canonical" href="https://atindahhillary.github.io/Elimu-Moja/">
+<meta name="theme-color" content="#fbf8f1">
+<link rel="canonical" href="https://atindahhillary.github.io/SELutionKe/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="SELution">
 <meta property="og:title" content="SELution: learning through play, made regional">
 <meta property="og:description" content="One play-based programme, four strands: social and emotional learning, foundational literacy and numeracy, unplugged coding, robotics. Built for East African classrooms.">
-<meta property="og:url" content="https://atindahhillary.github.io/Elimu-Moja/">
-<meta property="og:image" content="https://atindahhillary.github.io/Elimu-Moja/assets/preview.png">
+<meta property="og:url" content="https://atindahhillary.github.io/SELutionKe/">
+<meta property="og:image" content="https://atindahhillary.github.io/SELutionKe/assets/preview.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SELution: learning through play, made regional">
 <meta name="twitter:description" content="A play-based programme for SEL, FLN, unplugged coding and robotics across East African classrooms.">
-<meta name="twitter:image" content="https://atindahhillary.github.io/Elimu-Moja/assets/preview.png">
+<meta name="twitter:image" content="https://atindahhillary.github.io/SELutionKe/assets/preview.png">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='9'%20fill='%230c110d'/%3E%3Crect%20y='6'%20width='40'%20height='5.6'%20fill='%2337c46f'/%3E%3Crect%20y='13.6'%20width='40'%20height='5.6'%20fill='%23f2c218'/%3E%3Crect%20y='21.2'%20width='40'%20height='5.6'%20fill='%23e64134'/%3E%3Crect%20y='28.8'%20width='40'%20height='5.6'%20fill='%233aa7dd'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2040%2040'%3E%3Crect%20width='40'%20height='40'%20rx='11'%20fill='%23fbf8f1'/%3E%3Ccircle%20cx='11'%20cy='11'%20r='5'%20fill='%2312924c'/%3E%3Ccircle%20cx='29'%20cy='11'%20r='5'%20fill='%23d99b06'/%3E%3Ccircle%20cx='11'%20cy='29'%20r='5'%20fill='%23e0473a'/%3E%3Ccircle%20cx='29'%20cy='29'%20r='5'%20fill='%232b8fc4'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="assets/logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@110,600;110,700;110,800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="assets/proto.css">
-<style>
-  /* ---- SELution site, on top of the shared design layer ---- */
-  :root{ --sa: var(--fg-gold); }
-  .lead-wrap{ max-width:var(--maxw); margin:0 auto; padding:0 20px; }
-  section[id]{ scroll-margin-top:74px; }
-
-  .hero{ padding:64px 0 30px; border-bottom:1px solid var(--hair); }
-  .hero .kick{ font-family:var(--font-mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sa); margin:0 0 16px; }
-  .hero h1{ font-size:clamp(38px,6.4vw,72px); line-height:1.03; letter-spacing:-.02em; margin:0 0 8px; }
-  .hero h1 .b1{ color:var(--fg-green); } .hero h1 .b2{ color:var(--fg-gold); }
-  .hero h1 .b3{ color:var(--fg-red); } .hero h1 .b4{ color:var(--fg-blue); }
-  .hero .say{ font-family:var(--font-display); font-weight:600; font-size:clamp(18px,2.6vw,25px); color:var(--ink-2); margin:6px 0 20px; max-width:26ch; }
-  .hero p.big{ font-size:17px; color:var(--ink-2); max-width:64ch; margin:0 0 26px; }
-  .hero .cta{ display:flex; gap:11px; flex-wrap:wrap; }
-  .hero .cta .btn{ font-size:15px; padding:11px 20px; min-height:46px; }
-
-  .strip{ display:flex; flex-wrap:wrap; gap:8px 10px; margin:24px 0 0; }
-  .strip .pill{ font-size:11px; }
-
-  .sec{ padding:46px 0; border-bottom:1px solid var(--hair); }
-  .sec > .lead-wrap > .eyebrow{ margin-bottom:10px; }
-  .sec h2{ max-width:24ch; margin:0 0 12px; }
-  .sec .intro{ font-size:16px; color:var(--ink-2); max-width:66ch; margin:0 0 26px; }
-  .sec.alt{ background:var(--surface); }
-
-  .strand{ border:1px solid var(--hair); border-top:3px solid var(--sc,var(--fg-green)); border-radius:var(--radius); background:var(--surface-2); padding:18px 19px; display:flex; flex-direction:column; gap:9px; }
-  .sec.alt .strand{ background:var(--bg); }
-  .strand .tag{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sc,var(--fg-green)); }
-  .strand h3{ margin:0; }
-  .strand p{ margin:0; font-size:13.8px; color:var(--ink-2); }
-  .strand .look{ margin-top:auto; padding-top:11px; border-top:1px solid var(--hair); font-size:13px; }
-  .strand .look b{ color:var(--ink); font-weight:600; display:block; font-family:var(--font-mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin-bottom:3px; }
-
-  .playfig{ margin:6px 0 0; }
-  .playfig svg{ display:block; width:100%; height:auto; }
-  .playfig .t{ font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; fill:var(--muted); }
-  .playfig .lbl{ font-family:var(--font-body); font-size:13px; font-weight:600; fill:var(--ink); }
-  .playfig .sub{ font-family:var(--font-body); font-size:11px; fill:var(--ink-2); }
-  .playfig .rail{ fill:none; stroke-width:2; }
-  .playfig .spine{ fill:none; stroke:var(--sa); stroke-width:8; stroke-linecap:round; opacity:.9; }
-  .playfig .node{ stroke:var(--bg); stroke-width:2; }
-  .playfig-cap{ font-size:13px; color:var(--muted); margin:12px 0 0; }
-
-  .map{ width:100%; border-collapse:collapse; font-size:14px; }
-  .map th, .map td{ text-align:left; padding:11px 12px; border-bottom:1px solid var(--hair); vertical-align:top; }
-  .map thead th{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:400; }
-  .map td:first-child{ font-weight:600; color:var(--ink); white-space:nowrap; }
-  .map .frm{ color:var(--ink-2); font-size:13px; }
-
-  .steps{ counter-reset:s; display:grid; gap:14px; }
-  .step{ display:grid; grid-template-columns:34px 1fr; gap:14px; align-items:start; }
-  .step::before{ counter-increment:s; content:counter(s); font-family:var(--font-display); font-weight:800; font-size:16px; color:var(--sa); background:var(--sa-soft); border:1px solid color-mix(in srgb,var(--sa) 30%, transparent); width:34px; height:34px; border-radius:9px; display:grid; place-items:center; }
-  .step h4{ margin:0 0 3px; }
-  .step p{ margin:0; font-size:13.8px; color:var(--ink-2); }
-
-  .who{ display:flex; gap:4px; border-bottom:1px solid var(--hair); margin:0 0 18px; overflow-x:auto; }
-  .who button{ font:inherit; font-family:var(--font-mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; background:none; border:0; border-bottom:2px solid transparent; color:var(--muted); padding:10px 14px; cursor:pointer; white-space:nowrap; min-height:40px; }
-  .who button[aria-selected="true"]{ color:var(--ink); border-bottom-color:var(--sa); }
-  .ask{ display:grid; gap:16px; grid-template-columns:1fr 1fr; }
-  @media (max-width:720px){ .ask{ grid-template-columns:1fr; } }
-  .ask .col h4{ font-family:var(--font-mono); font-size:10.5px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); margin:0 0 8px; }
-  .ask ul{ margin:0; padding-left:18px; color:var(--ink-2); font-size:14px; line-height:1.7; }
-
-  .traction{ display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
-  .tr{ border:1px solid var(--hair); border-radius:var(--radius-sm); background:var(--surface-2); padding:14px 15px; }
-  .tr .h{ font-family:var(--font-mono); font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); }
-  .tr .m{ font-family:var(--font-display); font-weight:700; font-size:19px; margin:5px 0 3px; }
-  .tr p{ margin:0; font-size:13px; color:var(--ink-2); }
-
-  .endcta{ padding:52px 0; text-align:center; }
-  .endcta h2{ margin:0 auto 10px; max-width:20ch; }
-  .endcta p{ color:var(--ink-2); max-width:52ch; margin:0 auto 22px; }
-
-  .navlinks{ display:flex; gap:3px; overflow-x:auto; }
-  .navlinks a{ font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding:8px 10px; white-space:nowrap; border-radius:6px; }
-  .navlinks a:hover{ color:var(--ink); background:var(--surface-2); }
-  @media (max-width:900px){ .navlinks{ display:none; } }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Lexend:wght@300..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<a class="skip vh" href="#what">Skip to content</a>
-<div class="flagband"></div>
-<header class="topbar">
-  <div class="topbar-inner">
-    <a class="brand" href="#top">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" fill="#141a15"/><rect y="7" width="40" height="6.5" fill="#37c46f"/><rect y="14.5" width="40" height="6.5" fill="#f2c218"/><rect y="22" width="40" height="6.5" fill="#e64134"/><rect y="29.5" width="40" height="6.5" fill="#3aa7dd"/></svg>
-      <span>SELution</span>
+<a class="skip" href="#opening">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="SELution home">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      SELution
     </a>
-    <nav class="navlinks" aria-label="Sections">
-      <a href="#what">What it is</a>
-      <a href="#strands">Four strands</a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#strands">Strands</a>
       <a href="#play">Play</a>
-      <a href="#eac">EAC alignment</a>
-      <a href="#model">The model</a>
-      <a href="#asks">Partner with us</a>
+      <a href="#eac">EAC fit</a>
+      <a href="#pilot">Pilot</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <span class="spacer"></span>
-    <a class="iconbtn" href="concept-note.html">Concept note</a>
-    <button class="iconbtn" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Theme</button>
+    <span class="sp"></span>
+    <a class="btn sm" href="#contact">Talk to us</a>
   </div>
 </header>
 
 <main id="top">
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="hero" aria-labelledby="h1">
-    <div class="lead-wrap">
-      <p class="kick">A regional play-based learning initiative</p>
-      <h1 id="h1">Learning through <span class="b2">play</span>,<br>made regional.</h1>
-      <p class="say">One programme. Four strands. Eight countries that already agreed on the destination.</p>
-      <p class="big">
-        SELution turns the East African Community&rsquo;s stated priorities, social and emotional
-        learning, foundational literacy and numeracy, and parental engagement, into something a
-        teacher can run on a Monday morning: structured play across four strands, one training pathway,
-        one measurement spine, ready to pilot across borders.
-      </p>
-      <div class="cta">
-        <a class="btn" href="#asks">Partner with us</a>
-        <a class="btn ghost" href="concept-note.html">Read the concept note</a>
-        <a class="btn ghost" href="regional-brief.html">The regional systems brief</a>
-      </div>
-      <div class="strip">
-        <span class="pill plain">SEL</span>
-        <span class="pill plain">Foundational literacy &amp; numeracy</span>
-        <span class="pill plain">Unplugged coding</span>
-        <span class="pill plain">Robotics</span>
-        <span class="pill info">Play is the method, not a fifth strand</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= WHAT IT IS / THE OPENING ================= -->
-  <section class="sec" id="what" aria-labelledby="what-h">
-    <div class="lead-wrap">
-      <p class="eyebrow">The opening</p>
-      <h2 id="what-h">The region already reached consensus. It just has not reached the classroom.</h2>
-      <p class="intro">
-        The 2nd EAC Regional Education Conference put foundational learning, social and emotional
-        learning, and parental engagement at the centre of the agenda. Across every one of those
-        conversations, the same word kept coming up as the method that works: <b>play</b>. That
-        consensus is real, it is regional, and right now it lives in communiqu&eacute;s. SELution is
-        the delivery layer that carries it into schools.
-      </p>
-      <div class="grid c3">
-        <div class="card">
-          <h3>What the conference said</h3>
-          <p class="sub">The commitment</p>
-          <p style="font-size:14px;color:var(--ink-2)">Prioritise foundational learning and SEL, involve parents and communities, and use playful, child-centred pedagogy to get there.</p>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="tagpill">A regional play-based learning initiative</p>
+        <h1>Learning through <em class="wonk">play</em>, made regional.</h1>
+        <p class="lead">One programme. Four strands. Eight countries that already agreed on the destination.</p>
+        <div class="cta">
+          <a class="btn lg" href="#contact">Partner with us</a>
+          <a class="btn ghost lg" href="concept-note.html">Read the concept note</a>
         </div>
-        <div class="card">
-          <h3>What is missing</h3>
-          <p class="sub">The gap</p>
-          <p style="font-size:14px;color:var(--ink-2)">A concrete programme teachers can run, comparable across countries, with the training, the materials and the light-touch measurement already attached.</p>
-        </div>
-        <div class="card">
-          <h3>What SELution adds</h3>
-          <p class="sub">The move</p>
-          <p style="font-size:14px;color:var(--ink-2)">Four play-based strands on one pathway, designed for low-resource classrooms, ready to pilot with partners who are already asking for it.</p>
+        <div class="badges">
+          <span>SEL</span><span>Literacy &amp; numeracy</span><span>Unplugged coding</span><span>Robotics</span>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ================= FOUR STRANDS ================= -->
-  <section class="sec alt" id="strands" aria-labelledby="strands-h">
-    <div class="lead-wrap">
-      <p class="eyebrow">The offer</p>
-      <h2 id="strands-h">Four strands, one pathway</h2>
-      <p class="intro">
-        Each strand is a set of structured play activities with a clear learning target, a teacher
-        script, and simple materials. They share one training pathway and one progress record, so a
-        school runs them as a single programme rather than four projects.
-      </p>
-      <div class="grid c2">
-        <div class="strand" style="--sc: var(--fg-green)">
-          <span class="tag">Strand 01</span>
-          <h3>Social &amp; emotional learning</h3>
-          <p>Naming feelings, turn-taking, calming routines, friendship and conflict repair. The backbone the other three strands lean on.</p>
-          <div class="look"><b>A session looks like</b> A 20-minute circle game where children pass a &ldquo;feelings ball&rdquo;, act out a scenario, and agree one class rule. Teacher script, no printing needed.</div>
-        </div>
-        <div class="strand" style="--sc: var(--fg-gold)">
-          <span class="tag">Strand 02</span>
-          <h3>Foundational literacy &amp; numeracy</h3>
-          <p>Letter sounds, decoding, number sense and early operations through games, songs, chanting and manipulatives, mapped to the national curriculum.</p>
-          <div class="look"><b>A session looks like</b> Teams build words or number bonds with bottle-cap tiles against a timer, then teach their answer to another team. Assessment is the game score.</div>
-        </div>
-        <div class="strand" style="--sc: var(--fg-red)">
-          <span class="tag">Strand 03</span>
-          <h3>Unplugged coding</h3>
-          <p>Sequencing, loops, debugging and algorithms with no device: floor grids, arrow cards, and children as the &ldquo;robot&rdquo; following each other&rsquo;s instructions.</p>
-          <div class="look"><b>A session looks like</b> One child writes an arrow-card program, another walks the grid to the target, the class debugs the wrong turns together. Pure logic, zero electricity.</div>
-        </div>
-        <div class="strand" style="--sc: var(--fg-blue)">
-          <span class="tag">Strand 04</span>
-          <h3>Robotics</h3>
-          <p>The same computational thinking, now with a physical build: low-cost motors, recycled materials and a small kit shared across a cluster of schools.</p>
-          <div class="look"><b>A session looks like</b> Groups build and program a simple line-follower or a grabber from a shared kit, present it, and pass the kit to the next school on a rota.</div>
-        </div>
-      </div>
-      <p class="playfig-cap">Strands 03 and 04 are one continuum: unplugged coding needs nothing, robotics adds a shared kit when a cluster is ready. A school can start SELution with strands 01 and 02 alone.</p>
-    </div>
-  </section>
-
-  <!-- ================= PLAY AS METHOD ================= -->
-  <section class="sec" id="play" aria-labelledby="play-h">
-    <div class="lead-wrap">
-      <p class="eyebrow">The method</p>
-      <h2 id="play-h">Play is the spine, not a decoration</h2>
-      <p class="intro">
-        Every strand runs on the same play cycle: a clear goal, a game with a rule, a role for every
-        child, a moment of reflection, and a record the teacher keeps in seconds. It is what makes the
-        four strands feel like one programme and what the evidence says actually shifts foundational
-        outcomes.
-      </p>
-      <div class="playfig" role="img" aria-label="Diagram: the four strands run as parallel tracks along a single play spine, through five stages: goal, game, roles, reflect, record.">
-        <svg viewBox="0 0 1000 300">
-          <line class="spine" x1="70" y1="150" x2="930" y2="150"></line>
-          <!-- stage nodes -->
+      <div>
+        <svg class="playart" viewBox="0 0 440 380" role="img" aria-label="A playful path of coloured blocks and arrows leading to a star">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="var(--surface)"/><stop offset="1" stop-color="var(--surface-sunken)"/>
+            </linearGradient>
+          </defs>
+          <rect x="4" y="4" width="432" height="372" rx="28" fill="url(#sky)" stroke="var(--hairline)"/>
+          <!-- dotted play path -->
+          <path d="M52 300 C 120 300, 120 210, 180 200 S 280 150, 300 96 S 370 70, 392 66"
+                fill="none" stroke="var(--hairline-strong)" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 14"/>
+          <!-- blocks -->
           <g>
-            <circle class="node" cx="110" cy="150" r="9" fill="var(--fg-gold)"></circle>
-            <circle class="node" cx="315" cy="150" r="9" fill="var(--fg-gold)"></circle>
-            <circle class="node" cx="520" cy="150" r="9" fill="var(--fg-gold)"></circle>
-            <circle class="node" cx="725" cy="150" r="9" fill="var(--fg-gold)"></circle>
-            <circle class="node" cx="905" cy="150" r="9" fill="var(--fg-gold)"></circle>
+            <rect x="34" y="270" width="56" height="56" rx="14" fill="var(--green)"/>
+            <rect x="150" y="170" width="56" height="56" rx="14" fill="var(--gold)"/>
+            <rect x="256" y="120" width="56" height="56" rx="14" fill="var(--red)" transform="rotate(-8 284 148)"/>
+            <rect x="330" y="150" width="46" height="46" rx="12" fill="var(--blue)" transform="rotate(10 353 173)"/>
           </g>
-          <text class="lbl" x="110" y="185" text-anchor="middle">Goal</text>
-          <text class="sub" x="110" y="203" text-anchor="middle">one target</text>
-          <text class="lbl" x="315" y="185" text-anchor="middle">Game</text>
-          <text class="sub" x="315" y="203" text-anchor="middle">a rule to play by</text>
-          <text class="lbl" x="520" y="185" text-anchor="middle">Roles</text>
-          <text class="sub" x="520" y="203" text-anchor="middle">every child in</text>
-          <text class="lbl" x="725" y="185" text-anchor="middle">Reflect</text>
-          <text class="sub" x="725" y="203" text-anchor="middle">what did we learn</text>
-          <text class="lbl" x="905" y="185" text-anchor="middle">Record</text>
-          <text class="sub" x="905" y="203" text-anchor="middle">10-second note</text>
-          <!-- strand tracks feeding in -->
-          <text class="t" x="70" y="52" text-anchor="start">Four strands, one cycle</text>
-          <path class="rail" stroke="var(--fg-green)" d="M70 78 C 300 78, 350 140, 520 145"></path>
-          <path class="rail" stroke="var(--fg-gold)" d="M70 104 C 260 104, 340 140, 520 147"></path>
-          <path class="rail" stroke="var(--fg-red)" d="M70 210 C 260 210, 340 160, 520 153"></path>
-          <path class="rail" stroke="var(--fg-blue)" d="M70 236 C 300 236, 350 160, 520 155"></path>
-          <text class="sub" x="76" y="74">SEL</text>
-          <text class="sub" x="76" y="100">Literacy &amp; numeracy</text>
-          <text class="sub" x="76" y="252">Unplugged coding</text>
-          <text class="sub" x="76" y="278">Robotics</text>
+          <!-- little arrows -->
+          <g fill="none" stroke="var(--ink-2)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+            <path d="M104 250 l18 -14 M104 250 l18 14 M104 250 h-1"/>
+            <path d="M222 150 l16 -16 M222 150 l16 16"/>
+          </g>
+          <!-- star goal -->
+          <path transform="translate(392 66)" fill="var(--gold)" stroke="var(--surface)" stroke-width="3"
+                d="M0 -26 L7.6 -8 L27 -8 L11 4 L17 24 L0 12 L-17 24 L-11 4 L-27 -8 L-7.6 -8 Z"/>
+          <circle cx="72" cy="120" r="10" fill="var(--red)" opacity="0.85"/>
+          <circle cx="120" cy="86" r="6" fill="var(--blue)" opacity="0.85"/>
+          <circle cx="360" cy="300" r="8" fill="var(--green)" opacity="0.85"/>
         </svg>
       </div>
-      <p class="playfig-cap">The record at the end feeds one simple progress view per child, aggregated to class, school and cluster. That is the measurement spine partners and funders see.</p>
     </div>
   </section>
 
-  <!-- ================= EAC ALIGNMENT ================= -->
-  <section class="sec alt" id="eac" aria-labelledby="eac-h">
-    <div class="lead-wrap">
+  <!-- ============ THE OPENING ============ -->
+  <section class="sec tint" id="opening" style="--k: var(--gold)">
+    <div class="wrap">
+      <p class="eyebrow">The opening</p>
+      <h2>The region agreed. It just hasn&rsquo;t reached the classroom.</h2>
+      <p class="lead">
+        The 2nd EAC Regional Education Conference put foundational learning, social and emotional
+        learning, and parental engagement at the centre of the agenda, and named the same method every
+        time: play. That consensus is real. Right now it lives in communiqu&eacute;s.
+      </p>
+      <div class="trio">
+        <div class="mini" style="--c: var(--green); --ci: var(--green-ink)"><div class="n">1</div><h3>What was said</h3><p>Prioritise foundational learning and SEL, involve parents, and get there through playful, child-centred teaching.</p></div>
+        <div class="mini" style="--c: var(--gold); --ci: var(--gold-ink)"><div class="n">2</div><h3>What is missing</h3><p>A concrete programme teachers can run, comparable across countries, with the training and measurement already attached.</p></div>
+        <div class="mini" style="--c: var(--red); --ci: var(--red-ink)"><div class="n">3</div><h3>What SELution adds</h3><p>Four play-based strands on one pathway, designed for low-resource classrooms, ready to pilot with partners already asking.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE CHALLENGE (EAC gap map) ============ -->
+<section class="challenge" id="challenge" aria-labelledby="chTitle">
+
+  <p class="ch-eyebrow">The challenge, in numbers</p>
+  <h2 class="ch-title" id="chTitle">The region is not behind on coding and robotics. It has not started.</h2>
+  <p class="ch-standfirst">
+    Across the eight EAC partner states, an illustrative <strong>0.7%</strong> of schools have a
+    robotics kit in pupils&rsquo; hands and <strong>1.4%</strong> run any structured coding activity,
+    plugged or unplugged. Underneath that, roughly <strong>one Grade&nbsp;3 pupil in four</strong>
+    reads at grade level and about <strong>one primary school in seven</strong> timetables and
+    assesses social and emotional learning. These are not four separate problems: a child who cannot
+    read a sequence of instructions cannot debug one, and a classroom without emotional safety cannot
+    sustain the collaborative, failure-heavy work that coding and robotics demand.
+    SELution is built for that whole stack, and it starts where the numbers are lowest.
+  </p>
+
+  <div class="kpis">
+      <div class="kpi">
+        <span class="kpi-n">26<i>%</i></span>
+        <span class="kpi-l">Grade 3 pupils reading at grade level, region-wide</span>
+        <span class="kpi-t">2030 target <b>70%</b> &middot; 37% of target met</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-n">14<i>%</i></span>
+        <span class="kpi-l">Primary schools timetabling & assessing SEL, region-wide</span>
+        <span class="kpi-t">2030 target <b>60%</b> &middot; 23% of target met</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-n">1.4<i>%</i></span>
+        <span class="kpi-l">Primary schools running any coding activity, region-wide</span>
+        <span class="kpi-t">2030 target <b>40%</b> &middot; 3% of target met</span>
+      </div>
+      <div class="kpi">
+        <span class="kpi-n">0.7<i>%</i></span>
+        <span class="kpi-l">Schools with a robotics kit in pupils' hands, region-wide</span>
+        <span class="kpi-t">2030 target <b>20%</b> &middot; 3% of target met</span>
+      </div>
+  </div>
+
+  <div class="ch-grid">
+    <div>
+      <div class="strandbar" role="tablist" aria-label="Colour the map by strand">
+        <button type="button" role="tab" id="tab-fln" data-strand="fln" aria-controls="mapPanel" aria-selected="true" tabindex="0"><span class="dot"></span>Grade 3 reading</button>
+        <button type="button" role="tab" id="tab-sel" data-strand="sel" aria-controls="mapPanel" aria-selected="false" tabindex="-1"><span class="dot"></span>SEL timetabled</button>
+        <button type="button" role="tab" id="tab-cod" data-strand="cod" aria-controls="mapPanel" aria-selected="false" tabindex="-1"><span class="dot"></span>Unplugged coding</button>
+        <button type="button" role="tab" id="tab-rob" data-strand="rob" aria-controls="mapPanel" aria-selected="false" tabindex="-1"><span class="dot"></span>Robotics in use</button>
+      </div>
+
+      <figure class="mapfig" id="mapPanel" role="tabpanel" aria-labelledby="tab-fln" tabindex="0">
+        <svg class="eacmap" viewBox="0 0 1000 665" xmlns="http://www.w3.org/2000/svg"
+             role="group" aria-describedby="matrixCap"
+             aria-label="Map of the eight EAC partner states, shaded by the selected strand. Every figure is also in the data table below.">
+          <defs>
+            <path id="p-cd" d="M479.4 232.1 L477.9 261.3 L487.9 264.6 L479.9 273.5 L470.3 280.1 L460.8 293.1 L455.5 304.7 L454.1 324.8 L448.3 334.3 L448.1 353.1 L441.0 360.1 L440.0 374.9 L436.6 376.9 L434.3 390.5 L440.6 401.8 L442.2 431.9 L446.6 454.9 L444.1 467.9 L449.1 482.4 L463.6 496.3 L477.1 527.8 L467.3 525.2 L433.7 529.4 L427.1 532.4 L419.9 548.4 L425.5 559.4 L421.1 588.9 L418.0 614.0 L424.7 618.4 L442.2 628.1 L449.0 623.6 L451.1 650.5 L432.0 650.3 L421.8 636.5 L412.6 625.9 L393.5 622.4 L387.9 609.3 L372.6 617.2 L352.6 613.7 L344.3 602.4 L328.4 600.1 L316.7 600.7 L315.3 593.0 L306.7 592.3 L295.3 590.9 L279.9 594.6 L269.0 594.0 L262.9 596.3 L264.2 566.6 L255.9 557.3 L254.0 542.0 L257.7 526.9 L252.7 517.3 L252.2 501.6 L221.9 501.8 L224.1 492.8 L211.4 492.9 L210.0 497.2 L194.5 498.2 L188.3 512.8 L184.5 519.0 L170.8 515.5 L162.5 519.0 L146.0 521.0 L136.5 508.0 L130.7 499.9 L123.6 484.9 L117.4 466.3 L43.8 466.0 L35.0 469.0 L27.8 468.5 L17.5 471.9 L14.0 464.1 L20.3 461.5 L21.1 450.6 L25.2 444.2 L34.3 439.0 L40.8 441.5 L49.4 432.0 L63.0 432.2 L64.6 439.3 L73.9 443.7 L88.6 428.0 L103.1 415.9 L109.4 407.9 L108.6 387.3 L119.4 363.1 L130.9 350.2 L147.3 338.2 L150.2 330.3 L150.8 321.1 L154.8 312.4 L153.5 298.3 L156.6 276.2 L161.5 260.6 L169.0 247.3 L170.5 232.2 L172.7 214.8 L182.4 202.1 L195.8 194.1 L216.3 202.6 L232.2 211.8 L250.5 214.2 L269.1 219.1 L276.6 204.0 L280.0 202.1 L291.4 204.6 L319.1 192.2 L329.0 197.4 L337.1 196.7 L340.8 190.6 L350.1 188.5 L368.9 191.1 L384.9 191.7 L393.1 189.0 L408.2 209.6 L419.4 212.7 L426.1 208.5 L437.6 210.1 L451.5 204.8 L457.5 215.5 L479.4 232.1 Z"/>
+            <path id="p-tz" d="M556.0 343.4 L560.3 346.1 L650.7 396.9 L652.4 411.4 L688.3 436.4 L676.7 467.1 L678.2 481.3 L694.2 490.3 L694.9 496.8 L688.1 511.9 L689.5 519.5 L687.9 531.4 L696.6 547.0 L706.9 571.7 L716.1 577.1 L696.2 591.6 L668.9 601.3 L654.0 600.9 L645.1 608.3 L627.7 609.0 L621.2 612.1 L591.2 605.1 L572.4 607.1 L565.4 573.2 L557.0 561.6 L551.9 554.7 L527.5 550.0 L513.3 542.5 L497.5 538.3 L487.5 534.1 L477.1 527.8 L463.6 496.3 L449.1 482.4 L444.1 467.9 L446.6 454.9 L442.2 431.9 L452.5 430.8 L461.5 421.7 L471.2 408.7 L477.4 403.5 L477.2 395.4 L471.8 389.7 L470.3 379.9 L477.5 376.7 L479.0 362.0 L469.1 348.0 L477.8 345.0 L505.2 345.3 L556.0 343.4 Z"/>
+            <path id="p-ug" d="M505.2 345.3 L477.8 345.0 L469.1 348.0 L454.2 355.7 L448.1 353.1 L448.3 334.3 L454.1 324.8 L455.5 304.7 L460.8 293.1 L470.3 280.1 L479.9 273.5 L487.9 264.6 L477.9 261.3 L479.4 232.1 L489.7 225.3 L505.6 230.9 L525.7 225.0 L543.2 225.1 L558.6 213.6 L570.4 230.9 L573.3 243.4 L584.3 272.1 L575.2 290.3 L562.9 306.8 L555.8 316.9 L556.0 343.4 L505.2 345.3 Z"/>
+            <path id="p-ke" d="M732.9 341.1 L747.7 361.7 L730.2 371.6 L724.1 382.0 L714.7 383.9 L711.2 401.4 L703.2 411.5 L698.3 428.1 L688.3 436.4 L652.4 411.4 L650.7 396.9 L560.3 346.1 L556.0 343.4 L555.8 316.9 L562.9 306.8 L575.2 290.3 L584.3 272.1 L573.3 243.4 L570.4 230.9 L558.6 213.6 L573.9 198.7 L590.8 182.2 L603.8 186.4 L603.8 200.4 L612.3 208.7 L629.7 208.7 L661.3 229.8 L669.2 230.1 L675.0 229.4 L680.5 232.3 L697.2 234.3 L704.5 223.9 L727.3 213.4 L737.4 221.8 L754.5 221.9 L732.6 250.2 L732.9 341.1 Z"/>
+            <path id="p-rw" d="M469.1 348.0 L479.0 362.0 L477.5 376.7 L470.3 379.9 L457.1 378.3 L449.4 392.5 L434.3 390.5 L436.6 376.9 L440.0 374.9 L441.0 360.1 L448.1 353.1 L454.2 355.7 L469.1 348.0 Z"/>
+            <path id="p-bi" d="M442.2 431.9 L440.6 401.8 L434.3 390.5 L449.4 392.5 L457.1 378.3 L470.3 379.9 L471.8 389.7 L477.2 395.4 L477.4 403.5 L471.2 408.7 L461.5 421.7 L452.5 430.8 L442.2 431.9 Z"/>
+            <path id="p-ss" d="M557.5 83.5 L557.8 102.9 L554.1 110.5 L540.8 111.2 L532.3 125.4 L547.7 127.2 L560.3 139.3 L564.7 149.3 L576.1 155.1 L590.8 182.2 L573.9 198.7 L558.6 213.6 L543.2 225.1 L525.7 225.0 L505.6 230.9 L489.7 225.3 L479.4 232.1 L457.5 215.5 L451.5 204.8 L437.6 210.1 L426.1 208.5 L419.4 212.7 L408.2 209.6 L393.1 189.0 L389.1 181.1 L370.4 171.2 L364.1 156.3 L353.7 145.5 L337.0 132.5 L336.7 124.4 L323.1 114.3 L306.1 104.5 L313.7 101.8 L322.3 97.1 L328.7 74.8 L335.6 63.3 L353.6 59.8 L357.9 66.7 L370.7 81.3 L377.6 83.4 L386.6 79.1 L404.6 80.0 L408.0 85.1 L432.8 85.1 L433.7 80.0 L446.5 75.3 L449.1 68.0 L458.5 62.8 L479.5 77.4 L492.4 74.8 L504.8 56.8 L518.5 43.1 L516.4 28.1 L510.4 20.9 L525.4 19.6 L527.1 14.0 L538.6 15.7 L535.7 34.1 L538.6 52.1 L551.5 62.0 L554.5 70.6 L554.1 83.0 L557.5 83.5 Z"/>
+            <path id="p-so" d="M950.9 30.7 L964.2 28.2 L976.0 19.6 L985.4 19.6 L986.0 26.5 L983.7 41.0 L983.8 54.1 L978.5 63.1 L971.5 90.1 L959.5 118.0 L944.0 149.8 L922.6 186.4 L901.3 214.4 L872.0 248.4 L847.0 268.6 L809.7 293.4 L786.4 312.4 L759.1 342.6 L753.4 355.7 L747.7 361.7 L732.9 341.1 L732.6 250.2 L754.5 221.9 L761.3 214.0 L777.3 213.5 L799.5 195.9 L832.0 194.8 L902.5 119.9 L919.9 99.1 L931.2 83.8 L931.2 70.8 L931.2 45.6 L931.3 35.3 L931.5 34.9 L939.4 34.4 L950.9 30.7 Z"/>
+          </defs>
+          <g class="lyr-fill">
+            <g class="cc" data-c="cd"><use class="country" href="#p-cd" data-bin="1" tabindex="0" role="button" aria-pressed="false" aria-label="DR Congo. Grade 3 reading 14 percent, SEL timetabled 7 percent, Unplugged coding 0.6 percent, Robotics in use 0.2 percent. Select for detail."/></g>
+            <g class="cc" data-c="tz"><use class="country" href="#p-tz" data-bin="3" tabindex="0" role="button" aria-pressed="false" aria-label="Tanzania. Grade 3 reading 34 percent, SEL timetabled 16 percent, Unplugged coding 1.2 percent, Robotics in use 0.5 percent. Select for detail."/></g>
+            <g class="cc" data-c="ug"><use class="country" href="#p-ug" data-bin="2" tabindex="0" role="button" aria-pressed="false" aria-label="Uganda. Grade 3 reading 24 percent, SEL timetabled 14 percent, Unplugged coding 1.6 percent, Robotics in use 0.7 percent. Select for detail."/></g>
+            <g class="cc" data-c="ke"><use class="country" href="#p-ke" data-bin="3" tabindex="0" role="button" aria-pressed="false" aria-label="Kenya. Grade 3 reading 46 percent, SEL timetabled 27 percent, Unplugged coding 3.5 percent, Robotics in use 1.8 percent. Select for detail."/></g>
+            <g class="cc" data-c="rw"><use class="country" href="#p-rw" data-bin="3" tabindex="0" role="button" aria-pressed="false" aria-label="Rwanda. Grade 3 reading 31 percent, SEL timetabled 30 percent, Unplugged coding 3.1 percent, Robotics in use 2.0 percent. Select for detail."/></g>
+            <g class="cc" data-c="bi"><use class="country" href="#p-bi" data-bin="2" tabindex="0" role="button" aria-pressed="false" aria-label="Burundi. Grade 3 reading 21 percent, SEL timetabled 9 percent, Unplugged coding 0.5 percent, Robotics in use 0.2 percent. Select for detail."/></g>
+            <g class="cc" data-c="ss"><use class="country" href="#p-ss" data-bin="1" tabindex="0" role="button" aria-pressed="false" aria-label="South Sudan. Grade 3 reading 7 percent, SEL timetabled 6 percent, Unplugged coding 0.3 percent, Robotics in use 0.1 percent. Select for detail."/></g>
+            <g class="cc" data-c="so"><use class="country" href="#p-so" data-bin="1" tabindex="0" role="button" aria-pressed="false" aria-label="Somalia. Grade 3 reading 5 percent, SEL timetabled 5 percent, Unplugged coding 0.4 percent, Robotics in use 0.1 percent. Select for detail."/></g>
+          </g>
+          <g class="lyr-edge" aria-hidden="true" pointer-events="none">
+            <use class="edge" data-c="cd" href="#p-cd"/>
+            <use class="edge" data-c="tz" href="#p-tz"/>
+            <use class="edge" data-c="ug" href="#p-ug"/>
+            <use class="edge" data-c="ke" href="#p-ke"/>
+            <use class="edge" data-c="rw" href="#p-rw"/>
+            <use class="edge" data-c="bi" href="#p-bi"/>
+            <use class="edge" data-c="ss" href="#p-ss"/>
+            <use class="edge" data-c="so" href="#p-so"/>
+          </g>
+          <g class="lyr-anno" pointer-events="none">
+            <g class="anno" data-c="cd">
+              <text class="clabel" x="288" y="405" font-size="27">DR CONGO</text>
+              <g class="chip" transform="translate(288,440)">
+                <rect class="chip-bg" x="-36" y="-16" width="72" height="32" rx="16"/>
+                <text class="chip-t" x="0" y="1" data-chip="cd">14%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="tz">
+              <text class="clabel" x="577" y="498" font-size="24">TANZANIA</text>
+              <g class="chip" transform="translate(577,530)">
+                <rect class="chip-bg" x="-36" y="-16" width="72" height="32" rx="16"/>
+                <text class="chip-t" x="0" y="1" data-chip="tz">34%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="ug">
+              <text class="clabel" x="515" y="278" font-size="15">UGANDA</text>
+              <g class="chip" transform="translate(515,308)">
+                <rect class="chip-bg" x="-36" y="-16" width="72" height="32" rx="16"/>
+                <text class="chip-t" x="0" y="1" data-chip="ug">24%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="ke">
+              <text class="clabel" x="672" y="302" font-size="18">KENYA</text>
+              <g class="chip" transform="translate(672,334)">
+                <rect class="chip-bg" x="-36" y="-16" width="72" height="32" rx="16"/>
+                <text class="chip-t" x="0" y="1" data-chip="ke">46%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="rw">
+              <path class="lead" d="M456 373 L640 416 L741 440"/>
+              <circle class="pin" cx="456" cy="373" r="6"/>
+              <g class="chip chip--out" transform="translate(818,440)">
+                <rect class="chip-bg" x="-77" y="-17" width="154" height="34" rx="17"/>
+                <text class="chip-n" x="-46" y="1">RW</text>
+                <text class="chip-t" x="22" y="1" data-chip="rw">31%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="bi">
+              <path class="lead" d="M455 410 L636 468 L741 500"/>
+              <circle class="pin" cx="455" cy="410" r="6"/>
+              <g class="chip chip--out" transform="translate(818,500)">
+                <rect class="chip-bg" x="-77" y="-17" width="154" height="34" rx="17"/>
+                <text class="chip-n" x="-46" y="1">BU</text>
+                <text class="chip-t" x="22" y="1" data-chip="bi">21%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="ss">
+              <text class="clabel" x="452" y="150" font-size="20">SOUTH SUDAN</text>
+              <g class="chip" transform="translate(452,183)">
+                <rect class="chip-bg" x="-36" y="-16" width="72" height="32" rx="16"/>
+                <text class="chip-t" x="0" y="1" data-chip="ss">7%</text>
+              </g>
+            </g>
+            <g class="anno" data-c="so">
+              <text class="clabel" x="905" y="82" font-size="18">SOMALIA</text>
+              <g class="chip" transform="translate(905,114)">
+                <rect class="chip-bg" x="-36" y="-16" width="72" height="32" rx="16"/>
+                <text class="chip-t" x="0" y="1" data-chip="so">5%</text>
+              </g>
+            </g>
+          </g>
+        </svg>
+        <figcaption id="mapCap">
+          True national borders, equirectangular projection (Natural Earth).
+          Rwanda and Burundi are too small to label at map scale: their figures are called out
+          beside the map on wider screens, and in the table at every size.
+          Country area is geographic, not a measure, use the table for like-for-like comparison.
+        </figcaption>
+      </figure>
+
+      <div class="legend">
+        <p class="legend-h">Share achieved, one fixed 0&ndash;100% ruler for all four strands</p>
+        <div class="ramp-wrap">
+          <span class="tick" id="tick" style="left:70%">Target 70%</span>
+          <div class="ramp" role="img"
+               aria-label="Six-step sequential scale. The palest band is nought to five percent, then five to fifteen, fifteen to thirty, thirty to fifty, fifty to seventy-five, and seventy-five to one hundred percent.">
+            <i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="ramp-scale"><span>0</span><span>5</span><span>15</span><span>30</span><span>50</span><span>75</span><span>100%</span></div>
+        </div>
+        <p>The palest band means &ldquo;almost nothing there&rdquo;. No partner state reaches the
+        top three bands on any strand, and on coding and robotics all eight sit in the palest band.</p>
+      </div>
+    </div>
+
+    <aside class="readout" id="readout" aria-labelledby="roName">
+      <p class="readout-k" id="roKind">Region, all eight partner states</p>
+      <h3 class="readout-h" id="roName">East African Community</h3>
+      <p class="readout-sub" id="roSub">Enrolment-weighted across 53.7m primary pupils</p>
+      <ul class="metrics" id="roList"></ul>
+      <button type="button" class="readout-btn" id="roReset" hidden>Back to the regional figure</button>
+    </aside>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix" id="matrix">
+      <caption id="matrixCap">
+        <b>Illustrative gap figures by partner state and strand.</b> Every value is a
+        <b>share achieved</b>, so higher is better and the shortfall to the gold target tick is the gap.
+        Figures are <b>synthetic and for design purposes only</b>; they are modelled to be plausible and
+        internally consistent, not measured. Regional rows are weighted by primary enrolment.
+        Bars below 1% are drawn at a minimum width so they stay visible.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Partner state</th>
+        <th scope="col" data-strand="fln">Grade 3 reading<span>% &middot; target 70%</span></th>
+        <th scope="col" data-strand="sel">SEL timetabled<span>% &middot; target 60%</span></th>
+        <th scope="col" data-strand="cod">Unplugged coding<span>% &middot; target 40%</span></th>
+        <th scope="col" data-strand="rob">Robotics in use<span>% &middot; target 20%</span></th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr data-c="ke">
+        <th scope="row"><button type="button" class="rowbtn" data-c="ke"><span class="swatch" data-bin="3"></span><span class="c-full">Kenya</span><span class="c-abbr" aria-hidden="true">KE</span></button></th>
+        <td data-strand="fln"><span class="v">46<small>%</small></span><span class="bar" style="--v:46;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">27<small>%</small></span><span class="bar" style="--v:27;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">3.5<small>%</small></span><span class="bar" style="--v:3.5;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">1.8<small>%</small></span><span class="bar" style="--v:1.8;--t:20"></span></td>
+      </tr>
+      <tr data-c="tz">
+        <th scope="row"><button type="button" class="rowbtn" data-c="tz"><span class="swatch" data-bin="3"></span><span class="c-full">Tanzania</span><span class="c-abbr" aria-hidden="true">TZ</span></button></th>
+        <td data-strand="fln"><span class="v">34<small>%</small></span><span class="bar" style="--v:34;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">16<small>%</small></span><span class="bar" style="--v:16;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">1.2<small>%</small></span><span class="bar" style="--v:1.2;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">0.5<small>%</small></span><span class="bar" style="--v:0.5;--t:20"></span></td>
+      </tr>
+      <tr data-c="ug">
+        <th scope="row"><button type="button" class="rowbtn" data-c="ug"><span class="swatch" data-bin="2"></span><span class="c-full">Uganda</span><span class="c-abbr" aria-hidden="true">UG</span></button></th>
+        <td data-strand="fln"><span class="v">24<small>%</small></span><span class="bar" style="--v:24;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">14<small>%</small></span><span class="bar" style="--v:14;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">1.6<small>%</small></span><span class="bar" style="--v:1.6;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">0.7<small>%</small></span><span class="bar" style="--v:0.7;--t:20"></span></td>
+      </tr>
+      <tr data-c="rw">
+        <th scope="row"><button type="button" class="rowbtn" data-c="rw"><span class="swatch" data-bin="3"></span><span class="c-full">Rwanda</span><span class="c-abbr" aria-hidden="true">RW</span></button></th>
+        <td data-strand="fln"><span class="v">31<small>%</small></span><span class="bar" style="--v:31;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">30<small>%</small></span><span class="bar" style="--v:30;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">3.1<small>%</small></span><span class="bar" style="--v:3.1;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">2.0<small>%</small></span><span class="bar" style="--v:2.0;--t:20"></span></td>
+      </tr>
+      <tr data-c="bi">
+        <th scope="row"><button type="button" class="rowbtn" data-c="bi"><span class="swatch" data-bin="2"></span><span class="c-full">Burundi</span><span class="c-abbr" aria-hidden="true">BI</span></button></th>
+        <td data-strand="fln"><span class="v">21<small>%</small></span><span class="bar" style="--v:21;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">9<small>%</small></span><span class="bar" style="--v:9;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">0.5<small>%</small></span><span class="bar" style="--v:0.5;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">0.2<small>%</small></span><span class="bar" style="--v:0.2;--t:20"></span></td>
+      </tr>
+      <tr data-c="ss">
+        <th scope="row"><button type="button" class="rowbtn" data-c="ss"><span class="swatch" data-bin="1"></span><span class="c-full">South Sudan</span><span class="c-abbr" aria-hidden="true">SS</span></button></th>
+        <td data-strand="fln"><span class="v">7<small>%</small></span><span class="bar" style="--v:7;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">6<small>%</small></span><span class="bar" style="--v:6;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">0.3<small>%</small></span><span class="bar" style="--v:0.3;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">0.1<small>%</small></span><span class="bar" style="--v:0.1;--t:20"></span></td>
+      </tr>
+      <tr data-c="cd">
+        <th scope="row"><button type="button" class="rowbtn" data-c="cd"><span class="swatch" data-bin="1"></span><span class="c-full">DR Congo</span><span class="c-abbr" aria-hidden="true">CD</span></button></th>
+        <td data-strand="fln"><span class="v">14<small>%</small></span><span class="bar" style="--v:14;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">7<small>%</small></span><span class="bar" style="--v:7;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">0.6<small>%</small></span><span class="bar" style="--v:0.6;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">0.2<small>%</small></span><span class="bar" style="--v:0.2;--t:20"></span></td>
+      </tr>
+      <tr data-c="so">
+        <th scope="row"><button type="button" class="rowbtn" data-c="so"><span class="swatch" data-bin="1"></span><span class="c-full">Somalia</span><span class="c-abbr" aria-hidden="true">SO</span></button></th>
+        <td data-strand="fln"><span class="v">5<small>%</small></span><span class="bar" style="--v:5;--t:70"></span></td>
+        <td data-strand="sel"><span class="v">5<small>%</small></span><span class="bar" style="--v:5;--t:60"></span></td>
+        <td data-strand="cod"><span class="v">0.4<small>%</small></span><span class="bar" style="--v:0.4;--t:40"></span></td>
+        <td data-strand="rob"><span class="v">0.1<small>%</small></span><span class="bar" style="--v:0.1;--t:20"></span></td>
+      </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th scope="row">Region (weighted)</th>
+        <td data-strand="fln"><span class="v">26<small>%</small></span></td>
+        <td data-strand="sel"><span class="v">14<small>%</small></span></td>
+        <td data-strand="cod"><span class="v">1.4<small>%</small></span></td>
+        <td data-strand="rob"><span class="v">0.7<small>%</small></span></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <p class="ch-note">
+    <b>Definitions.</b> <b>Grade 3 reading</b>, share of Grade&nbsp;3 pupils who read a
+    grade-level passage and answer at least 80% of comprehension items correctly.
+    <b>SEL timetabled</b>, share of public primary schools with a scheduled and assessed SEL
+    block of at least 30 minutes a week, taught by a teacher who has had SEL training; presence in
+    the written curriculum is far more common than delivery, and this metric measures delivery.
+    <b>Unplugged coding</b>, share of public primary schools running any structured
+    computational-thinking activity in a normal term, no device required.
+    <b>Robotics</b>, share of primary and lower-secondary schools with a functioning robotics
+    or physical-computing kit used with pupils in the last term, in use rather than owned.
+    <b>Method.</b> Regional figures are weighted by primary enrolment
+    (DR&nbsp;Congo 18.0m, Tanzania 11.0m, Uganda 9.0m, Kenya 8.5m, Rwanda 2.5m, Burundi 2.2m,
+    South&nbsp;Sudan 1.4m, Somalia 1.1m; 53.7m total), so DR&nbsp;Congo pulls the regional
+    average well below the regional median.
+    <b>Source.</b> Synthetic dataset, SELution design council, 2026. Not for citation.
+  </p>
+
+  <p class="sr-only" role="status" id="live"></p>
+</section>
+
+  <!-- ============ FOUR STRANDS ============ -->
+  <section class="sec tint" id="strands" style="--k: var(--green)">
+    <div class="wrap">
+      <p class="eyebrow">The offer</p>
+      <h2>Four strands, one pathway</h2>
+      <p class="lead">
+        Each strand is a set of structured play activities with a clear learning target, a teacher
+        script, and simple materials. They share one training pathway and one progress record, so a
+        school runs them as a single programme.
+      </p>
+      <div class="strands">
+        <div class="card strand--sel">
+          <span class="num">Strand 01</span>
+          <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--green)" stroke-width="2.4"><circle cx="12" cy="15" r="7"/><circle cx="20" cy="15" r="7"/></svg></div>
+          <h3>Social &amp; emotional learning</h3>
+          <p>Naming feelings, turn-taking, calming routines, friendship and conflict repair. The backbone the other three strands lean on.</p>
+          <div class="look"><b>A session looks like</b> A 20-minute circle game: children pass a feelings ball or a Six Bricks tower, act out a scenario, and agree one class rule. No printing needed.</div>
+        </div>
+        <div class="card strand--fln">
+          <span class="num">Strand 02</span>
+          <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="2.4"><rect x="4" y="6" width="10" height="10" rx="2.5"/><rect x="16" y="14" width="10" height="10" rx="2.5"/><path d="M7 21h4M23 9h-4"/></svg></div>
+          <h3>Foundational literacy &amp; numeracy</h3>
+          <p>Letter sounds, decoding, number sense and early operations through games, songs and manipulatives, mapped to the national curriculum.</p>
+          <div class="look"><b>A session looks like</b> Teams build words or number bonds from Six Bricks and bottle-cap tiles against a timer, then teach their answer to another team. The score is the assessment.</div>
+        </div>
+        <div class="card strand--coding">
+          <span class="num">Strand 03</span>
+          <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--red)" stroke-width="2.4"><rect x="4" y="4" width="9" height="9" rx="2"/><rect x="17" y="4" width="9" height="9" rx="2"/><rect x="4" y="17" width="9" height="9" rx="2"/><path d="M17 21.5h9M22 17l4.5 4.5L22 26"/></svg></div>
+          <h3>Unplugged coding</h3>
+          <p>Sequencing, loops, debugging and algorithms with no device: floor grids, arrow cards, and children as the robot following each other&rsquo;s instructions.</p>
+          <div class="look"><b>A session looks like</b> One child writes an arrow-card program, another walks the grid, the class debugs the wrong turns together. Pure logic, zero electricity.</div>
+        </div>
+        <div class="card strand--robotics">
+          <span class="num">Strand 04</span>
+          <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--blue)" stroke-width="2.4"><rect x="6" y="10" width="18" height="14" rx="3"/><path d="M15 10V5M15 5h-2M15 5h2"/><circle cx="12" cy="17" r="1.4" fill="var(--blue)"/><circle cx="18" cy="17" r="1.4" fill="var(--blue)"/></svg></div>
+          <h3>Robotics</h3>
+          <p>The same computational thinking, now with a physical build: low-cost motors, recycled materials and a small kit shared across a cluster of schools.</p>
+          <div class="look"><b>A session looks like</b> Groups build and program a line-follower or a grabber from a shared kit, present it, and pass the kit to the next school on a rota.</div>
+        </div>
+      </div>
+      <p class="strandnote">Strands 03 and 04 are one continuum: unplugged coding needs nothing, robotics adds a shared kit when a cluster is ready. A school can start with strands 01 and 02 alone.</p>
+    </div>
+  </section>
+
+  <!-- ============ PLAY AS METHOD ============ -->
+  <section class="sec" id="play" style="--k: var(--red)">
+    <div class="wrap">
+      <p class="eyebrow">The method</p>
+      <h2>Play is the spine, not a decoration</h2>
+      <p class="lead">
+        Construction, not instruction. Children build understanding by making and re-making, not by
+        being told. Every strand runs on the same five-beat cycle, which is what makes four strands
+        feel like one programme and what the evidence says actually shifts foundational outcomes.
+      </p>
+      <div class="cycle">
+        <div class="step"><span class="pill" style="--c: var(--green)">Goal<small>one target</small></span><span class="arw" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        <div class="step"><span class="pill" style="--c: var(--gold)">Game<small>a rule to play by</small></span><span class="arw" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        <div class="step"><span class="pill" style="--c: var(--red)">Roles<small>every child in</small></span><span class="arw" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        <div class="step"><span class="pill" style="--c: var(--blue)">Reflect<small>what did we learn</small></span><span class="arw" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+        <div class="step"><span class="pill" style="--c: var(--green)">Record<small>10-second note</small></span></div>
+      </div>
+      <p class="cyclecap">The record at the end feeds one simple progress view per child, aggregated to class, school and cluster. That is the measurement spine partners and funders see.</p>
+
+      <div class="methods">
+        <div class="method">
+          <div class="mi" aria-hidden="true"><svg viewBox="0 0 60 46" role="img" aria-label="A stack of six bricks">
+  <g stroke="rgba(0,0,0,.12)" stroke-width="0.5">
+    <g fill="#e0473a"><rect x="8" y="4" width="44" height="7" rx="1.5"/><circle cx="19" cy="3.5" r="2.4"/><circle cx="41" cy="3.5" r="2.4"/></g>
+    <g fill="#f0913a"><rect x="8" y="11" width="44" height="7" rx="1.5"/><circle cx="19" cy="10.5" r="2.4"/><circle cx="41" cy="10.5" r="2.4"/></g>
+    <g fill="#f2c94c"><rect x="8" y="18" width="44" height="7" rx="1.5"/><circle cx="19" cy="17.5" r="2.4"/><circle cx="41" cy="17.5" r="2.4"/></g>
+    <g fill="#37c46f"><rect x="8" y="25" width="44" height="7" rx="1.5"/><circle cx="19" cy="24.5" r="2.4"/><circle cx="41" cy="24.5" r="2.4"/></g>
+    <g fill="#2bb3a3"><rect x="8" y="32" width="44" height="7" rx="1.5"/><circle cx="19" cy="31.5" r="2.4"/><circle cx="41" cy="31.5" r="2.4"/></g>
+    <g fill="#2b8fc4"><rect x="8" y="39" width="44" height="7" rx="1.5"/><circle cx="19" cy="38.5" r="2.4"/><circle cx="41" cy="38.5" r="2.4"/></g>
+  </g>
+</svg></div>
+          <h4>Six Bricks</h4>
+          <p>Six DUPLO bricks on every desk. Short games that wake up the brain and build self-regulation, curiosity, memory, sequencing and early numeracy. The workhorse of the SEL and literacy strands.</p>
+          <span class="tag">Play method</span>
+        </div>
+        <div class="method">
+          <div class="mi" aria-hidden="true"><svg viewBox="0 0 46 46" fill="none" stroke="var(--red-ink)" stroke-width="2.6" role="img" aria-label="Floor grid"><rect x="4" y="4" width="12" height="12" rx="2"/><rect x="17" y="4" width="12" height="12" rx="2"/><rect x="4" y="17" width="12" height="12" rx="2"/><path d="M17 23h13M25 18l5.5 5.5L25 29"/></svg></div>
+          <h4>Floor grids &amp; arrow cards</h4>
+          <p>Sequencing, loops and debugging drawn in chalk, with children as the robot. No device, no power.</p>
+          <span class="tag">Unplugged coding</span>
+        </div>
+        <div class="method">
+          <div class="mi" aria-hidden="true"><svg viewBox="0 0 46 46" fill="none" stroke="var(--gold-ink)" stroke-width="2.6" role="img" aria-label="Bottle caps"><circle cx="16" cy="16" r="9"/><circle cx="31" cy="30" r="9"/><path d="M16 11v10M11 16h10"/></svg></div>
+          <h4>Bottle-cap tiles</h4>
+          <p>A free, endless manipulative for letters, sounds, number bonds and place value. Every school already has the caps.</p>
+          <span class="tag">Literacy &amp; numeracy</span>
+        </div>
+        <div class="method">
+          <div class="mi" aria-hidden="true"><svg viewBox="0 0 46 46" fill="none" stroke="var(--blue-ink)" stroke-width="2.6" role="img" aria-label="Recycled robotics parts"><rect x="9" y="16" width="28" height="20" rx="3"/><path d="M23 16v-6M23 10h-3M23 10h3"/><circle cx="18" cy="26" r="2" fill="var(--blue-ink)"/><circle cx="28" cy="26" r="2" fill="var(--blue-ink)"/></svg></div>
+          <h4>Recycled-parts builds</h4>
+          <p>Motors, wheels and card from a shared kit. Robotics that a cluster of schools can actually afford.</p>
+          <span class="tag">Robotics</span>
+        </div>
+      </div>
+      <p class="cyclecap" style="margin-top:var(--s-4)">SELution did not invent these. It packages proven low-cost play methods into one training pathway and one record. <b>Six Bricks</b> is an established DUPLO-based approach; SELution&rsquo;s activities draw on it and adapt it to each national curriculum.</p>
+    </div>
+  </section>
+
+  <!-- ============ EAC FIT ============ -->
+  <section class="sec tint" id="eac" style="--k: var(--blue)">
+    <div class="wrap">
       <p class="eyebrow">The references</p>
-      <h2 id="eac-h">Every strand maps to something the region already committed to</h2>
-      <p class="intro">
-        SELution is not asking ministries to adopt a new priority. It is offering a way to deliver
-        priorities that are already on the table. The detailed institutional picture, the
-        councils, frameworks and data systems this sits under, is set out in the
+      <h2>Every strand maps to something the region already committed to</h2>
+      <p class="lead">
+        SELution is not a new priority to argue for. It is a way to deliver priorities that are
+        already on the table. The full institutional picture is in the
         <a href="regional-brief.html">regional systems brief</a>.
       </p>
-      <div class="tw">
-        <table class="map">
-          <thead>
-            <tr><th>SELution strand</th><th>Regional / conference commitment it delivers</th><th>What that unlocks</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>SEL</td>
-              <td class="frm">Conference emphasis on social and emotional learning and wellbeing; CESA focus on holistic skills.</td>
-              <td class="frm">A concrete SEL curriculum ministries can point to, not just a policy line.</td>
-            </tr>
-            <tr>
-              <td>Literacy &amp; numeracy</td>
-              <td class="frm">FLN as the headline conference priority; national foundational-learning targets and the regional push for a common minimum.</td>
-              <td class="frm">Comparable foundational-outcome data across pilot districts in four countries.</td>
-            </tr>
-            <tr>
-              <td>Unplugged coding</td>
-              <td class="frm">Digital-skills and 21st-century-competency commitments, framed for classrooms with no devices or power.</td>
-              <td class="frm">A credible entry point to digital literacy that works in the lowest-resource schools.</td>
-            </tr>
-            <tr>
-              <td>Robotics</td>
-              <td class="frm">STEM and innovation goals; the shift from consuming technology to building it.</td>
-              <td class="frm">A shared-kit model that keeps per-school cost low while reaching hands-on learning.</td>
-            </tr>
-            <tr>
-              <td>Play (method)</td>
-              <td class="frm">Repeated conference call for playful, child-centred, activity-based pedagogy.</td>
-              <td class="frm">One teacher-training pathway that carries all four strands.</td>
-            </tr>
-            <tr>
-              <td>Parent &amp; community role</td>
-              <td class="frm">Parental-engagement commitment across the conference.</td>
-              <td class="frm">Take-home play prompts and a termly community showcase built into every strand.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table class="aligntbl">
+        <thead><tr><th>Strand</th><th>Commitment it delivers</th><th>What that unlocks</th></tr></thead>
+        <tbody>
+          <tr style="--rc: var(--green)"><td>SEL</td><td>Conference emphasis on social and emotional learning and wellbeing; CESA focus on holistic skills.</td><td>A concrete SEL curriculum ministries can point to, not just a policy line.</td></tr>
+          <tr style="--rc: var(--gold)"><td>Literacy &amp; numeracy</td><td>FLN as the headline conference priority; national foundational-learning targets and the push for a common minimum.</td><td>Comparable foundational-outcome data across pilot districts in four countries.</td></tr>
+          <tr style="--rc: var(--red)"><td>Unplugged coding</td><td>Digital-skills and 21st-century-competency commitments, framed for classrooms with no devices or power.</td><td>A credible entry point to digital literacy that works in the lowest-resource schools.</td></tr>
+          <tr style="--rc: var(--blue)"><td>Robotics</td><td>STEM and innovation goals; the shift from consuming technology to building it.</td><td>A shared-kit model that keeps per-school cost low while reaching hands-on learning.</td></tr>
+          <tr style="--rc: var(--gold)"><td>Play</td><td>Repeated conference call for playful, child-centred, activity-based pedagogy.</td><td>One teacher-training pathway that carries all four strands.</td></tr>
+          <tr style="--rc: var(--green)"><td>Parent role</td><td>Parental-engagement commitment across the conference.</td><td>Take-home play prompts and a termly community showcase built into every strand.</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <!-- ================= THE MODEL ================= -->
-  <section class="sec" id="model" aria-labelledby="model-h">
-    <div class="lead-wrap">
+  <!-- ============ PILOT ============ -->
+  <section class="sec" id="pilot" style="--k: var(--green)">
+    <div class="wrap">
       <p class="eyebrow">How a pilot runs</p>
-      <h2 id="model-h">A pilot is a cluster, a term, and a clear before-and-after</h2>
-      <p class="intro">
-        SELution is designed to be run by an implementing partner inside the existing school system,
-        not as a parallel structure. One pilot is roughly one district cluster for one to two terms.
+      <h2>A cluster, a term, and a clear before-and-after</h2>
+      <p class="lead">
+        SELution runs inside the existing school system, not as a parallel structure. One pilot is
+        roughly one district cluster for one to two terms.
       </p>
-      <div class="steps">
-        <div class="step"><div><h4>Cluster and baseline</h4><p>An implementing partner selects 8 to 15 schools in one district. A short play-based assessment gives a foundational-skills and SEL baseline for a sample of classes.</p></div></div>
-        <div class="step"><div><h4>Train the teachers</h4><p>Two to three days of hands-on training on the play cycle and the strands the cluster is starting with, then fortnightly coaching visits by the partner.</p></div></div>
-        <div class="step"><div><h4>Run the strands</h4><p>Teachers run 3 to 4 short sessions a week using the scripts and low-cost materials. Robotics kits rotate between schools on a fixed schedule.</p></div></div>
-        <div class="step"><div><h4>Engage parents</h4><p>Weekly take-home play prompts in the local language and a termly showcase where children demonstrate what they built and learned.</p></div></div>
-        <div class="step"><div><h4>Measure and report</h4><p>The 10-second-per-child records roll up to a cluster dashboard. An endline repeats the baseline assessment. Partner and ministry get one comparable report.</p></div></div>
-        <div class="step"><div><h4>Decide on scale</h4><p>Ministry, partner and funder review the evidence against an agreed threshold and decide whether and how to extend to the next cluster.</p></div></div>
+      <div class="path">
+        <div class="node" style="--c: var(--green)"><div class="n">1</div><div><h4>Cluster and baseline</h4><p>An implementing partner selects 8 to 15 schools in one district. A short play-based assessment gives a foundational-skills and SEL baseline for a sample of classes.</p></div></div>
+        <div class="node" style="--c: var(--gold)"><div class="n">2</div><div><h4>Train the trainers, then the teachers</h4><p>A cascade: SELution trains a small group of national master trainers, who train district facilitators, who run the hands-on teacher training and fortnightly coaching. It is how a programme reaches many classrooms quickly without thinning out.</p></div></div>
+        <div class="node" style="--c: var(--red)"><div class="n">3</div><div><h4>Run the strands</h4><p>Teachers run 3 to 4 short sessions a week using the scripts and low-cost materials. Robotics kits rotate between schools on a fixed schedule.</p></div></div>
+        <div class="node" style="--c: var(--blue)"><div class="n">4</div><div><h4>Engage parents</h4><p>Weekly take-home play prompts in the local language and a termly showcase where children demonstrate what they built and learned.</p></div></div>
+        <div class="node" style="--c: var(--green)"><div class="n">5</div><div><h4>Measure and report</h4><p>The per-child records roll up to a cluster dashboard. An endline repeats the baseline. Partner and ministry get one comparable report.</p></div></div>
+        <div class="node" style="--c: var(--gold)"><div class="n">6</div><div><h4>Decide on scale</h4><p>Ministry, partner and funder review the evidence against an agreed threshold and decide whether to extend to the next cluster. The district facilitators stay on as a regional community of practice that carries the next round.</p></div></div>
       </div>
-      <p class="playfig-cap">Materials are deliberately cheap and local: bottle caps, cards, chalk grids, recycled parts, one shared robotics kit per cluster. The expensive input is teacher coaching, and that is where the model concentrates spend.</p>
+      <p class="cyclecap">Materials are deliberately cheap and local: bottle caps, cards, chalk grids, recycled parts, one shared robotics kit per cluster. The expensive input is teacher coaching, and that is where the model concentrates spend.</p>
     </div>
   </section>
 
-  <!-- ================= TRACTION ================= -->
-  <section class="sec alt" id="traction" aria-labelledby="tr-h">
-    <div class="lead-wrap">
+  <!-- ============ TRACTION ============ -->
+  <section class="sec tint" id="traction" style="--k: var(--red)">
+    <div class="wrap">
       <p class="eyebrow">Where this is</p>
-      <h2 id="tr-h">Early, honest, and already moving</h2>
-      <p class="intro">
-        SELution is at the design and partnership stage. What exists today is a defined programme, an
-        implementing partner in conversation, and interested contacts in four countries. What does not
-        exist yet is a funded pilot. That is the ask.
+      <h2>Early, honest, and already moving</h2>
+      <p class="lead">
+        SELution is at the design and partnership stage. There is a defined programme, an implementing
+        partner in conversation, and interested contacts in four countries. There is no funded pilot
+        yet. That is the ask.
       </p>
-      <div class="traction">
-        <div class="tr"><div class="h">Implementing partner</div><div class="m">Teach for Kenya</div><p>In conversation about bringing SELution into their placement schools as a delivery vehicle.</p></div>
-        <div class="tr"><div class="h">Interested contacts</div><div class="m">4 countries</div><p>Educators and organisations in Kenya, Uganda, Tanzania and South Sudan who want to run a pilot.</p></div>
-        <div class="tr"><div class="h">Regional grounding</div><div class="m">Post-conference</div><p>Built directly on the 2nd EAC Regional Education Conference agenda, with the systems brief as reference.</p></div>
-        <div class="tr"><div class="h">Status</div><div class="m">Seeking pilot funding</div><p>One or two district clusters, one to two terms, with baseline and endline measurement.</p></div>
+      <div class="tract">
+        <div class="t"><div class="k">Implementing partner</div><div class="v">Teach for Kenya</div><p>In conversation about bringing SELution into their placement schools.</p></div>
+        <div class="t"><div class="k">Interested contacts</div><div class="v">4 countries</div><p>Educators and organisations in Kenya, Uganda, Tanzania and South Sudan.</p></div>
+        <div class="t"><div class="k">Grounding</div><div class="v">Post-conference</div><p>Built on the 2nd EAC Regional Education Conference agenda, with the systems brief as reference.</p></div>
+        <div class="t"><div class="k">Status</div><div class="v">Seeking pilot funding</div><p>One or two district clusters, one to two terms, with baseline and endline.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ================= THE ASKS ================= -->
-  <section class="sec" id="asks" aria-labelledby="asks-h">
-    <div class="lead-wrap">
+  <!-- ============ ASKS ============ -->
+  <section class="sec" id="asks" style="--k: var(--gold)">
+    <div class="wrap">
       <p class="eyebrow">Partner with us</p>
-      <h2 id="asks-h">What we are asking, by who you are</h2>
-      <p class="intro">Pick the row that fits. Every one of these conversations is open right now.</p>
-
-      <div class="who" role="tablist" aria-label="Audience">
-        <button role="tab" id="tab-tfk" aria-controls="p-tfk" aria-selected="true">Implementing partners</button>
-        <button role="tab" id="tab-country" aria-controls="p-country" aria-selected="false">Country contacts</button>
-        <button role="tab" id="tab-gov" aria-controls="p-gov" aria-selected="false">Ministries &amp; EAC</button>
-        <button role="tab" id="tab-fund" aria-controls="p-fund" aria-selected="false">Funders</button>
+      <h2>What we are asking, by who you are</h2>
+      <p class="lead">Pick the row that fits. Every one of these conversations is open right now.</p>
+      <div class="tabbar" role="tablist" aria-label="Audience">
+        <button role="tab" id="t-partner" aria-controls="p-partner" aria-selected="true">Implementing partners</button>
+        <button role="tab" id="t-country" aria-controls="p-country" aria-selected="false">Country contacts</button>
+        <button role="tab" id="t-gov" aria-controls="p-gov" aria-selected="false">Ministries &amp; EAC</button>
+        <button role="tab" id="t-fund" aria-controls="p-fund" aria-selected="false">Funders</button>
       </div>
-
-      <div class="ask" role="tabpanel" id="p-tfk" aria-labelledby="tab-tfk">
+      <div class="askpanel" role="tabpanel" id="p-partner" aria-labelledby="t-partner">
         <div class="col"><h4>What we ask of you</h4><ul>
           <li>Host a first pilot in a cluster of your placement or partner schools.</li>
           <li>Provide fellows or teachers for the training and weekly coaching.</li>
@@ -398,8 +594,7 @@
           <li>A shared evidence base you co-own and can take to your own funders.</li>
         </ul></div>
       </div>
-
-      <div class="ask" role="tabpanel" id="p-country" aria-labelledby="tab-country" hidden>
+      <div class="askpanel" role="tabpanel" id="p-country" aria-labelledby="t-country" hidden>
         <div class="col"><h4>What we ask of you</h4><ul>
           <li>Identify one district and a local organisation that could implement.</li>
           <li>Open the door to the district education office for permission and buy-in.</li>
@@ -411,8 +606,7 @@
           <li>First call on the trainer-of-trainers pathway as it scales.</li>
         </ul></div>
       </div>
-
-      <div class="ask" role="tabpanel" id="p-gov" aria-labelledby="tab-gov" hidden>
+      <div class="askpanel" role="tabpanel" id="p-gov" aria-labelledby="t-gov" hidden>
         <div class="col"><h4>What we ask of you</h4><ul>
           <li>A letter of support and permission to pilot in a named district.</li>
           <li>A curriculum officer to confirm the literacy and numeracy mapping.</li>
@@ -424,8 +618,7 @@
           <li>No cost obligation at the pilot stage and full visibility of results.</li>
         </ul></div>
       </div>
-
-      <div class="ask" role="tabpanel" id="p-fund" aria-labelledby="tab-fund" hidden>
+      <div class="askpanel" role="tabpanel" id="p-fund" aria-labelledby="t-fund" hidden>
         <div class="col"><h4>What we ask of you</h4><ul>
           <li>Fund one or two district-cluster pilots for one to two terms.</li>
           <li>Fund the teacher-coaching layer, which is the real cost driver.</li>
@@ -440,68 +633,244 @@
     </div>
   </section>
 
-  <!-- ================= END CTA ================= -->
-  <section class="endcta" aria-labelledby="end-h">
-    <div class="lead-wrap">
-      <p class="eyebrow" style="color:var(--sa)">Next step</p>
-      <h2 id="end-h">If any of that is a fit, start a conversation.</h2>
-      <p>Send the concept note to whoever needs to see it, or reply with the district and the partner you have in mind. A first pilot can be scoped in a fortnight.</p>
-      <div class="cta" style="justify-content:center;display:flex;gap:11px;flex-wrap:wrap">
-        <a class="btn" href="concept-note.html">Open the concept note</a>
-        <a class="btn ghost" href="mailto:atindahhillary@gmail.com?subject=SELution%20pilot">Reply by email</a>
+  <!-- ============ CONTACT ============ -->
+  <section class="sec tint" id="contact" style="--k: var(--green)">
+    <div class="wrap">
+      <p class="eyebrow">Talk to us</p>
+      <h2>Two people, one WhatsApp away</h2>
+      <p class="lead">
+        Message either of us with the district and the partner you have in mind. A first pilot can be
+        scoped in a fortnight.
+      </p>
+      <div class="people">
+        <div class="person" style="--c: var(--green)">
+          <div class="av" aria-hidden="true">RM</div>
+          <h3>Rodgers Mayero</h3>
+          <p class="role">Partnerships and country contacts</p>
+          <p class="tel"><a href="tel:+254724510102">+254 724 510102</a></p>
+          <a class="btn wa" href="https://wa.me/254724510102?text=Hi%20Rodgers%2C%20I%27m%20interested%20in%20SELution." target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.1 1.1 1.1-4-.3-.4a10 10 0 01-1.6-5.3C5.5 9.9 10.2 5.3 16 5.3s10.5 4.6 10.5 10.2S21.8 25.7 16 25.7zm5.8-7.7c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6s.1-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7c0 1.6 1.2 3.2 1.3 3.4s2.3 3.6 5.6 5c.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.4.2-1.5-.3-.3-.6-.4z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+        <div class="person" style="--c: var(--blue)">
+          <div class="av" aria-hidden="true">HA</div>
+          <h3>Hillary Atindah</h3>
+          <p class="role">Programme design and prototypes</p>
+          <p class="tel"><a href="tel:+254790780579">+254 790 780579</a></p>
+          <a class="btn wa" href="https://wa.me/254790780579?text=Hi%20Hillary%2C%20I%27m%20interested%20in%20SELution." target="_blank" rel="noopener">
+            <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.1 1.1 1.1-4-.3-.4a10 10 0 01-1.6-5.3C5.5 9.9 10.2 5.3 16 5.3s10.5 4.6 10.5 10.2S21.8 25.7 16 25.7zm5.8-7.7c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6s.1-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7c0 1.6 1.2 3.2 1.3 3.4s2.3 3.6 5.6 5c.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.4.2-1.5-.3-.3-.6-.4z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+      <p class="contact-alt">Prefer email? <a href="mailto:atindahhillary@gmail.com?subject=SELution%20pilot">atindahhillary@gmail.com</a>. Or open the <a href="concept-note.html">concept note</a> and send it on.</p>
+    </div>
+  </section>
+
+  <!-- ============ END ============ -->
+  <section class="end">
+    <div class="wrap">
+      <p class="eyebrow">Next step</p>
+      <h2>If any of that is a fit, start a conversation.</h2>
+      <p>The programme is ready. What it needs is a district, a partner and a term.</p>
+      <div class="cta">
+        <a class="btn wa lg" href="https://wa.me/254790780579?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20a%20SELution%20pilot." target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true" style="width:22px;height:22px"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.1 1.1 1.1-4-.3-.4a10 10 0 01-1.6-5.3C5.5 9.9 10.2 5.3 16 5.3s10.5 4.6 10.5 10.2S21.8 25.7 16 25.7zm5.8-7.7c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6s.1-.4 0-.6-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 00-.9.4 3.6 3.6 0 00-1.1 2.7c0 1.6 1.2 3.2 1.3 3.4s2.3 3.6 5.6 5c.8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5s.3-1.4.2-1.5-.3-.3-.6-.4z"/></svg>
+          Message us on WhatsApp
+        </a>
+        <a class="btn ghost lg" href="concept-note.html">Open the concept note</a>
       </div>
     </div>
   </section>
 
   <footer class="foot">
-    <div class="lead-wrap">
+    <div class="wrap">
       <p>
-        <b>SELution</b> is an independent, regional play-based learning initiative, developed after the
+        <b>SELution</b> is an independent regional play-based learning initiative, developed after the
         2nd EAC Regional Education Conference. It is not an EAC programme or publication. Country names,
         partner references and figures on this page describe work in progress and early-stage
         conversations, not confirmed commitments.
       </p>
-      <p style="margin-top:8px">
-        <a href="regional-brief.html">Regional systems brief</a> &middot;
-        <a href="concept-note.html">Concept note</a> &middot;
-        <a href="prototypes/index.html">Programme prototypes</a> &middot;
-        <a href="https://github.com/atindahhillary/Elimu-Moja">Source</a>
+      <p class="links">
+        <a href="regional-brief.html">Regional systems brief</a> &nbsp;&middot;&nbsp;
+        <a href="concept-note.html">Concept note</a> &nbsp;&middot;&nbsp;
+        <a href="prototypes/index.html">Programme prototypes</a> &nbsp;&middot;&nbsp;
+        <a href="https://github.com/atindahhillary/SELutionKe">Source</a>
       </p>
     </div>
   </footer>
 </main>
 
+<script>try{localStorage.removeItem("em-theme")}catch(e){}document.documentElement.removeAttribute("data-theme");</script>
 <script src="assets/proto.js"></script>
 <script>
+(function(){
+  "use strict";
+  var DATA = {"strands":[{"k":"fln","short":"FLN","head":"Grade 3 reading","full":"Grade 3 pupils reading at grade level","t":70,"dp":0},{"k":"sel","short":"SEL","head":"SEL timetabled","full":"Primary schools timetabling & assessing SEL","t":60,"dp":0},{"k":"cod","short":"Coding","head":"Unplugged coding","full":"Primary schools running any coding activity","t":40,"dp":1},{"k":"rob","short":"Robotics","head":"Robotics in use","full":"Schools with a robotics kit in pupils' hands","t":20,"dp":1}],"countries":{"ke":{"name":"Kenya","enrol":8.5,"v":{"fln":46,"sel":27,"cod":3.5,"rob":1.8}},"tz":{"name":"Tanzania","enrol":11.0,"v":{"fln":34,"sel":16,"cod":1.2,"rob":0.5}},"ug":{"name":"Uganda","enrol":9.0,"v":{"fln":24,"sel":14,"cod":1.6,"rob":0.7}},"rw":{"name":"Rwanda","enrol":2.5,"v":{"fln":31,"sel":30,"cod":3.1,"rob":2.0}},"bi":{"name":"Burundi","enrol":2.2,"v":{"fln":21,"sel":9,"cod":0.5,"rob":0.2}},"ss":{"name":"South Sudan","enrol":1.4,"v":{"fln":7,"sel":6,"cod":0.3,"rob":0.1}},"cd":{"name":"DR Congo","enrol":18.0,"v":{"fln":14,"sel":7,"cod":0.6,"rob":0.2}},"so":{"name":"Somalia","enrol":1.1,"v":{"fln":5,"sel":5,"cod":0.4,"rob":0.1}}},"region":{"fln":26,"sel":14,"cod":1.4,"rob":0.7},"bins":[0,5,15,30,50,75,100]};
+  var BINS = DATA.bins, SEL = null, STRAND = "fln";
+  var map = document.querySelector(".eacmap"),
+      bar = document.querySelector(".strandbar"),
+      tabs = [].slice.call(bar.querySelectorAll('[role="tab"]')),
+      table = document.getElementById("matrix"),
+      list = document.getElementById("roList"),
+      live = document.getElementById("live"),
+      resetBtn = document.getElementById("roReset"),
+      tick = document.getElementById("tick"),
+      panel = document.getElementById("mapPanel");
+
+  function meta(k){ for(var i=0;i<DATA.strands.length;i++){ if(DATA.strands[i].k===k) return DATA.strands[i]; } }
+  function fmt(v,dp){ return dp ? v.toFixed(1) : String(Math.round(v)); }
+  function binOf(v){ for(var i=5;i>0;i--){ if(v>=BINS[i]) return i; } return 0; }
+  // text-only interpolation, never innerHTML with data
+  function setText(el,t){ el.textContent = t; }
+
+  /* ---------- strand switch: recolour map, move target tick, mark column ---------- */
+  function setStrand(k){
+    STRAND = k;
+    var m = meta(k);
+    tabs.forEach(function(t){
+      var on = t.dataset.strand === k;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      if(on) panel.setAttribute("aria-labelledby", t.id);
+    });
+    Object.keys(DATA.countries).forEach(function(c){
+      var v = DATA.countries[c].v[k], b = binOf(v);
+      var p = map.querySelector('.cc[data-c="'+c+'"] .country');
+      if(p) p.setAttribute("data-bin", b);
+      var chip = map.querySelector('[data-chip="'+c+'"]');
+      if(chip) setText(chip, fmt(v, m.dp) + "%");
+      var sw = table.querySelector('.rowbtn[data-c="'+c+'"] .swatch');
+      if(sw) sw.setAttribute("data-bin", b);
+    });
+    [].forEach.call(table.querySelectorAll("[data-strand]"), function(el){
+      el.classList.toggle("is-active", el.dataset.strand === k);
+    });
+    tick.style.left = m.t + "%";
+    setText(tick, "Target " + m.t + "%");
+  }
+
+  /* ---------- readout ---------- */
+  function paint(code){
+    var src = code ? DATA.countries[code].v : DATA.region;
+    document.getElementById("roKind").textContent = code ? "Partner state" : "Region, all eight partner states";
+    document.getElementById("roName").textContent = code ? DATA.countries[code].name : "East African Community";
+    document.getElementById("roSub").textContent = code
+      ? (DATA.countries[code].enrol.toFixed(1) + "m primary pupils · illustrative figures")
+      : "Enrolment-weighted across 53.7m primary pupils";
+    list.textContent = "";
+    DATA.strands.forEach(function(s){
+      var v = src[s.k], li = document.createElement("li");
+      li.className = "metric";
+      var l = document.createElement("span"); l.className = "metric-l"; l.textContent = s.full;
+      var n = document.createElement("span"); n.className = "metric-v";
+      n.textContent = fmt(v, s.dp); var i = document.createElement("i"); i.textContent = "%"; n.appendChild(i);
+      var tr = document.createElement("span"); tr.className = "track";
+      tr.style.setProperty("--v", v); tr.style.setProperty("--t", s.t);
+      var f = document.createElement("span"); f.className = "fill";
+      var g = document.createElement("span"); g.className = "goal";
+      tr.appendChild(f); tr.appendChild(g);
+      var ft = document.createElement("span"); ft.className = "metric-f";
+      ft.textContent = Math.round(v / s.t * 100) + "% of the " + s.t + "% target";
+      li.appendChild(l); li.appendChild(n); li.appendChild(tr); li.appendChild(ft);
+      list.appendChild(li);
+    });
+    resetBtn.hidden = !code;
+  }
+
+  function highlight(code){
+    map.classList.toggle("is-dim", !!code);
+    // every layer tags its parts with data-c, so one pass drives fill, edge and annotation
+    [].forEach.call(map.querySelectorAll("[data-c]"), function(el){
+      el.classList.toggle("is-on", el.dataset.c === code);
+    });
+    [].forEach.call(table.querySelectorAll("tbody tr"), function(r){
+      r.classList.toggle("is-on", r.dataset.c === code);
+    });
+    [].forEach.call(map.querySelectorAll(".country"), function(p){
+      p.setAttribute("aria-pressed", p.parentNode.dataset.c === code ? "true" : "false");
+    });
+  }
+
+  function select(code){
+    SEL = code;
+    highlight(code); paint(code);
+    if(code){
+      var d = DATA.countries[code], parts = DATA.strands.map(function(s){
+        return s.full + " " + fmt(d.v[s.k], s.dp) + " percent";
+      });
+      live.textContent = d.name + " selected. " + parts.join(". ") + ".";
+    } else { live.textContent = "Showing the regional figure for all eight partner states."; }
+  }
+  function preview(code){ if(SEL) return; highlight(code); }
+
+  /* ---------- wiring ---------- */
+  bar.addEventListener("click", function(e){
+    var b = e.target.closest('[role="tab"]'); if(b) setStrand(b.dataset.strand);
+  });
+  bar.addEventListener("keydown", function(e){
+    var i = tabs.indexOf(document.activeElement); if(i < 0) return;
+    var n = e.key === "ArrowRight" ? i+1 : e.key === "ArrowLeft" ? i-1
+          : e.key === "Home" ? 0 : e.key === "End" ? tabs.length-1 : -1;
+    if(n < 0 && n !== 0) return;
+    e.preventDefault();
+    n = (n + tabs.length) % tabs.length;
+    tabs[n].focus(); setStrand(tabs[n].dataset.strand);
+  });
+
+  map.addEventListener("pointerover", function(e){
+    var g = e.target.closest("[data-c]"); if(g) preview(g.dataset.c);
+  });
+  map.addEventListener("pointerleave", function(){ preview(null); });
+  map.addEventListener("click", function(e){
+    var g = e.target.closest("[data-c]"); if(!g) return;
+    select(SEL === g.dataset.c ? null : g.dataset.c);
+  });
+  map.addEventListener("focusin", function(e){
+    var g = e.target.closest("[data-c]"); if(g) preview(g.dataset.c);
+  });
+  map.addEventListener("keydown", function(e){
+    if(e.key !== "Enter" && e.key !== " ") return;
+    var g = e.target.closest("[data-c]"); if(!g) return;
+    e.preventDefault(); select(SEL === g.dataset.c ? null : g.dataset.c);
+  });
+
+  table.addEventListener("click", function(e){
+    var b = e.target.closest(".rowbtn"); if(b) select(SEL === b.dataset.c ? null : b.dataset.c);
+  });
+  table.addEventListener("pointerover", function(e){
+    var r = e.target.closest("tbody tr"); if(r) preview(r.dataset.c);
+  });
+  table.addEventListener("focusin", function(e){
+    var b = e.target.closest(".rowbtn"); if(b) preview(b.dataset.c);
+  });
+  table.addEventListener("pointerleave", function(){ preview(null); });
+
+  resetBtn.addEventListener("click", function(){ select(null); });
+  document.getElementById("challenge").addEventListener("keydown", function(e){
+    if(e.key === "Escape" && SEL) select(null);
+  });
+
+  setStrand("fln"); paint(null);
+})();
+</script>
+<script>
 EM.boot(function () {
-  /* audience tabs */
-  var tabs = EM.$$('.who [role="tab"]');
-  var panels = EM.$$('.ask[role="tabpanel"]');
+  var tabs = EM.$$('.tabbar [role="tab"]');
+  var panels = EM.$$('.askpanel[role="tabpanel"]');
   function select(tab) {
     tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
     panels.forEach(function (p) { p.hidden = p.getAttribute('aria-labelledby') !== tab.id; });
-    EM.say(tab.textContent.trim() + ' selected');
   }
   tabs.forEach(function (t, i) {
     t.addEventListener('click', function () { select(t); });
     t.addEventListener('keydown', function (e) {
-      var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : -1;
-      if (n < 0) return;
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
       e.preventDefault();
-      var next = tabs[(n + tabs.length) % tabs.length];
-      next.focus(); select(next);
-    });
-  });
-
-  /* smooth-scroll for in-page nav, respecting reduced motion */
-  EM.$$('a[href^="#"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var id = a.getAttribute('href').slice(1);
-      var el = id && document.getElementById(id);
-      if (!el) return;
-      e.preventDefault();
-      el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
-      history.replaceState(null, '', '#' + id);
+      var n = tabs[(i + d + tabs.length) % tabs.length];
+      n.focus(); select(n);
     });
   });
 });

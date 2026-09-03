@@ -1,8 +1,8 @@
-<a href="https://atindahhillary.github.io/Elimu-Moja/">
+<a href="https://atindahhillary.github.io/SELutionKe/">
   <img src="assets/preview.png" alt="Open the SELution site: learning through play, made regional" width="100%">
 </a>
 
-<p align="center"><strong><a href="https://atindahhillary.github.io/Elimu-Moja/">Open the live site &rarr; atindahhillary.github.io/Elimu-Moja</a></strong></p>
+<p align="center"><strong><a href="https://atindahhillary.github.io/SELutionKe/">Open the live site &rarr; atindahhillary.github.io/SELutionKe</a></strong></p>
 
 # SELution
 
@@ -68,7 +68,7 @@ Full detail: the [concept note](concept-note.html) and the [site](index.html).
 
 ## View it
 
-- **Live:** <https://atindahhillary.github.io/Elimu-Moja/>
+- **Live:** <https://atindahhillary.github.io/SELutionKe/>
 - **Local:**
 
 ```bash
