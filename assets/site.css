@@ -69,6 +69,7 @@
 *,*::before,*::after{ box-sizing:border-box; }
 [hidden]{ display:none !important; }
 html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+:target, [id]{ scroll-margin-block-start:84px; }
 
 body{
   margin:0; background:var(--paper); color:var(--ink);
@@ -188,12 +189,14 @@ a.skip:focus{ position:fixed; z-index:210; left:16px; top:16px; width:auto; heig
 @media (max-width:920px){ .topnav{ display:none; } }
 
 /* ---------- hero ---------- */
-.hero{ padding-block:var(--s-9) var(--s-7); position:relative; isolation:isolate; }
+.hero{ padding-block:var(--s-9) var(--s-7); position:relative; isolation:isolate;
+  background:url("classroom-play.jpg") center 38% / cover no-repeat; }
+.hero .herobg{ position:absolute; inset:0; inline-size:100%; block-size:100%; object-fit:cover;
+  object-position:center 42%; z-index:-2; }
 .hero::before{ content:""; position:absolute; inset:0; z-index:-1;
-  background-image:
-    linear-gradient(180deg, var(--paper) 0 6%, rgb(251 248 241 / .80) 30%, rgb(251 248 241 / .82) 64%, var(--paper) 100%),
-    url("classroom-play.jpg");
-  background-size:cover; background-position:center 38%; background-repeat:no-repeat; }
+  background:linear-gradient(180deg, var(--paper) 0 6%, rgb(251 248 241 / .80) 30%, rgb(251 248 241 / .82) 64%, var(--paper) 100%); }
+@media (max-width:700px){ .hero .herobg{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .hero .herobg{ display:none; } }
 .hero h1,.hero .lead{ text-shadow:0 1px 0 var(--paper), 0 0 18px var(--paper); }
 .hero .lead{ color:var(--ink); }
 .hero .wrap{ display:grid; grid-template-columns:1.12fr .88fr; gap:var(--s-8); align-items:center; }
@@ -207,8 +210,10 @@ a.skip:focus{ position:fixed; z-index:210; left:16px; top:16px; width:auto; heig
 .hero .say{ margin-block:var(--s-4) var(--s-6); }
 .hero .cta{ display:flex; gap:var(--s-3); flex-wrap:wrap; }
 .hero .badges{ display:flex; flex-wrap:wrap; gap:var(--s-2); margin-block-start:var(--s-6); }
-.hero .badges span{ font-size:.9rem; font-weight:500; color:var(--ink-2); background:var(--surface);
-  border:1px solid var(--hairline); padding:6px 13px; border-radius:var(--r-md) var(--r-md) var(--r-md) var(--r-cut); }
+.hero .badges a{ font-size:.9rem; font-weight:600; color:var(--ink-2); background:var(--surface); text-decoration:none;
+  border:1px solid var(--hairline); padding:7px 14px; border-radius:var(--r-md) var(--r-md) var(--r-md) var(--r-cut);
+  transition:color var(--dur-2) var(--ease-out), border-color var(--dur-2) var(--ease-out), translate var(--dur-2) var(--ease-out); }
+.hero .badges a:hover{ color:var(--ink); border-color:var(--ink); translate:0 -2px; }
 .playart{ width:100%; height:auto; }
 
 /* ---------- section frame ---------- */

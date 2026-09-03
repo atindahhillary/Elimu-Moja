@@ -55,6 +55,9 @@
 <main id="top">
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <video class="herobg" muted loop playsinline preload="none" poster="assets/classroom-play.jpg" aria-hidden="true" tabindex="-1">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
     <div class="wrap">
       <div>
         <p class="tagpill">A regional play-based learning initiative</p>
@@ -64,9 +67,9 @@
           <a class="btn lg" href="#contact">Partner with us</a>
           <a class="btn ghost lg" href="concept-note.html">Read the concept note</a>
         </div>
-        <div class="badges">
-          <span>SEL</span><span>Literacy &amp; numeracy</span><span>Unplugged coding</span><span>Robotics</span>
-        </div>
+        <nav class="badges" aria-label="Jump to a strand">
+          <a href="#strand-sel">SEL</a><a href="#strand-fln">Literacy &amp; numeracy</a><a href="#strand-coding">Unplugged coding</a><a href="#strand-robotics">Robotics</a>
+        </nav>
       </div>
       <div>
         <svg class="playart" viewBox="0 0 440 380" role="img" aria-label="A playful path of coloured blocks and arrows leading to a star">
@@ -416,28 +419,28 @@
         school runs them as a single programme.
       </p>
       <div class="strands">
-        <div class="card strand--sel">
+        <div class="card strand--sel" id="strand-sel">
           <span class="num">Strand 01</span>
           <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--green)" stroke-width="2.4"><circle cx="12" cy="15" r="7"/><circle cx="20" cy="15" r="7"/></svg></div>
           <h3>Social &amp; emotional learning</h3>
           <p>Naming feelings, turn-taking, calming routines, friendship and conflict repair. The backbone the other three strands lean on.</p>
           <div class="look"><b>A session looks like</b> A 20-minute circle game: children pass a feelings ball or a Six Bricks tower, act out a scenario, and agree one class rule. No printing needed.</div>
         </div>
-        <div class="card strand--fln">
+        <div class="card strand--fln" id="strand-fln">
           <span class="num">Strand 02</span>
           <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--gold)" stroke-width="2.4"><rect x="4" y="6" width="10" height="10" rx="2.5"/><rect x="16" y="14" width="10" height="10" rx="2.5"/><path d="M7 21h4M23 9h-4"/></svg></div>
           <h3>Foundational literacy &amp; numeracy</h3>
           <p>Letter sounds, decoding, number sense and early operations through games, songs and manipulatives, mapped to the national curriculum.</p>
           <div class="look"><b>A session looks like</b> Teams build words or number bonds from Six Bricks and bottle-cap tiles against a timer, then teach their answer to another team. The score is the assessment.</div>
         </div>
-        <div class="card strand--coding">
+        <div class="card strand--coding" id="strand-coding">
           <span class="num">Strand 03</span>
           <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--red)" stroke-width="2.4"><rect x="4" y="4" width="9" height="9" rx="2"/><rect x="17" y="4" width="9" height="9" rx="2"/><rect x="4" y="17" width="9" height="9" rx="2"/><path d="M17 21.5h9M22 17l4.5 4.5L22 26"/></svg></div>
           <h3>Unplugged coding</h3>
           <p>Sequencing, loops, debugging and algorithms with no device: floor grids, arrow cards, and children as the robot following each other&rsquo;s instructions.</p>
           <div class="look"><b>A session looks like</b> One child writes an arrow-card program, another walks the grid, the class debugs the wrong turns together. Pure logic, zero electricity.</div>
         </div>
-        <div class="card strand--robotics">
+        <div class="card strand--robotics" id="strand-robotics">
           <span class="num">Strand 04</span>
           <div class="plate" aria-hidden="true"><svg viewBox="0 0 30 30" fill="none" stroke="var(--blue)" stroke-width="2.4"><rect x="6" y="10" width="18" height="14" rx="3"/><path d="M15 10V5M15 5h-2M15 5h2"/><circle cx="12" cy="17" r="1.4" fill="var(--blue)"/><circle cx="18" cy="17" r="1.4" fill="var(--blue)"/></svg></div>
           <h3>Robotics</h3>
@@ -735,6 +738,14 @@
 </main>
 
 <script>try{localStorage.removeItem("em-theme")}catch(e){}document.documentElement.removeAttribute("data-theme");</script>
+<script>
+(function(){
+  var v=document.querySelector('.herobg'); if(!v) return;
+  var ok = window.matchMedia('(min-width:701px)').matches
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(ok){ v.setAttribute('autoplay',''); v.play&&v.play().catch(function(){}); }
+})();
+</script>
 <script src="assets/proto.js"></script>
 <script>
 (function(){
